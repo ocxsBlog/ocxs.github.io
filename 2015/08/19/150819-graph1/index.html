@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Ocxs's blog">
 <meta property="og:description" content="一.什么是图1.基本定义">
 <meta property="og:image" content="site:ocxs.coding.io/source/img/150819-1.jpg">
-<meta property="og:updated_time" content="2015-08-19T09:18:07.743Z">
+<meta property="og:updated_time" content="2015-08-19T14:40:59.242Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图（上）">
 <meta name="twitter:description" content="一.什么是图1.基本定义">
@@ -281,21 +281,25 @@
 <li>时间复杂度<br>  和DFS一样</li>
 </ul>
 </blockquote>
-<p>名词解释：</p>
-<pre><code><span class="keyword">*</span> <span class="keyword">*</span><span class="keyword">*</span>连通<span class="keyword">*</span><span class="keyword">*</span>：如果V到W存在一条路径，则称V和W是连通的
-<span class="keyword">*</span> <span class="keyword">*</span><span class="keyword">*</span>路径<span class="keyword">*</span><span class="keyword">*</span>：V和W的<span class="keyword">*</span><span class="keyword">*</span>路径<span class="keyword">*</span><span class="keyword">*</span>是一系列顶点｛V，V1，V2···｝的集合，其中任一对相邻顶点都是图中的边。<span class="keyword">*</span><span class="keyword">*</span>路径的长度<span class="keyword">*</span><span class="keyword">*</span>是路径中的边数（如果带权，则是所有边的权重和），如果V到W之间的所有顶点都不同，则称<span class="keyword">*</span><span class="keyword">*</span>简单路径<span class="keyword">*</span><span class="keyword">*</span>。
-<span class="keyword">*</span> <span class="keyword">*</span><span class="keyword">*</span>回路<span class="keyword">*</span><span class="keyword">*</span>：起点等于终点的路径
-<span class="keyword">*</span> <span class="keyword">*</span><span class="keyword">*</span>连通分量<span class="keyword">*</span><span class="keyword">*</span>（指的是无向图）：无向图的<span class="keyword">*</span>极大<span class="keyword">*</span>连通子图
-    <span class="keyword">*</span> 极大定点数：再加一个顶点就不连通了（加的这个顶点要属于这个图）
-    <span class="keyword">*</span> 极大边数：包含子图中所有顶点相连的所有边
-<span class="keyword">*</span> <span class="keyword">*</span><span class="keyword">*</span>强连通<span class="keyword">*</span><span class="keyword">*</span>：有向图中顶点V和W之间存在双向路径，则称V和W是强连通的
-<span class="keyword">*</span> <span class="keyword">*</span><span class="keyword">*</span>弱连通<span class="keyword">*</span><span class="keyword">*</span>：有向图中顶点V和W之间不存在双向路径，但是去掉方向，就是连通的，则称V和W是弱连通的
-<span class="keyword">*</span> <span class="keyword">*</span><span class="keyword">*</span>强连通图<span class="keyword">*</span><span class="keyword">*</span>：有向图中任一两顶点均强连通
-<span class="keyword">*</span> <span class="keyword">*</span><span class="keyword">*</span>强连通分量<span class="keyword">*</span><span class="keyword">*</span>：有向图的极大强连通子图
-</code></pre><blockquote>
+<h3 id="3-名词解释：">3.名词解释：</h3><blockquote>
 <ul>
+<li>概念<ul>
+<li><strong>连通</strong>：如果V到W存在一条路径，则称V和W是连通的</li>
+<li><strong>路径</strong>：V和W的<strong>路径</strong>是一系列顶点｛V，V1，V2···｝的集合，其中任一对相邻顶点都是图中的边。<strong>路径的长度</strong>是路径中的边数（如果带权，则是所有边的权重和），如果V到W之间的所有顶点都不同，则称<strong>简单路径</strong>。</li>
+<li><strong>回路</strong>：起点等于终点的路径</li>
+<li><strong>连通分量</strong>（指的是无向图）：无向图的<em>极大</em>连通子图<ul>
+<li>极大定点数：再加一个顶点就不连通了（加的这个顶点要属于这个图）</li>
+<li>极大边数：包含子图中所有顶点相连的所有边</li>
+</ul>
+</li>
+<li><strong>强连通</strong>：有向图中顶点V和W之间存在双向路径，则称V和W是强连通的</li>
+<li><strong>弱连通</strong>：有向图中顶点V和W之间不存在双向路径，但是去掉方向，就是连通的，则称V和W是弱连通的</li>
+<li><strong>强连通图</strong>：有向图中任一两顶点均强连通</li>
+<li><strong>强连通分量</strong>：有向图的极大强连通子图</li>
+</ul>
+</li>
 <li>图不连通怎么办？（如何遍历？）<ul>
-<li>伪码描述<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ListCompontents</span><span class="params">(Graph G)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(each V in G)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!visited[V])</span><br><span class="line">		&#123;</span><br><span class="line">			DFS(V);	<span class="comment">//or BFS(V);	//每一个DFS(BFS)遍历一个连通分量</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>伪码描述  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ListCompontents</span><span class="params">(Graph G)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(each V in G)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!visited[V])</span><br><span class="line">		&#123;</span><br><span class="line">			DFS(V);	<span class="comment">//or BFS(V);	//每一个DFS(BFS)遍历一个连通分量</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
