@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Ocxs's blog">
 <meta property="og:description" content="一.什么是图1.基本定义">
 <meta property="og:image" content="site:ocxs.coding.io/source/img/150819-1.jpg">
-<meta property="og:updated_time" content="2015-08-19T07:12:21.845Z">
+<meta property="og:updated_time" content="2015-08-19T09:18:07.743Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图（上）">
 <meta name="twitter:description" content="一.什么是图1.基本定义">
@@ -238,6 +238,64 @@
 </li>
 <li>邻接表<ul>
 <li><img src="/source/img/150819-1.jpg" alt="Alt text"></li>
+<li>邻接表的优点：<ul>
+<li>方便找任一节点的邻接点</li>
+<li>节约稀疏图的空间（需要N个头指针+2E个结点（每个结点至少两个域））问：E小于多少，用邻接表划算： N + 2<em>E</em>2 &lt; N*N 解得：E&lt; N(N-1)/4;</li>
+<li>方便计算任一节点的”度”？<ul>
+<li>对于无向图 ，是的</li>
+<li>对有向图，只能计算出度，需要计算“逆邻接表”（存指向自己的边）来方便计算“入度”</li>
+</ul>
+</li>
+<li>不方便计算任一两点之间是否存在边</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="二-图的遍历">二.图的遍历</h2><h3 id="1-深度优先搜索（Depth_First_Search，_DFS）">1.深度优先搜索（Depth First Search， DFS）</h3><blockquote>
+<ul>
+<li>伪码描述  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(Vertex V)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	visited[V] = <span class="literal">true</span>;<span class="comment">//代表该结点被访问了</span></span><br><span class="line">	<span class="keyword">for</span>(V的每个邻接点W)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!visited[W])	<span class="comment">//如果还没被访问过</span></span><br><span class="line">		&#123;</span><br><span class="line">			DFS(W);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<pre><code>跟树的先序遍历很类似
+</code></pre><blockquote>
+<ul>
+<li>时间复杂度<br>  若有N个顶点，E条边，时间复杂度是<ul>
+<li>若用邻接表存储图，有O(N+E);    //邻接表只要遍历N个结点后面的链接的个数E即可</li>
+<li>若邻接矩阵存储图，有O(N^2);    //邻接矩阵需要遍历N个结点后面的链接的个数N</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="2-广度优先搜索（Breadth_First_Search，BFS）">2.广度优先搜索（Breadth First Search，BFS）</h3><blockquote>
+<ul>
+<li>伪代码  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(Vertex V)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	visited[V] = <span class="literal">true</span>;</span><br><span class="line">	EnQuene(V,Q);<span class="comment">//入队</span></span><br><span class="line">	<span class="keyword">while</span>(!IsEmpty(Q))</span><br><span class="line">	&#123;</span><br><span class="line">		V = DeQuene(Q);<span class="comment">//出队</span></span><br><span class="line">		<span class="keyword">for</span>(V的每个邻接点W)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(!visited[W])</span><br><span class="line">			&#123;</span><br><span class="line">				visited[W] = <span class="literal">true</span>;</span><br><span class="line">				EnQuene(W, Q);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<pre><code>跟树的层次遍历很类似
+</code></pre><blockquote>
+<ul>
+<li>时间复杂度<br>  和DFS一样</li>
+</ul>
+</blockquote>
+<p>名词解释：</p>
+<pre><code><span class="keyword">*</span> <span class="keyword">*</span><span class="keyword">*</span>连通<span class="keyword">*</span><span class="keyword">*</span>：如果V到W存在一条路径，则称V和W是连通的
+<span class="keyword">*</span> <span class="keyword">*</span><span class="keyword">*</span>路径<span class="keyword">*</span><span class="keyword">*</span>：V和W的<span class="keyword">*</span><span class="keyword">*</span>路径<span class="keyword">*</span><span class="keyword">*</span>是一系列顶点｛V，V1，V2···｝的集合，其中任一对相邻顶点都是图中的边。<span class="keyword">*</span><span class="keyword">*</span>路径的长度<span class="keyword">*</span><span class="keyword">*</span>是路径中的边数（如果带权，则是所有边的权重和），如果V到W之间的所有顶点都不同，则称<span class="keyword">*</span><span class="keyword">*</span>简单路径<span class="keyword">*</span><span class="keyword">*</span>。
+<span class="keyword">*</span> <span class="keyword">*</span><span class="keyword">*</span>回路<span class="keyword">*</span><span class="keyword">*</span>：起点等于终点的路径
+<span class="keyword">*</span> <span class="keyword">*</span><span class="keyword">*</span>连通分量<span class="keyword">*</span><span class="keyword">*</span>（指的是无向图）：无向图的<span class="keyword">*</span>极大<span class="keyword">*</span>连通子图
+    <span class="keyword">*</span> 极大定点数：再加一个顶点就不连通了（加的这个顶点要属于这个图）
+    <span class="keyword">*</span> 极大边数：包含子图中所有顶点相连的所有边
+<span class="keyword">*</span> <span class="keyword">*</span><span class="keyword">*</span>强连通<span class="keyword">*</span><span class="keyword">*</span>：有向图中顶点V和W之间存在双向路径，则称V和W是强连通的
+<span class="keyword">*</span> <span class="keyword">*</span><span class="keyword">*</span>弱连通<span class="keyword">*</span><span class="keyword">*</span>：有向图中顶点V和W之间不存在双向路径，但是去掉方向，就是连通的，则称V和W是弱连通的
+<span class="keyword">*</span> <span class="keyword">*</span><span class="keyword">*</span>强连通图<span class="keyword">*</span><span class="keyword">*</span>：有向图中任一两顶点均强连通
+<span class="keyword">*</span> <span class="keyword">*</span><span class="keyword">*</span>强连通分量<span class="keyword">*</span><span class="keyword">*</span>：有向图的极大强连通子图
+</code></pre><blockquote>
+<ul>
+<li>图不连通怎么办？（如何遍历？）<ul>
+<li>伪码描述<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ListCompontents</span><span class="params">(Graph G)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(each V in G)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!visited[V])</span><br><span class="line">		&#123;</span><br><span class="line">			DFS(V);	<span class="comment">//or BFS(V);	//每一个DFS(BFS)遍历一个连通分量</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
