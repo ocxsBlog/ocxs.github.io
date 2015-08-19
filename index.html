@@ -101,7 +101,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/PAT/" style="font-size: 10px;">PAT</a> <a href="/tags/PAT-data-structure/" style="font-size: 10px;">PAT data structure</a>
+						<a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/PAT-data-structure/" style="font-size: 20px;">PAT data structure</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a>
 					</div>
 				</section>
 				
@@ -158,6 +158,64 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-150819-graph1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/19/150819-graph1/" class="article-date">
+  	<time datetime="2015-08-19T05:52:36.000Z" itemprop="datePublished">2015-08-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/19/150819-graph1/">图（上）</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一-什么是图">一.什么是图</h2><h3 id="1-基本定义">1.基本定义</h3>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/19/150819-graph1/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-150803-pat16" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -705,64 +763,6 @@
         <a id="more"></a>
 <p>代码如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; Tree[<span class="number">30</span>];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">postOrderTraversal</span><span class="params">(<span class="keyword">int</span> fNode)</span>  <span class="comment">//fNode : father node</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(Tree[fNode].size() == <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        postOrderTraversal(Tree[fNode][<span class="number">0</span>]);</span><br><span class="line">        ans.push_back(fNode);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(Tree[fNode].size() == <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        postOrderTraversal(Tree[fNode][<span class="number">0</span>]);</span><br><span class="line">        postOrderTraversal(Tree[fNode][<span class="number">1</span>]);</span><br><span class="line">        ans.push_back(fNode);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        ans.push_back(fNode);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; N;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">string</span> str;</span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk;</span><br><span class="line">    <span class="keyword">int</span> popVal = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> root = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N * <span class="number">2</span>; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; str;</span><br><span class="line">        <span class="keyword">if</span>(str == <span class="string">"Push"</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; val;</span><br><span class="line">            <span class="keyword">if</span>(i != <span class="number">0</span> &amp;&amp; popVal == -<span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                Tree[stk.top()].push_back(val);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(i == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                root = val;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(popVal != -<span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                Tree[popVal].push_back(val);</span><br><span class="line">            &#125;</span><br><span class="line">            stk.push(val);</span><br><span class="line">            popVal = -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(str == <span class="string">"Pop"</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            popVal = stk.top();</span><br><span class="line">            stk.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    postOrderTraversal(root);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ans.size(); ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans[i] &lt;&lt; ((i == ans.size() - <span class="number">1</span>)?<span class="string">"\n"</span>:<span class="string">" "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>这是我第二次一遍就能AC的代码！<br>思路：<br>push即为先序遍历序列<br>pop即为中序遍历序列<br>知道这两个序列，就可以唯一确定一棵树，然后在后序遍历即可。<br>如何分辨push进来的元素是<strong>哪个结点（父结点）</strong>的<strong>左子结点</strong>还是<strong>右子结点</strong>？<br>每次push之前，如果之前那次是pop操作，则父结点为pop的那个元素，如果之前依然是push操作，那么父结点就是栈顶元素。代码中设置一个popVal来判断上一次操作是pop还是push，是pop，记录pop元素的值，以便接下来push操作找父结点。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PAT/">PAT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PAT-data-structure/">PAT data structure</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-150803-pat7" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/03/150803-pat7/" class="article-date">
-  	<time datetime="2015-08-03T14:05:47.000Z" itemprop="datePublished">2015-08-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/03/150803-pat7/">03-树2. List Leaves</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <a id="more"></a>
-<p>AC代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">struct</span> BinNode</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">char</span> val;</span><br><span class="line">    BinNode *left, *right;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">search</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt; svec1, <span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt; svec2, <span class="keyword">char</span> fNode, <span class="keyword">char</span> &amp;lNode, <span class="keyword">char</span> &amp;rNode)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> position = fNode - <span class="string">'0'</span>;</span><br><span class="line">    lNode = svec1[position];</span><br><span class="line">    rNode = svec2[position];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">BinNode *<span class="title">createTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt; &amp;svec1, <span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt; &amp;svec2, <span class="keyword">char</span> fNode)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> lNode, rNode;</span><br><span class="line">    search(svec1, svec2, fNode, lNode, rNode);</span><br><span class="line">    BinNode *bn = <span class="keyword">new</span> BinNode;</span><br><span class="line">    <span class="keyword">if</span>(fNode != <span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        bn-&gt;val = fNode;</span><br><span class="line">        bn-&gt;left = createTree(svec1,svec2, lNode);</span><br><span class="line">        bn-&gt;right = createTree(svec1, svec2, rNode);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        bn = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bn;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">levelOrderTraversal</span><span class="params">(BinNode *bn)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(bn == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">string</span> str;</span><br><span class="line">    <span class="keyword">int</span> countNum = <span class="number">0</span>;</span><br><span class="line">    BinNode *Quene[<span class="number">10</span>], *tmp;</span><br><span class="line">    <span class="keyword">int</span> rear = -<span class="number">1</span>, front = -<span class="number">1</span>;</span><br><span class="line">    Quene[++rear] = bn;</span><br><span class="line">    <span class="keyword">while</span>(rear != front)</span><br><span class="line">    &#123;</span><br><span class="line">        tmp = Quene[++front];</span><br><span class="line">        <span class="keyword">if</span>(tmp-&gt;left == <span class="literal">NULL</span> &amp;&amp; tmp-&gt;right == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(countNum == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; tmp-&gt;val;</span><br><span class="line">                ++countNum;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; tmp-&gt;val;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(tmp-&gt;left != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Quene[++rear] = tmp-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(tmp-&gt;right != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Quene[++rear] = tmp-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">str</span><span class="params">(<span class="string">"0123456789"</span>)</span>, input</span>;</span><br><span class="line">    <span class="keyword">int</span> N = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; N;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt; svec1, svec2;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">char</span> ch1, ch2;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; ch1 &gt;&gt; ch2;</span><br><span class="line">        svec1.push_back(ch1);</span><br><span class="line">        svec2.push_back(ch2);</span><br><span class="line">        <span class="keyword">if</span>(ch1 != <span class="string">'-'</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            input += ch1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(ch2 != <span class="string">'-'</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            input += ch2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(N != <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> position = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">char</span> rootNode;</span><br><span class="line">        <span class="keyword">if</span>((position = str.find_first_not_of(input)) != <span class="built_in">string</span>::npos)</span><br><span class="line">        &#123;</span><br><span class="line">            rootNode = <span class="string">'0'</span> + position;</span><br><span class="line">        &#125;</span><br><span class="line">        BinNode *root;</span><br><span class="line">        root = createTree(svec1, svec2, rootNode);</span><br><span class="line">        levelOrderTraversal(root);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>本题我的思路是：<br>1.先找根节点<br>2.根据根节点来创建树<br>3.层次遍历</p>
-<p>网上有大牛的代码更短，并没有创建树，但是模拟了树的层次遍历。</p>
 
       
     </div>

@@ -3,18 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>about | Ocxs&#39;s blog</title>
+  <title>图（上） | Ocxs&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="哈哈哈">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="site:ocxs.coding.io/about/index.html">
+  <meta name="description" content="一.什么是图1.基本定义">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图（上）">
+<meta property="og:url" content="site:ocxs.coding.io/2015/08/19/150819-graph1/index.html">
 <meta property="og:site_name" content="Ocxs's blog">
-<meta property="og:description" content="哈哈哈">
-<meta property="og:updated_time" content="2015-08-04T11:53:31.289Z">
+<meta property="og:description" content="一.什么是图1.基本定义">
+<meta property="og:image" content="site:ocxs.coding.io/source/img/150819-1.jpg">
+<meta property="og:updated_time" content="2015-08-19T07:12:21.845Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
-<meta name="twitter:description" content="哈哈哈">
+<meta name="twitter:title" content="图（上）">
+<meta name="twitter:description" content="一.什么是图1.基本定义">
   
     <link rel="alternative" href="/atom.xml" title="Ocxs&#39;s blog" type="application/atom+xml">
   
@@ -158,11 +159,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-150819-graph1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/about/index.html" class="article-date">
-  	<time datetime="2015-08-04T11:52:59.000Z" itemprop="datePublished">2015-08-04</time>
+      <a href="/2015/08/19/150819-graph1/" class="article-date">
+  	<time datetime="2015-08-19T05:52:36.000Z" itemprop="datePublished">2015-08-19</time>
 </a>
     </div>
   
@@ -175,7 +176,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      about
+      图（上）
     </h1>
   
 
@@ -183,6 +184,10 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
         
 
         <div class="clearfix"></div>
@@ -191,7 +196,52 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>哈哈哈</p>
+        <h2 id="一-什么是图">一.什么是图</h2><h3 id="1-基本定义">1.基本定义</h3><a id="more"></a>
+<blockquote>
+<ul>
+<li>表示“多对多”的一种关系，树是一对多，线性结构是一对一，可以看作图的特殊情况。<br>包含：<ul>
+<li>一组顶点（通常用V(Vertex)表示顶点集合</li>
+<li>一组边：通常用E（Edge）表示边的集合<ul>
+<li>边是顶点对：（v，w）属于E，其中v，w属于V，</li>
+<li>有向边：&lt;<em>v</em>, <em>w</em>> 表示v指向w的边 （单行线）<br>注意：一对圆括号表示双向边，一对尖括号表示单向边<br>图中没有重复边（两个顶点之间，当边是无向边时，默认只有一条边，不会有多条边）和自回路（顶点不会指向自身）</li>
+</ul>
+</li>
+<li>图可以没有边，但是不能没有顶点</li>
+<li>无向图：边没有方向 </li>
+<li>有向图：边有方向（双向，单向，边可能带权重）</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="2-在程序中如何表示图">2.在程序中如何表示图</h3><blockquote>
+<ul>
+<li>邻接矩阵<ul>
+<li>邻接矩阵G[N][N] —- N个顶点从0到N-1编号</li>
+<li>G[i][j] = 1,表示Vi到Vj的边， G[i][j] = 0，表示Vi和Vj之间没有直接相连的边</li>
+<li>如果是无向图，则其邻接矩阵是关于对角线对称的，切对角线的元素均为0，因为图没有自回路，具体可见MOOC6.1第二个小视频。</li>
+<li>由上面可知，这样存储会浪费一半空间，如何节省空间，<strong>使用一个长度为N（N+1)/2的一维数组</strong>来存储，只存储下三角矩阵的元素，Gij在一维数组A中对应的下标应该是i*(i+1)/2 +j,视情况而定，对于有权值的图，则可以将矩阵中对应位置元素的值记为权重，如果没有权重，则记为1，代表两点之间有边，记为0，代表两点直接没有直接边相连。</li>
+<li>邻接矩阵的好处：<ul>
+<li>方便查找任一顶点的所有邻接点（有直接边相连的顶点）–遍历矩阵的某一行元素，元素为1，则直接相连</li>
+<li>方便计算任一顶点的“度”（从该点出发的边数为“出度”，指向该点的边数为“入度”）<ul>
+<li>无向图：对应行（列）非0元素的个数</li>
+<li>有向图：对应行非0元素的个数是“出度”，对应列非0元素的个数是“入度”</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>邻接矩阵的缺点：<ul>
+<li>对于存稀疏图，会浪费空间（对于稠密图，尤其是完全图（任一两点直接相连），还是挺合算的）</li>
+<li>浪费时间（统计稀疏图有多少条边的时候）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>邻接表<ul>
+<li><img src="/source/img/150819-1.jpg" alt="Alt text"></li>
+</ul>
+</li>
+</ul>
+</blockquote>
 
       
     </div>
@@ -199,6 +249,16 @@
   </div>
   
     
+<nav id="article-nav">
+  
+  
+    <a href="/2015/08/03/150803-pat16/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">04-树9. Path in a Heap</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
@@ -222,7 +282,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="undefined" data-title="about" data-url="site:ocxs.coding.io/about/index.html"></div>
+	<div class="ds-thread" data-thread-key="150819-graph1" data-title="图（上）" data-url="site:ocxs.coding.io/2015/08/19/150819-graph1/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -266,7 +326,7 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
