@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>05-图3. 六度空间 (30) | Ocxs&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="“六度空间”理论又称作“六度分隔（Six Degrees of Separation）”理论。这个理论可以通俗地阐述为：“你和任何一个陌生人之间所间隔的人不会超过六个，也就是说，最多通过五个人你就能够认识任何一个陌生人。”如图6.4所示。“六度空间”理论虽然得到广泛的认同，并且正在得到越来越多的应用。但是数十年来，试图验证这个理论始终是许多社会学家努力追求的目标。然而由于历史的原因，这样的研究具有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="05-图3. 六度空间 (30)">
+<meta property="og:url" content="site:ocxs.coding.io/2015/08/22/150822-pat1/index.html">
+<meta property="og:site_name" content="Ocxs's blog">
+<meta property="og:description" content="“六度空间”理论又称作“六度分隔（Six Degrees of Separation）”理论。这个理论可以通俗地阐述为：“你和任何一个陌生人之间所间隔的人不会超过六个，也就是说，最多通过五个人你就能够认识任何一个陌生人。”如图6.4所示。“六度空间”理论虽然得到广泛的认同，并且正在得到越来越多的应用。但是数十年来，试图验证这个理论始终是许多社会学家努力追求的目标。然而由于历史的原因，这样的研究具有">
+<meta property="og:image" content="http://www.patest.cn/upload/57_mj55i1ensa6.jpg">
+<meta property="og:updated_time" content="2015-08-22T10:10:05.660Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="05-图3. 六度空间 (30)">
+<meta name="twitter:description" content="“六度空间”理论又称作“六度分隔（Six Degrees of Separation）”理论。这个理论可以通俗地阐述为：“你和任何一个陌生人之间所间隔的人不会超过六个，也就是说，最多通过五个人你就能够认识任何一个陌生人。”如图6.4所示。“六度空间”理论虽然得到广泛的认同，并且正在得到越来越多的应用。但是数十年来，试图验证这个理论始终是许多社会学家努力追求的目标。然而由于历史的原因，这样的研究具有">
+  
+    <link rel="alternative" href="/atom.xml" title="Ocxs&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">ocxs</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">To be better</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/PAT-data-structure/" style="font-size: 20px;">PAT data structure</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">To be better!</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">ocxs</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">ocxs</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">To be better</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-150822-pat1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/22/150822-pat1/" class="article-date">
+  	<time datetime="2015-08-22T09:45:40.000Z" itemprop="datePublished">2015-08-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      05-图3. 六度空间 (30)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PAT/">PAT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PAT-data-structure/">PAT data structure</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>“六度空间”理论又称作“六度分隔（Six Degrees of Separation）”理论。这个理论可以通俗地阐述为：“你和任何一个陌生人之间所间隔的人不会超过六个，也就是说，最多通过五个人你就能够认识任何一个陌生人。”如图6.4所示。<br><img src="http://www.patest.cn/upload/57_mj55i1ensa6.jpg" alt="图6.4 六度空间示意图"><br>“六度空间”理论虽然得到广泛的认同，并且正在得到越来越多的应用。但是数十年来，试图验证这个理论始终是许多社会学家努力追求的目标。然而由于历史的原因，这样的研究具有太大的局限性和困难。随着当代人的联络主要依赖于电话、短信、微信以及因特网上即时通信等工具，能够体现社交网络关系的一手数据已经逐渐使得“六度空间”理论的验证成为可能。</p>
+<p>假如给你一个社交网络图，请你对每个节点计算符合“六度空间”理论的结点占结点总数的百分比。<br><a id="more"></a><br>输入格式说明：</p>
+<p>输入第1行给出两个正整数，分别表示社交网络图的结点数N （1&lt;N&lt;=104，表示人数）、边数M（&lt;=33*N，表示社交关系数）。随后的M行对应M条边，每行给出一对正整数，分别是该条边直接连通的两个结点的编号（节点从1到N编号）。</p>
+<p>输出格式说明：</p>
+<p>对每个结点输出与该结点距离不超过6的结点数占结点总数的百分比，精确到小数点后2位。每个结节点输出一行，格式为“结点编号:（空格）百分比%”。</p>
+<p>样例输入与输出：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th>输入</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td>10 9</td>
+<td>1: 70.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>1 2</td>
+<td>2: 80.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>2 3</td>
+<td>3: 90.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>3 4</td>
+<td>4: 100.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>4 5</td>
+<td>5: 100.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>5 6</td>
+<td>6: 100.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>6 7</td>
+<td>7: 100.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>7 8</td>
+<td>8: 90.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>8 9</td>
+<td>9: 80.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>9 10</td>
+<td>10: 70.00%</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td>10 8</td>
+<td>1: 70.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>1 2</td>
+<td>2: 80.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>2 3</td>
+<td>3: 80.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>3 4</td>
+<td>4: 80.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>4 5</td>
+<td>5: 80.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>5 6</td>
+<td>6: 80.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>6 7</td>
+<td>7: 80.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>7 8</td>
+<td>8: 70.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>9 10</td>
+<td>9: 20.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td></td>
+<td>10: 20.00%</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td>11 10</td>
+<td>1: 100.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>1 2</td>
+<td>2: 90.91%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>1 3</td>
+<td>3: 90.91%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>1 4</td>
+<td>4: 100.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>4 5</td>
+<td>5: 100.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>6 5</td>
+<td>6: 100.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>6 7</td>
+<td>7: 100.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>6 8</td>
+<td>8: 100.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>8 9</td>
+<td>9: 100.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>8 10</td>
+<td>10: 100.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>10 11</td>
+<td>11: 81.82%</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td>2 1</td>
+<td>1: 100.00%</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>1 2</td>
+<td>2: 100.00%</td>
+</tr>
+</tbody>
+</table>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Graph</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    Graph(<span class="keyword">int</span> vertexNum, <span class="keyword">int</span> edgeNum):vertexNum(vertexNum), edgeNum(edgeNum)</span><br><span class="line">    &#123;</span><br><span class="line">        m_graph.resize(vertexNum + <span class="number">1</span>);          <span class="comment">//initialize values</span></span><br><span class="line">        visited.resize(vertexNum + <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">        countNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> startVertex = <span class="number">0</span>, endVertex = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; edgeNum; ++i)    <span class="comment">//create graph</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; startVertex &gt;&gt; endVertex;</span><br><span class="line">            m_graph[startVertex].push_back(endVertex);</span><br><span class="line">            m_graph[endVertex].push_back(startVertex);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Traversal</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">CountVisitedNum</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> vertexNum;</span><br><span class="line">    <span class="keyword">int</span> edgeNum;</span><br><span class="line">    <span class="keyword">int</span> countNum;       <span class="comment">// the number of level</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; visited;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; m_graph;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Graph::Traversal()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; vertexNum + <span class="number">1</span>; ++i)      <span class="comment">//for each element , traversal</span></span><br><span class="line">    &#123;</span><br><span class="line">        BFS(i);         <span class="comment">//DFS(i);</span></span><br><span class="line">        countNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> visitedNum = CountVisitedNum();     <span class="comment">//compute visited element number</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">": "</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; fixed &lt;&lt; setprecision(<span class="number">2</span>) &lt;&lt; (<span class="keyword">float</span>)visitedNum  / (<span class="keyword">float</span>)vertexNum * <span class="number">100.0</span> &lt;&lt; <span class="string">"%"</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Graph::DFS(<span class="keyword">int</span> index)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(!visited[index])</span><br><span class="line">    &#123;</span><br><span class="line">        visited[index] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="number">6</span> == countNum)   <span class="comment">//µ½´ïµÚÁù²ã</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m_graph[index].size(); ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            ++countNum;</span><br><span class="line">            DFS(m_graph[index][i]);</span><br><span class="line">            --countNum;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Graph::BFS(<span class="keyword">int</span> index)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; queueGraph;</span><br><span class="line">    queueGraph.push(index);</span><br><span class="line">    <span class="keyword">int</span> level = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> last = index;    <span class="comment">//标记到达这一层的末尾元素</span></span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;        <span class="comment">//num 表示这一层元素有多少个</span></span><br><span class="line">    <span class="keyword">while</span>(!queueGraph.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!visited[queueGraph.front()])</span><br><span class="line">        &#123;</span><br><span class="line">            visited[queueGraph.front()] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m_graph[queueGraph.front()].size(); ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                queueGraph.push(m_graph[queueGraph.front()][i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(last == queueGraph.front() &amp;&amp; !num)  <span class="comment">//当这一层元素到达末尾且这一层元素即将遍历完时，更新</span></span><br><span class="line">            <span class="comment">//为什么用两个条件一起判断呢，因为在这一层元素未遍历完之前，可能前面会有和末尾元素相同的值，所以额外加一个num值为0作为辅助判断</span></span><br><span class="line">        &#123;</span><br><span class="line">            ++level;</span><br><span class="line">            num = queueGraph.size() - <span class="number">1</span>;</span><br><span class="line">            last = queueGraph.back();</span><br><span class="line">        &#125;</span><br><span class="line">        --num;</span><br><span class="line">        <span class="keyword">if</span>(<span class="number">7</span> == level)  <span class="comment">//我将初始元素作为第一层，所以等于7，break</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        queueGraph.pop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> Graph::CountVisitedNum()    <span class="comment">//计算他所能访问的元素个数，顺便将visited恢复到初始状态</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; vertexNum + <span class="number">1</span>; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(visited[i])</span><br><span class="line">        &#123;</span><br><span class="line">            ++num;</span><br><span class="line">            visited[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N = <span class="number">0</span>, M = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; N &gt;&gt; M;</span><br><span class="line">    <span class="function">Graph <span class="title">graph</span><span class="params">(N, M)</span></span>;</span><br><span class="line">    graph.Traversal();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>刚开始用DFS写的，但是写完之后，测试点4过不了，但是速度快，DFS测试点4我的用时只有20ms，虽然没过，但是BFS就是其10倍还不止，而且我现在还是没有把DFS的bug修复好。<br>最后一个测试数据，问陈越老师，陈越老师说是1000个点组成一个环，然后前面64个点一次与后面500个点相连，也就是1000个点，1000+64*500=33000个边。根据这个数据，我知道bug出在哪里，后面就看了一下陈越老师的解法，看完之后只知道要做个标记，具体给忘了，然后就自己想想，写了个四不像的，核心思想应该跟陈越老师的是一样的。</p>
+<p>做完这道题，PAT成绩终于进第二页了，争取开学之前进首页。<br>测试数据如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">测试点</th>
+<th>结果</th>
+<th>用时(ms)</th>
+<th>内存(kB)</th>
+<th>得分/满分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td>答案正确</td>
+<td>1</td>
+<td>308</td>
+<td>18/18</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td>答案正确</td>
+<td>1</td>
+<td>308</td>
+<td>3/3</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td>答案正确</td>
+<td>1</td>
+<td>180</td>
+<td>3/3</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td>答案正确</td>
+<td>1</td>
+<td>180</td>
+<td>3/3</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td>答案正确</td>
+<td>224</td>
+<td>1056</td>
+<td>3/3</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/08/21/150821-pat1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">05-图1. List Components (25)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="150822-pat1" data-title="05-图3. 六度空间 (30)" data-url="site:ocxs.coding.io/2015/08/22/150822-pat1/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 ocxs
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
