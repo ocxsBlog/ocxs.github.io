@@ -5,16 +5,16 @@
   
   <title>00-自测3. 数组元素循环右移问题 (20) | Ocxs&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1234567891011121314151617181920212223242526272829303132333435363738394041#include&amp;lt;iostream&amp;gt;using namespace std;int a[101];int main()&amp;#123;    int N = 0, M = 0;    cin &amp;gt;&amp;gt; N &amp;gt;&amp;gt; M;    f">
+  <meta name="description" content="一个数组A中存有N（N&amp;gt;0）个整数，在不允许使用另外数组的前提下，将每个整数循环向右移M（M&amp;gt;=0）个位置，即将A中的数据由（A0 A1……AN-1）变换为（AN-M …… AN-1 A0 A1……AN-M-1）（最后M个数循环移至最前面的M个位置）。如果需要考虑程序移动数据的次数尽量少，要如何设计移动的方法？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="00-自测3. 数组元素循环右移问题 (20)">
 <meta property="og:url" content="site:ocxs.coding.io/2015/08/03/150803-pat5/index.html">
 <meta property="og:site_name" content="Ocxs's blog">
-<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132333435363738394041#include&amp;lt;iostream&amp;gt;using namespace std;int a[101];int main()&amp;#123;    int N = 0, M = 0;    cin &amp;gt;&amp;gt; N &amp;gt;&amp;gt; M;    f">
-<meta property="og:updated_time" content="2015-08-20T10:40:50.806Z">
+<meta property="og:description" content="一个数组A中存有N（N&amp;gt;0）个整数，在不允许使用另外数组的前提下，将每个整数循环向右移M（M&amp;gt;=0）个位置，即将A中的数据由（A0 A1……AN-1）变换为（AN-M …… AN-1 A0 A1……AN-M-1）（最后M个数循环移至最前面的M个位置）。如果需要考虑程序移动数据的次数尽量少，要如何设计移动的方法？">
+<meta property="og:updated_time" content="2015-08-22T11:19:32.304Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="00-自测3. 数组元素循环右移问题 (20)">
-<meta name="twitter:description" content="1234567891011121314151617181920212223242526272829303132333435363738394041#include&amp;lt;iostream&amp;gt;using namespace std;int a[101];int main()&amp;#123;    int N = 0, M = 0;    cin &amp;gt;&amp;gt; N &amp;gt;&amp;gt; M;    f">
+<meta name="twitter:description" content="一个数组A中存有N（N&amp;gt;0）个整数，在不允许使用另外数组的前提下，将每个整数循环向右移M（M&amp;gt;=0）个位置，即将A中的数据由（A0 A1……AN-1）变换为（AN-M …… AN-1 A0 A1……AN-M-1）（最后M个数循环移至最前面的M个位置）。如果需要考虑程序移动数据的次数尽量少，要如何设计移动的方法？">
   
     <link rel="alternative" href="/atom.xml" title="Ocxs&#39;s blog" type="application/atom+xml">
   
@@ -102,7 +102,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/PAT-data-structure/" style="font-size: 20px;">PAT data structure</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a>
+						<a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/PAT-data-structure/" style="font-size: 20px;">PAT data structure</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/���ݽu/" style="font-size: 10px;">���ݽṹ</a>
 					</div>
 				</section>
 				
@@ -195,11 +195,60 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
+        <p>一个数组A中存有N（N&gt;0）个整数，在不允许使用另外数组的前提下，将每个整数循环向右移M（M&gt;=0）个位置，即将A中的数据由（A0 A1……AN-1）变换为（AN-M …… AN-1 A0 A1……AN-M-1）（最后M个数循环移至最前面的M个位置）。如果需要考虑程序移动数据的次数尽量少，要如何设计移动的方法？<br><a id="more"></a><br>输入格式：每个输入包含一个测试用例，第1行输入N ( 1&lt;=N&lt;=100)、M（M&gt;=0）；第2行输入N个整数，之间用空格分隔。</p>
+<p>输出格式：在一行中输出循环右移M位以后的整数序列，之间用空格分隔，序列结尾不能有多余空格。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入样例：</span><br><span class="line"><span class="number">6</span> <span class="number">2</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span></span><br><span class="line">输出样例：</span><br><span class="line"><span class="number">5</span> <span class="number">6</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span></span><br></pre></td></tr></table></figure></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">101</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N = <span class="number">0</span>, M = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; N &gt;&gt; M;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(M &gt;= N)</span><br><span class="line">    &#123;</span><br><span class="line">        M %= N;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(M != <span class="number">0</span> &amp;&amp; N != <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = N-M; i &lt; N; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; a[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N - M - <span class="number">1</span>; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; a[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; a[N - M - <span class="number">1</span>] &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(N != <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N - <span class="number">1</span>; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; a[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; a[N-<span class="number">1</span>] &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>代码写的很一般，不过放在PAT上一遍就AC，上了陈越老师的公开课后，也做了PAT上十几道数据结构的题，知道测试数据经常容易出边界性的数据，于是自己在底下将，<code>N = 0，M = 0，N = M， N &lt; M</code>这样的数据都试了一遍，确保无误后，提交就AC了。</p>
 <p>出题意图估计是想让我用<code>(i+M)%N</code>来做的（没试过，不知道对不对），我偷个懒，黑盒测试，只要输出结果对就行。</p>
-<p>测试结果：<br>|测试点|    结果|    用时(ms)|    内存(kB)|    得分/满分<br>|:—:|<br>|0|    答案正确|    1|    256|    10/10|<br>|1|    答案正确|    1|    360    |3/3|<br>|2|    答案正确|    1|    236    |3/3<br>|3|    答案正确|    1|    256|    2/2<br>|4|    答案正确|    1    |360|    2/2</p>
+<p>测试结果：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">测试点</th>
+<th>结果</th>
+<th>用时(ms)</th>
+<th>内存(kB)</th>
+<th>得分/满分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td>答案正确</td>
+<td>1</td>
+<td>256</td>
+<td>10/10</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td>答案正确</td>
+<td>1</td>
+<td>360</td>
+<td>3/3</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td>答案正确</td>
+<td>1</td>
+<td>236</td>
+<td>3/3</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td>答案正确</td>
+<td>1</td>
+<td>256</td>
+<td>2/2</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td>答案正确</td>
+<td>1</td>
+<td>360</td>
+<td>2/2</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>

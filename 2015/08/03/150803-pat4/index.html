@@ -5,19 +5,19 @@
   
   <title>00-自测2. 素数对猜想 (20) | Ocxs&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="代码如下：
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455#include&amp;lt;iostream&amp;gt;#include&amp;lt;vector&amp;gt;#include&amp;lt;cmath&amp;gt;using namespace std;int el">
+  <meta name="description" content="让我们定义 dn 为：dn = pn+1 - pn，其中 pi 是第i个素数。显然有 d1=1 且对于n&amp;gt;1有 dn 是偶数。“素数对猜想”认为“存在无穷多对相邻且差为2的素数”。
+现给定任意正整数N (&amp;lt; 105)，请计算不超过N的满足猜想的素数对的个数。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="00-自测2. 素数对猜想 (20)">
 <meta property="og:url" content="site:ocxs.coding.io/2015/08/03/150803-pat4/index.html">
 <meta property="og:site_name" content="Ocxs's blog">
-<meta property="og:description" content="代码如下：
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455#include&amp;lt;iostream&amp;gt;#include&amp;lt;vector&amp;gt;#include&amp;lt;cmath&amp;gt;using namespace std;int el">
-<meta property="og:updated_time" content="2015-08-20T10:46:38.538Z">
+<meta property="og:description" content="让我们定义 dn 为：dn = pn+1 - pn，其中 pi 是第i个素数。显然有 d1=1 且对于n&amp;gt;1有 dn 是偶数。“素数对猜想”认为“存在无穷多对相邻且差为2的素数”。
+现给定任意正整数N (&amp;lt; 105)，请计算不超过N的满足猜想的素数对的个数。">
+<meta property="og:updated_time" content="2015-08-22T11:19:25.412Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="00-自测2. 素数对猜想 (20)">
-<meta name="twitter:description" content="代码如下：
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455#include&amp;lt;iostream&amp;gt;#include&amp;lt;vector&amp;gt;#include&amp;lt;cmath&amp;gt;using namespace std;int el">
+<meta name="twitter:description" content="让我们定义 dn 为：dn = pn+1 - pn，其中 pi 是第i个素数。显然有 d1=1 且对于n&amp;gt;1有 dn 是偶数。“素数对猜想”认为“存在无穷多对相邻且差为2的素数”。
+现给定任意正整数N (&amp;lt; 105)，请计算不超过N的满足猜想的素数对的个数。">
   
     <link rel="alternative" href="/atom.xml" title="Ocxs&#39;s blog" type="application/atom+xml">
   
@@ -105,7 +105,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/PAT-data-structure/" style="font-size: 20px;">PAT data structure</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a>
+						<a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/PAT-data-structure/" style="font-size: 20px;">PAT data structure</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/���ݽu/" style="font-size: 10px;">���ݽṹ</a>
 					</div>
 				</section>
 				
@@ -198,10 +198,67 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
+        <p>让我们定义 dn 为：dn = pn+1 - pn，其中 pi 是第i个素数。显然有 d1=1 且对于n&gt;1有 dn 是偶数。“素数对猜想”认为“存在无穷多对相邻且差为2的素数”。</p>
+<p>现给定任意正整数N (&lt; 105)，请计算不超过N的满足猜想的素数对的个数。<br><a id="more"></a><br>输入格式：每个测试输入包含1个测试用例，给出正整数N。</p>
+<p>输出格式：每个测试用例的输出占一行，不超过N的满足猜想的素数对的个数。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入样例：</span><br><span class="line"><span class="number">20</span></span><br><span class="line">输出样例：</span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure></p>
 <p>代码如下：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> element[<span class="number">100001</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; N;</span><br><span class="line">    <span class="keyword">int</span> position = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">pow</span>(i, <span class="number">2</span>) &gt; N)</span><br><span class="line">        &#123;</span><br><span class="line">            position = i;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= N; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        element[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; position; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(element[i] != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= N; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(element[j] != <span class="number">0</span> &amp;&amp; (element[j] % element[i] == <span class="number">0</span>))</span><br><span class="line">                &#123;</span><br><span class="line">                    element[j] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ivec;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= N; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(element[i] != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ivec.push_back(element[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> countNum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ivec.size() - <span class="number">1</span>; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(ivec[i+<span class="number">1</span>] - ivec[i] == <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ++countNum;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; countNum &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>第一次提交测试点1没过，一猜就是某个边界没弄好，而且数还不大，然后想来一下，试了<code>7</code>，发现7输出的是<code>1</code>，才知道自己在算的时候，把<code>7</code>漏了，不超过<code>N</code>，是可以包括<code>N</code>的，所以在某些地方加上<code>=</code>就过了。<br>自己想的方法无非是就是开根号后一个个试，一看这样的题目就是求素数，数学方面的解法肯定有不少比较简单的，百度了一下求素数的方法，看到一个叫<strong>厄拉多塞筛法</strong>的办法，不难理解，然后实现了一下，就采用它了。主要还是PAT这一题测试的数据量不大，不然我也得跪。<br>测试结果：<br>|测试点|    结果|    用时(ms)|    内存(kB)|    得分/满分<br>|:—-:|<br>|0    |答案正确    |1    |180|    10/10<br>|1    |答案正确    |1    |308|    2/2<br>|2    |答案正确    |1    |256|    2/2<br>|3    |答案正确    |1    |256|    2/2<br>|4    |答案正确    |1    |308|    2/2<br>|5    |答案正确    |16    |820|    2/2</p>
+<p>第一次提交测试点1没过，一猜就是某个边界没弄好，而且数还不大，然后想来一下，试了<code>7</code>，发现7输出的是<code>1</code>，才知道自己在算的时候，把<code>7</code>漏了，不超过<code>N</code>，是可以包括<code>N</code>的，所以在某些地方加上<code>=</code>就过了。<br>自己想的方法无非是就是开根号后一个个试，一看这样的题目就是求素数，数学方面的解法肯定有不少比较简单的，百度了一下求素数的方法，看到一个叫<strong>厄拉多塞筛法</strong>的办法，不难理解，然后实现了一下，就采用它了。主要还是PAT这一题测试的数据量不大，不然我也得跪。<br>测试结果：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">测试点</th>
+<th>结果</th>
+<th>用时(ms)</th>
+<th>内存(kB)</th>
+<th>得分/满分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td>答案正确</td>
+<td>1</td>
+<td>180</td>
+<td>10/10</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td>答案正确</td>
+<td>1</td>
+<td>308</td>
+<td>2/2</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td>答案正确</td>
+<td>1</td>
+<td>256</td>
+<td>2/2</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td>答案正确</td>
+<td>1</td>
+<td>256</td>
+<td>2/2</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td>答案正确</td>
+<td>1</td>
+<td>308</td>
+<td>2/2</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td>答案正确</td>
+<td>16</td>
+<td>820</td>
+<td>2/2</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
