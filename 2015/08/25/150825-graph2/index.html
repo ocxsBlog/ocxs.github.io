@@ -13,11 +13,7 @@
 1.单源最短路径问题
 
 概念：从固定源点出发，求其到所有其他顶点的最短路径
-
-
-2.多源最短路径问题
-
-概念：求任意两点的最短路径">
+无源图的单源最短路径算法1234567891011121314151617void weighted(Vertex S)&amp;#123;	Enqueue(S, Q);	while(!IsEmpty(Q))	&amp;#123;		V">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图（中）">
 <meta property="og:url" content="site:ocxs.coding.io/2015/08/25/150825-graph2/index.html">
@@ -30,12 +26,8 @@
 1.单源最短路径问题
 
 概念：从固定源点出发，求其到所有其他顶点的最短路径
-
-
-2.多源最短路径问题
-
-概念：求任意两点的最短路径">
-<meta property="og:updated_time" content="2015-08-25T04:05:40.461Z">
+无源图的单源最短路径算法1234567891011121314151617void weighted(Vertex S)&amp;#123;	Enqueue(S, Q);	while(!IsEmpty(Q))	&amp;#123;		V">
+<meta property="og:updated_time" content="2015-08-26T08:25:01.752Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图（中）">
 <meta name="twitter:description" content="最短路径问题
@@ -46,11 +38,7 @@
 1.单源最短路径问题
 
 概念：从固定源点出发，求其到所有其他顶点的最短路径
-
-
-2.多源最短路径问题
-
-概念：求任意两点的最短路径">
+无源图的单源最短路径算法1234567891011121314151617void weighted(Vertex S)&amp;#123;	Enqueue(S, Q);	while(!IsEmpty(Q))	&amp;#123;		V">
   
     <link rel="alternative" href="/atom.xml" title="Ocxs&#39;s blog" type="application/atom+xml">
   
@@ -238,10 +226,26 @@
 </blockquote>
 <h3 id="1-单源最短路径问题">1.单源最短路径问题</h3><blockquote>
 <ul>
-<li>概念：从固定源点出发，求其到所有其他顶点的最短路径</li>
+<li>概念：从固定源点出发，求其到所有其他顶点的最短路径<ul>
+<li>无源图的单源最短路径算法<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">weighted</span><span class="params">(Vertex S)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	Enqueue(S, Q);</span><br><span class="line">	<span class="keyword">while</span>(!IsEmpty(Q))</span><br><span class="line">	&#123;</span><br><span class="line">		V = Dequeue(Q);</span><br><span class="line">		<span class="keyword">for</span>(V 的每个邻接点W)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dist[W] = -<span class="number">1</span>)		<span class="comment">//dist[W] 代表 </span></span><br><span class="line">			&#123;</span><br><span class="line">				dist[W] = dist[V] + <span class="number">1</span>;</span><br><span class="line">				path[W] = V;</span><br><span class="line">				Enqueue(W, Q);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
 </ul>
 </blockquote>
-<h3 id="2-多源最短路径问题">2.多源最短路径问题</h3><blockquote>
+<pre><code>时间复杂度：O(|<span class="string">V</span>|<span class="string"> + </span>|<span class="string">T</span>|<span class="string">)
+
+* Dijkstra 算法
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//伪码描述</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">(Vertex s)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		V = 未收录顶点中dist最小值;		<span class="comment">//该算法的时间复杂度取决与这句，如何寻找dist中最小值，dist即distance</span></span><br><span class="line">		<span class="keyword">if</span>(这样的V不存在)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		collect[V] = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">for</span>(V的每个邻接点W)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dist[V] + E&lt;V,W&gt; &lt; dist[W])</span><br><span class="line">			&#123;</span><br><span class="line">				dist[W] = dist[V] + E&lt;V,W&gt;;</span><br><span class="line">				path[W] = V;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Dijkstra算法不能解决有负边的问题。</span></span><br></pre></td></tr></table></figure>
+
+* 收集dist最小值方法
+    * 方法1：直接扫描所有未收录的顶点-O(</span>|<span class="string">V</span>|<span class="string">)
+      由于每次都要扫描，外层循环是</span>|<span class="string">V</span>|<span class="string">次，内层也是，所以总体时间复杂度O(</span>|<span class="string">V</span>|<span class="string">*</span>|<span class="string">V</span>|<span class="string"> + </span>|<span class="string">E</span>|<span class="string">) = O(</span>|<span class="string">V</span>|<span class="string">*</span>|<span class="string">V</span>|<span class="string">);</span>|<span class="string">E</span>|<span class="string">是for(V的每个邻接点W)的复杂度
+    * 方法2：将dist存入最小堆-O(log</span>|<span class="string">V</span>|<span class="string">)
+        * 更新dist值的复杂度O(log</span>|<span class="string">V</span>|<span class="string">)//这是为什么呢？
+        * T = O(</span>|<span class="string">V</span>|<span class="string">log</span>|<span class="string">V</span>|<span class="string"> + </span>|<span class="string">E</span>|<span class="string">log</span>|<span class="string">V</span>|<span class="string">) = O(</span>|<span class="string">E</span>|<span class="string">log</span>|<span class="string">V</span>|<span class="string">);一般来说边的个数</span>|<span class="string">E</span>|<span class="string">比顶点个数多
+        * **这里我们可以使用C++ STL里的优先队列来替代自己写最小堆**</span>
+</code></pre><h3 id="2-多源最短路径问题">2.多源最短路径问题</h3><blockquote>
 <ul>
 <li>概念：求任意两点的最短路径</li>
 </ul>
@@ -254,6 +258,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/09/05/150905-sort1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          排序（上）
+        
+      </div>
+    </a>
   
   
     <a href="/2015/08/25/150825-pat1/" id="article-nav-older" class="article-nav-link-wrap">
