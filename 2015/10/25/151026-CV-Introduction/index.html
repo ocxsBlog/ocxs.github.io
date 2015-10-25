@@ -11,7 +11,7 @@
 <meta property="og:url" content="site:ocxs.coding.io/2015/10/25/151026-CV-Introduction/index.html">
 <meta property="og:site_name" content="Ocxs's blog">
 <meta property="og:description" content="阅读opencv2计算机视觉编程手册的一些笔记，供自己快速以后查阅!一.opencv的各大模块二.opencv示例代码">
-<meta property="og:updated_time" content="2015-10-25T14:36:20.930Z">
+<meta property="og:updated_time" content="2015-10-25T15:29:24.618Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Opencv 学习笔记(一)">
 <meta name="twitter:description" content="阅读opencv2计算机视觉编程手册的一些笔记，供自己快速以后查阅!一.opencv的各大模块二.opencv示例代码">
@@ -196,43 +196,30 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>阅读opencv2计算机视觉编程手册的一些笔记，供自己快速以后查阅!<br>一.opencv的各大模块<br>二.opencv示例代码<br><a id="more"></a></p>
-<h2 id="一-opencv的各大模块">一.opencv的各大模块</h2><pre><code>* core模块，包含核心功能，尤其是底层数据结构和算法函数；
-* imgproc模块，包含图像处理函数；
-* highgui模块，包含读写图像及视频的函数，以及操作图形用户界面函数；
-* features2d模块，包含兴趣点检测子，描述子以及兴趣点匹配框架；
-* calib3d模块，包含相机标定，双目几何估算以及立体视觉函数；
-* video模块，包含运动估算，特征跟踪以及前景提取函数与类；
-* objdetect模块， 包含物体检测函数，如脸部与行人检测；
-* opencv中还包括，机器学习模块(ml),计算几何(flann),第三方代码(contrib),废弃的代码(legacy),以及gpu加速过的代码(gpu);这些代码均位于`./sources/modules`路径下。
-在需要用的时候，可以单独用如下方式：
+<h2 id="一-opencv的各大模块">一.opencv的各大模块</h2><blockquote>
+<ul>
+<li>core模块，包含核心功能，尤其是底层数据结构和算法函数；</li>
+<li>imgproc模块，包含图像处理函数；</li>
+<li>highgui模块，包含读写图像及视频的函数，以及操作图形用户界面函数；</li>
+<li>features2d模块，包含兴趣点检测子，描述子以及兴趣点匹配框架；</li>
+<li>calib3d模块，包含相机标定，双目几何估算以及立体视觉函数；</li>
+<li>video模块，包含运动估算，特征跟踪以及前景提取函数与类；</li>
+<li>objdetect模块， 包含物体检测函数，如脸部与行人检测；</li>
+<li>opencv中还包括，机器学习模块(ml),计算几何(flann),第三方代码(contrib),废弃的代码(legacy),以及gpu加速过的代码(gpu);这些代码均位于<code>./sources/modules</code>路径下。<br>在需要用的时候，可以单独用如下方式：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;opencv2/core/core.hpp&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<p>  或者使用一句代码将所有的头文件全部包含进去，<code>#include&lt;opencv2/opencv.hpp&gt;</code>,这种方法比较偷懒。</p>
+<hr>
+<h2 id="二-opencv示例代码">二.opencv示例代码</h2><hr>
+<blockquote>
+<p>代码如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	cv::Mat img = cv::imread(<span class="string">"../../resource/test.jpg"</span>);</span><br><span class="line">	<span class="keyword">if</span> (!img.data)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> windowName = <span class="string">"show image"</span>;</span><br><span class="line">	cv::namedWindow(windowName);</span><br><span class="line">	cv::imshow(windowName, img);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> fileName = <span class="string">"../../resource/test_write.bmp"</span>;</span><br><span class="line">	cv::imwrite(fileName, img);</span><br><span class="line"></span><br><span class="line">	cv::waitKey(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>1.cv::Mat 实现了引用技术以及浅拷贝，当图像之间进行赋值时，图像数据并没有发生复制，两个对象都指向同一块内存块。这也可用于参数传值的图像以及返回值传值的图像。<br>2.引用计数的作用是当只有当所有引用内存数据的对象都被析构后，才会释放内存块。<br>3.如果希望创建的图像拥有原始图像的崭新拷贝，那么可以使用<code>copyTo()</code>方法.<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cv::<span class="function">Mat <span class="title">function</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	cv::<span class="function">Mat <span class="title">img</span><span class="params">(<span class="number">240</span>, <span class="number">110</span>, CV_8U, cv::Scalar(<span class="number">100</span>)</span>)</span>;</span><br><span class="line">	<span class="keyword">return</span> img;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果我们从main函数中调用该函数：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv::Mat gray = function();</span><br></pre></td></tr></table></figure></p>
+<p>函数返回的<code>cv::Mat</code>对象在转移到gray时仅发生浅拷贝。函数中的声明局部变量img离开作用域被析构，但是由于它所关联的引用计数表示内部图像正被另一个对象gray所引用，因此内存块并不会被释放。<br>但是在类中使用时需要谨慎，避免返回类中的图像成员。错误示例如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Test</span><br><span class="line">&#123;</span><br><span class="line">	cv::Mat img;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Test() : img(<span class="number">240</span>,<span class="number">10</span>,CV_8U, cv::Scalar(<span class="number">100</span>))&#123;&#125;</span><br><span class="line">	cv::<span class="function">Mat <span class="title">function</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> img;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果这里调用了function,便得到该图像的浅拷贝，如果之后这份拷贝发送改变，则会导致类中的成员变量也发生改变，为了避免这种错误发生，应当返回成员变量的一份新的拷贝。</p>
+</blockquote>
 
-<span class="comment"><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;opencv2/core/core.hpp&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span></span><br></pre></td></tr></table></figure></span>
-
-
-或者使用一句代码将所有的头文件全部包含进去，`#include<span class="tag">&lt;<span class="title">opencv2</span>/<span class="attribute">opencv.hpp</span>&gt;</span>`,这种方法比较偷懒。
-</code></pre><h2 id="二-opencv示例代码">二.opencv示例代码</h2><pre><code><span class="comment"><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	cv::Mat img = cv::imread(<span class="string">"../../resource/test.jpg"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!img.data)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> windowName = <span class="string">"show image"</span>;</span><br><span class="line">	cv::namedWindow(windowName);</span><br><span class="line">	cv::imshow(windowName, img);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> fileName = <span class="string">"../../resource/test_write.bmp"</span>;</span><br><span class="line">	cv::imwrite(fileName, img);</span><br><span class="line"></span><br><span class="line">	cv::waitKey(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></span>
-
-
-cv::Mat 实现了引用技术以及浅拷贝，当图像之间进行赋值时，图像数据并没有发生复制，两个对象都指向同一块内存块。这也可用于参数传值的图像以及返回值传值的图像。
-引用计数的作用是当只有当所有引用内存数据的对象都被析构后，才会释放内存块。
-如果希望创建的图像拥有原始图像的崭新拷贝，那么可以使用`copyTo()`方法.
-
-<span class="comment"><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cv::<span class="function">Mat <span class="title">function</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	cv::<span class="function">Mat <span class="title">img</span><span class="params">(<span class="number">240</span>, <span class="number">110</span>, CV_8U, cv::Scalar(<span class="number">100</span>)</span>)</span>;</span><br><span class="line">	<span class="keyword">return</span> img;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></span>
-
-
-如果我们从main函数中调用该函数：
-
-<span class="comment"><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv::Mat gray = function();</span><br></pre></td></tr></table></figure></span>
-
-
-函数返回的`cv::Mat`对象在转移到gray时仅发生浅拷贝。函数中的声明局部变量img离开作用域被析构，但是由于它所关联的引用计数表示内部图像正被另一个对象gray所引用，因此内存块并不会被释放。
-但是在类中使用时需要谨慎，避免返回类中的图像成员。错误示例如下：
-
-<span class="comment"><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Test</span><br><span class="line">&#123;</span><br><span class="line">	cv::Mat img;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Test() : img(<span class="number">240</span>,<span class="number">10</span>,CV_8U, cv::Scalar(<span class="number">100</span>))&#123;&#125;</span><br><span class="line">	cv::<span class="function">Mat <span class="title">function</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> img;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></span>
-
-
-如果这里调用了function,便得到该图像的浅拷贝，如果之后这份拷贝发送改变，则会导致类中的成员变量也发生改变，为了避免这种错误发生，应当返回成员变量的一份新的拷贝。
-</code></pre>
       
     </div>
     
