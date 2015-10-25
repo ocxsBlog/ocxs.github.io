@@ -7,38 +7,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="最短路径问题
 
-最短路径：在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的那一条路径。
-
-
-1.单源最短路径问题
-
-概念：从固定源点出发，求其到所有其他顶点的最短路径
-无源图的单源最短路径算法(与BFS基本上相似)1234567891011121314151617void weighted(Vertex S)&amp;#123;	Enqueue(S, Q);	while(!IsEmpty(Q)">
+最短路径：在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的那一条路径。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图（中）">
 <meta property="og:url" content="site:ocxs.coding.io/2015/08/25/150825-graph2/index.html">
 <meta property="og:site_name" content="Ocxs's blog">
 <meta property="og:description" content="最短路径问题
 
-最短路径：在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的那一条路径。
-
-
-1.单源最短路径问题
-
-概念：从固定源点出发，求其到所有其他顶点的最短路径
-无源图的单源最短路径算法(与BFS基本上相似)1234567891011121314151617void weighted(Vertex S)&amp;#123;	Enqueue(S, Q);	while(!IsEmpty(Q)">
-<meta property="og:updated_time" content="2015-09-20T13:25:33.197Z">
+最短路径：在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的那一条路径。">
+<meta property="og:updated_time" content="2015-10-25T12:19:51.738Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图（中）">
 <meta name="twitter:description" content="最短路径问题
 
-最短路径：在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的那一条路径。
-
-
-1.单源最短路径问题
-
-概念：从固定源点出发，求其到所有其他顶点的最短路径
-无源图的单源最短路径算法(与BFS基本上相似)1234567891011121314151617void weighted(Vertex S)&amp;#123;	Enqueue(S, Q);	while(!IsEmpty(Q)">
+最短路径：在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的那一条路径。">
   
     <link rel="alternative" href="/atom.xml" title="Ocxs&#39;s blog" type="application/atom+xml">
   
@@ -221,11 +203,8 @@
       
         <h2 id="最短路径问题">最短路径问题</h2><blockquote>
 <ul>
-<li>最短路径：在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的那一条路径。</li>
-</ul>
-</blockquote>
-<h3 id="1-单源最短路径问题">1.单源最短路径问题</h3><blockquote>
-<ul>
+<li>最短路径：在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的那一条路径。<a id="more"></a>
+<h3 id="1-单源最短路径问题">1.单源最短路径问题</h3></li>
 <li>概念：从固定源点出发，求其到所有其他顶点的最短路径<ul>
 <li>无源图的单源最短路径算法(与BFS基本上相似)<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">weighted</span><span class="params">(Vertex S)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	Enqueue(S, Q);</span><br><span class="line">	<span class="keyword">while</span>(!IsEmpty(Q))</span><br><span class="line">	&#123;</span><br><span class="line">		V = Dequeue(Q);</span><br><span class="line">		<span class="keyword">for</span>(V 的每个邻接点W)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dist[W] = -<span class="number">1</span>)		<span class="comment">//dist[W] 代表  起点到顶点W的距离</span></span><br><span class="line">			&#123;</span><br><span class="line">				dist[W] = dist[V] + <span class="number">1</span>;</span><br><span class="line">				path[W] = V;		<span class="comment">//path[W] 代表 起点到W经过的顶点，我们一般只存储他的上一个顶点，最小生成树中可以看成其父结点</span></span><br><span class="line">				Enqueue(W, Q);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
