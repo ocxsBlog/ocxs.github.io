@@ -13,7 +13,7 @@
 1.单源最短路径问题
 
 概念：从固定源点出发，求其到所有其他顶点的最短路径
-无源图的单源最短路径算法1234567891011121314151617void weighted(Vertex S)&amp;#123;	Enqueue(S, Q);	while(!IsEmpty(Q))	&amp;#123;		V">
+无源图的单源最短路径算法(与BFS基本上相似)1234567891011121314151617void weighted(Vertex S)&amp;#123;	Enqueue(S, Q);	while(!IsEmpty(Q)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图（中）">
 <meta property="og:url" content="site:ocxs.coding.io/2015/08/25/150825-graph2/index.html">
@@ -26,8 +26,8 @@
 1.单源最短路径问题
 
 概念：从固定源点出发，求其到所有其他顶点的最短路径
-无源图的单源最短路径算法1234567891011121314151617void weighted(Vertex S)&amp;#123;	Enqueue(S, Q);	while(!IsEmpty(Q))	&amp;#123;		V">
-<meta property="og:updated_time" content="2015-08-26T08:25:01.752Z">
+无源图的单源最短路径算法(与BFS基本上相似)1234567891011121314151617void weighted(Vertex S)&amp;#123;	Enqueue(S, Q);	while(!IsEmpty(Q)">
+<meta property="og:updated_time" content="2015-09-20T13:25:33.197Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图（中）">
 <meta name="twitter:description" content="最短路径问题
@@ -38,7 +38,7 @@
 1.单源最短路径问题
 
 概念：从固定源点出发，求其到所有其他顶点的最短路径
-无源图的单源最短路径算法1234567891011121314151617void weighted(Vertex S)&amp;#123;	Enqueue(S, Q);	while(!IsEmpty(Q))	&amp;#123;		V">
+无源图的单源最短路径算法(与BFS基本上相似)1234567891011121314151617void weighted(Vertex S)&amp;#123;	Enqueue(S, Q);	while(!IsEmpty(Q)">
   
     <link rel="alternative" href="/atom.xml" title="Ocxs&#39;s blog" type="application/atom+xml">
   
@@ -227,7 +227,7 @@
 <h3 id="1-单源最短路径问题">1.单源最短路径问题</h3><blockquote>
 <ul>
 <li>概念：从固定源点出发，求其到所有其他顶点的最短路径<ul>
-<li>无源图的单源最短路径算法<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">weighted</span><span class="params">(Vertex S)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	Enqueue(S, Q);</span><br><span class="line">	<span class="keyword">while</span>(!IsEmpty(Q))</span><br><span class="line">	&#123;</span><br><span class="line">		V = Dequeue(Q);</span><br><span class="line">		<span class="keyword">for</span>(V 的每个邻接点W)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dist[W] = -<span class="number">1</span>)		<span class="comment">//dist[W] 代表 </span></span><br><span class="line">			&#123;</span><br><span class="line">				dist[W] = dist[V] + <span class="number">1</span>;</span><br><span class="line">				path[W] = V;</span><br><span class="line">				Enqueue(W, Q);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>无源图的单源最短路径算法(与BFS基本上相似)<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">weighted</span><span class="params">(Vertex S)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	Enqueue(S, Q);</span><br><span class="line">	<span class="keyword">while</span>(!IsEmpty(Q))</span><br><span class="line">	&#123;</span><br><span class="line">		V = Dequeue(Q);</span><br><span class="line">		<span class="keyword">for</span>(V 的每个邻接点W)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dist[W] = -<span class="number">1</span>)		<span class="comment">//dist[W] 代表  起点到顶点W的距离</span></span><br><span class="line">			&#123;</span><br><span class="line">				dist[W] = dist[V] + <span class="number">1</span>;</span><br><span class="line">				path[W] = V;		<span class="comment">//path[W] 代表 起点到W经过的顶点，我们一般只存储他的上一个顶点，最小生成树中可以看成其父结点</span></span><br><span class="line">				Enqueue(W, Q);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -236,7 +236,7 @@
 <pre><code>时间复杂度：O(|<span class="string">V</span>|<span class="string"> + </span>|<span class="string">T</span>|<span class="string">)
 
 * Dijkstra 算法
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//伪码描述</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">(Vertex s)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		V = 未收录顶点中dist最小值;		<span class="comment">//该算法的时间复杂度取决与这句，如何寻找dist中最小值，dist即distance</span></span><br><span class="line">		<span class="keyword">if</span>(这样的V不存在)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		collect[V] = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">for</span>(V的每个邻接点W)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dist[V] + E&lt;V,W&gt; &lt; dist[W])</span><br><span class="line">			&#123;</span><br><span class="line">				dist[W] = dist[V] + E&lt;V,W&gt;;</span><br><span class="line">				path[W] = V;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Dijkstra算法不能解决有负边的问题。</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//伪码描述</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">(Vertex s)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		V = 未收录顶点中dist最小值;		<span class="comment">//该算法的时间复杂度取决与这句，如何寻找dist中最小值，dist即distance</span></span><br><span class="line">		<span class="keyword">if</span>(这样的V不存在)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		collect[V] = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">for</span>(V的每个邻接点W)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dist[V] + E&lt;V,W&gt; &lt; dist[W])</span><br><span class="line">			&#123;</span><br><span class="line">				dist[W] = dist[V] + E&lt;V,W&gt;;</span><br><span class="line">				path[W] = V;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Dijkstra算法不能解决有负边的问题。即图中不能存在负值圈（negative-cost cycle）</span></span><br></pre></td></tr></table></figure>
 
 * 收集dist最小值方法
     * 方法1：直接扫描所有未收录的顶点-O(</span>|<span class="string">V</span>|<span class="string">)
@@ -247,7 +247,7 @@
         * **这里我们可以使用C++ STL里的优先队列来替代自己写最小堆**</span>
 </code></pre><h3 id="2-多源最短路径问题">2.多源最短路径问题</h3><blockquote>
 <ul>
-<li>概念：求任意两点的最短路径</li>
+<li>概念：求任意两点的最短路径  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//floyd算法</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 </blockquote>
 
