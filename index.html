@@ -363,142 +363,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="һ-�ѣ�Heap��">һ.�ѣ�Heap��</h3><p>1.���ȶ��У�Priority Quene���������ġ����С���ȡ��Ԫ�ص�˳���ǰ���Ԫ�ص�<strong>����Ȩ���ؼ��֣�</strong>��С��������Ԫ�ؽ������е��Ⱥ�˳����</p>
-<blockquote>
-<ul>
-<li>����������������ʵ�����ȶ��У�<ul>
-<li>���飺<ul>
-<li>����–Ԫ�����ǲ���β�� — O(1)</li>
-<li>����–���ҹؼ���— O(n)</li>
-<li>ɾ��–��������ɾ��Ԫ�أ���Ҫ��ɾ��Ԫ�غ���x<code>x</code>Ԫ����ǰŲ��–O(n)</li>
-</ul>
-</li>
-<li>����<ul>
-<li>����–��������ͷ��λ��—O(1)</li>
-<li>ɾ��–���ҹؼ��� — O(n)</li>
-<li>ɾ��–ֻ�轫ָ����д����–O(1)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>����<strong>��ȫ������</strong>��ʾ��������������������<ul>
-<li>�ṹ�ԣ�����ȫ���������������洢��</li>
-<li>�����ԣ���һ�����Ĺؼ��������������н���������ֵ������Сֵ��<ul>
-<li>�����ѣ�MaxHeap��������ֵ</li>
-<li>��С�ѣ�MinHeap������Сֵ<br>�Ӹ��ڵ㵽��һ������·������������</li>
-</ul>
-</li>
-<li>����  O(logN)���μ������ƿ������ݽṹ��Խmooc���Ƚ�Ԫ�ط�����������һλ��Ȼ�������丸�����Ƚϣ����ݴ�С����λ��</li>
-<li>ɾ��  O(logN) ɾ������Ԫ�أ��ճ���λ��������һ��Ԫ���油��Ȼ������һ��Ԫ��������Ԫ�رȽϣ�С�򻥻�λ�ã�ֱ����������������λ�ã��������������ͣ���С��ͬ��</li>
-</ul>
-</li>
-<li><strong>�����ѵĽ���</strong>���������������ǽ����������ѵĻ����ϣ�<ul>
-<li>����1��ͨ���������󣬽�N��Ԫ��һ����������ʼΪ�յĶ���ȥ��ʱ��������<strong>O(NlogN)</strong>��ÿ����һ��Ԫ�ظ��Ӷ���O(logN)�����Բ���N������O(NlogN)��</li>
-<li>����2��������ʱ�临�Ӷ��½��������ѣ�<strong>O(N)</strong>��<ul>
-<li>��N��Ԫ�ذ�����˳����������˳�����Ǵ�С˳����ֻ�ǰ���λ��˳����1��2��3��4�������������������ѣ����룬��������ȫ�������Ľṹ����</li>
-<li>����������λ�ã������������ѵ��������ԡ����Ե����ϣ�ʹ��һ������������������һ���ѣ�</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//��С�ѵ�ʵ�֣����������룬ɾ��������·����</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_SIZE = <span class="number">1001</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MIN_DATA = -<span class="number">100001</span>;    <span class="comment">//set sentinel</span></span><br><span class="line"><span class="keyword">struct</span> Heap</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> *heapArray;     <span class="comment">//create dynamic array to storage element of heap</span></span><br><span class="line">    <span class="keyword">int</span> size;           <span class="comment">//the size of current heap</span></span><br><span class="line">    <span class="keyword">int</span> capacity;       <span class="comment">//the max size of heap</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> MinHeap</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    MinHeap();</span><br><span class="line">    ~MinHeap()&#123;&#125;</span><br><span class="line">    <span class="function">Heap *<span class="title">CreateMinHeap</span><span class="params">(<span class="keyword">int</span> maxSize)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">IsFull</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">IsEmpty</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">InsertValMinHeap</span><span class="params">(<span class="keyword">int</span> val,Heap *&amp;MH)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(<span class="keyword">int</span> val)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">DeleteMaxValMinHeap</span><span class="params">(Heap *&amp;MH)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Delete</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">FindVal</span><span class="params">(<span class="keyword">int</span> position, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;ans)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Heap *m_h;</span><br><span class="line">&#125;;</span><br><span class="line">MinHeap::MinHeap()</span><br><span class="line">&#123;</span><br><span class="line">    m_h = CreateMinHeap(MAX_SIZE);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Heap *MinHeap::CreateMinHeap(<span class="keyword">int</span> maxSize)</span><br><span class="line">&#123;</span><br><span class="line">    Heap *tempH = <span class="keyword">new</span> Heap;</span><br><span class="line">    tempH-&gt;heapArray = <span class="keyword">new</span> <span class="keyword">int</span> [maxSize];</span><br><span class="line">    tempH-&gt;size = <span class="number">0</span>;</span><br><span class="line">    tempH-&gt;capacity = maxSize;</span><br><span class="line">    tempH-&gt;heapArray[<span class="number">0</span>] = MIN_DATA;</span><br><span class="line">    <span class="keyword">return</span> tempH;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> MinHeap::IsFull()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(m_h-&gt;size == m_h-&gt;capacity - <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> MinHeap::IsEmpty()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(m_h-&gt;size == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MinHeap::Insert(<span class="keyword">int</span> val)</span><br><span class="line">&#123;</span><br><span class="line">    InsertValMinHeap(val, m_h);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MinHeap::InsertValMinHeap(<span class="keyword">int</span> val, Heap *&amp;MH)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(IsFull())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"heap is full "</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> i = ++MH-&gt;size;</span><br><span class="line">    <span class="keyword">for</span>(; val &lt; MH-&gt;heapArray[i/<span class="number">2</span>]; i /= <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        MH-&gt;heapArray[i] = MH-&gt;heapArray[i/<span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    MH-&gt;heapArray[i] = val;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> MinHeap::DeleteMaxValMinHeap(Heap *&amp;MH)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(IsEmpty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"heap is empty "</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> maxData = MH-&gt;heapArray[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span> tempVal = MH-&gt;heapArray[MH-&gt;size--];</span><br><span class="line">    <span class="keyword">int</span> parent = <span class="number">1</span>, child = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(; parent * <span class="number">2</span> &lt;= MH-&gt;size; parent = child)</span><br><span class="line">    &#123;</span><br><span class="line">        child = parent * <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>((child != MH-&gt;size) &amp;&amp; (MH-&gt;heapArray[child + <span class="number">1</span>] &lt; MH-&gt;heapArray[child]))</span><br><span class="line">        &#123;</span><br><span class="line">            ++child;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(tempVal &lt;= MH-&gt;heapArray[child])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        MH-&gt;heapArray[parent] = MH-&gt;heapArray[child];</span><br><span class="line">    &#125;</span><br><span class="line">    MH-&gt;heapArray[parent] = tempVal;</span><br><span class="line">    <span class="keyword">return</span> maxData;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> MinHeap::Delete()</span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">return</span> DeleteMaxValMinHeap(m_h);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> MinHeap::FindVal(<span class="keyword">int</span> position, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;ans)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(position &lt; <span class="number">0</span> || position &gt; m_h-&gt;size)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"can't find element "</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = position; i &gt; <span class="number">0</span>; i /= <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ans.push_back(m_h-&gt;heapArray[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> M = <span class="number">0</span>, N = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; M &gt;&gt; N;</span><br><span class="line"> <span class="comment">//   vector&lt;int&gt; seqValVec;</span></span><br><span class="line">    MinHeap mh;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; M; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> val = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; val;</span><br><span class="line"> <span class="comment">//       seqValVec.push_back(val);</span></span><br><span class="line">        mh.Insert(val);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    mh.Delete();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; index;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">        mh.FindVal(index,ans);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ans.size(); ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; ans[i] &lt;&lt; (i == ans.size() - <span class="number">1</span> ? <span class="string">"\n"</span>:<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="��-���������͹���������">��.���������͹���������</h3><blockquote>
-<ul>
-<li><strong>��Ȩ·������</strong>��WPL��Weight Path Length��������������n��<strong>Ҷ�ӽ���</strong>��ÿ��Ҷ�ӽ�������ȨֵWk���Ӹ��ڵ㵽ÿ��Ҷ�ӽ����ĳ���ΪLk����ÿ��Ҷ�ӽ�����WPL֮�ͣ�WPL = W0*L0 + ?? + Wi*Li +??+ Wn*Ln��i = 0???N��</li>
-<li><strong>��������</strong>�����Ŷ����󣩣�WPL��С�Ķ�����</li>
-<li><p><strong>���������Ĺ���</strong>��ÿ�ν�Ȩֵ��С�����ö������ϲ���<br>  ���磺<code>1 2 3 4 5</code><br>  �������£�<br>  <code>1 2</code>�ϲ���<code>3</code>����<code>3 3 4 5</code>��ѡ����С�ģ�<code>3 3</code>�ϲ��� <code>6 4 5</code>��������ѡ����С��<code>4 5</code> ��<code>6 9</code>�ϲ���<code>15</code></p>
-<ul>
-<li>����ʵ���У�����ѡȡ��С������Ԫ�أ�����������С��Ч�ʸߣ���Ϊÿ�������򣬻�Ҫ���ϲ�����Ԫ�ط����������������򡣹�����С�ѣ�ÿ��ɾ����С���е�����Ԫ�أ�Ȼ�������ϲ�����Ԫ�أ����չ�������������ʱ�临�Ӷ�ΪO(NlogN)</li>
-</ul>
-</li>
-<li><p><strong>�����������ص�</strong></p>
-<ul>
-<li>û�ж�Ϊ1�Ľ���</li>
-<li>������N��Ҷ�ӽ��㣬��������������2*N-1������</li>
-<li>������������һ��Ҷ�ڵ����������󽻻������ǹ�������</li>
-<li>��ͬһ��Ȩֵ��W1��W2��W3???Wn���Ƿ����ڲ�ͬ�������ù��������أ������ڣ�<br>������1��2��3��3}�ʹ��ڡ�����MOOC�μ���</li>
-</ul>
-</li>
-<li><strong>����������</strong><ul>
-<li>���ȳ����룬Ƶ�ʳ��ָߵı��볤�ȶ�һ�㣬Ƶ�ʳ��ֵ͵ı��볤�ȸ�һ�㡣<br>�������������ֶ����ԣ����磺<br><code>a:1,e:0,s:10,t:11</code><br>��ô����1011�Ľ��;��в�ֹһ�֣����Խ��ͳ�<code>st</code>����<code>aet</code>�����α��������ԣ�</li>
-<li>ǰ׺�루prefix code�����κ��ַ��ı��붼������һ�ַ��ı�����ǰ׺��<br>����������a�ı�����t�ı�����ǰ׺�������������˶����ԡ�</li>
-<li>���������б��룺<br>  ��1�������ҷ�֧��0��1����Ϊ0����Ϊ1��<br>  ��2�����ַ�ֻ��Ҷ�ӽ����ϣ����ܳ����ڷ�Ҷ�ӽ�����</li>
-<li>����һЩ�ַ���Ƶ�ʣ�����Ƶ���Ƚ��������������������������ı߱���0�����ҵı���1���������е��ַ��Ĺ����������ͳ����ˣ������Ķ��������Ҵ���Ҳ����С�ġ�</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h3 id="���ϼ�����">���ϼ�����</h3><blockquote>
-<ul>
-<li>���鼯<br>  ���ú��ֽṹ���洢���ϣ����������洢�����н�����ָ�����ڵ㣬���ڵ������ü��ϡ�Ȼ��������ʵ�֣�����Ҳ��ʵ�֣�</li>
-</ul>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">�±�</th>
-<th style="text-align:center">Data</th>
-<th style="text-align:center">parent</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">-1</td>
-</tr>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">0</td>
-</tr>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:center">3</td>
-<td style="text-align:center">-1</td>
-</tr>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">0</td>
-</tr>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">2</td>
-</tr>
-<tr>
-<td style="text-align:center">5</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">-1</td>
-</tr>
-<tr>
-<td style="text-align:center">6</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">0</td>
-</tr>
-<tr>
-<td style="text-align:center">7</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">2</td>
-</tr>
-<tr>
-<td style="text-align:center">8</td>
-<td style="text-align:center">9</td>
-<td style="text-align:center">5</td>
-</tr>
-<tr>
-<td style="text-align:center">9</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">5</td>
-</tr>
-</tbody>
-</table>
-<p>����1���ӽڵ���2��4��7<br>����3���ӽڵ���5��8<br>����6���ӽڵ���9��10<br>����1��3��6����������ͬ�ļ��ϣ���Ϊ���ǵĸ�����Ϊ-1�����б���û�У��±���Ԫ���������е�λ�ã������������д洢����ʽ��</p>
-
+        <h3 id="һ-�ѣ�Heap��">һ.�ѣ�Heap��</h3>
       
     </div>
     
@@ -511,6 +376,10 @@
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/22/150822-tree-3/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
