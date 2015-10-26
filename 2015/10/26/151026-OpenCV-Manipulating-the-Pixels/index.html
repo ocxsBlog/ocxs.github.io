@@ -3,19 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Manipulating the Pixels | Ocxs&#39;s blog</title>
+  <title>OpenCV 学习笔记(2) Manipulating the Pixels (上) | Ocxs&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="本节导读：
 
 
 Accessing pixel values
 Scanning an image with pointers
-Scanning an image with iterators
-Writing effcient image scanning loops
-Scanning an image with neighbor access
-Performing simple image ari">
+Scanning an image with iterators">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Manipulating the Pixels">
+<meta property="og:title" content="OpenCV 学习笔记(2) Manipulating the Pixels (上)">
 <meta property="og:url" content="site:ocxs.coding.io/2015/10/26/151026-OpenCV-Manipulating-the-Pixels/index.html">
 <meta property="og:site_name" content="Ocxs's blog">
 <meta property="og:description" content="本节导读：
@@ -23,22 +20,16 @@ Performing simple image ari">
 
 Accessing pixel values
 Scanning an image with pointers
-Scanning an image with iterators
-Writing effcient image scanning loops
-Scanning an image with neighbor access
-Performing simple image ari">
-<meta property="og:updated_time" content="2015-10-26T13:11:45.776Z">
+Scanning an image with iterators">
+<meta property="og:updated_time" content="2015-10-26T13:19:57.739Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Manipulating the Pixels">
+<meta name="twitter:title" content="OpenCV 学习笔记(2) Manipulating the Pixels (上)">
 <meta name="twitter:description" content="本节导读：
 
 
 Accessing pixel values
 Scanning an image with pointers
-Scanning an image with iterators
-Writing effcient image scanning loops
-Scanning an image with neighbor access
-Performing simple image ari">
+Scanning an image with iterators">
   
     <link rel="alternative" href="/atom.xml" title="Ocxs&#39;s blog" type="application/atom+xml">
   
@@ -199,7 +190,7 @@ Performing simple image ari">
         
   
     <h1 class="article-title" itemprop="name">
-      Manipulating the Pixels
+      OpenCV 学习笔记(2) Manipulating the Pixels (上)
     </h1>
   
 
@@ -224,16 +215,11 @@ Performing simple image ari">
 <ul>
 <li>Accessing pixel values</li>
 <li>Scanning an image with pointers</li>
-<li>Scanning an image with iterators</li>
-<li>Writing effcient image scanning loops</li>
-<li>Scanning an image with neighbor access</li>
-<li>Performing simple image arithmetic </li>
-<li>Defining regions of interest<a id="more"></a>
+<li>Scanning an image with iterators<a id="more"></a>
 </li>
 </ul>
 </blockquote>
-<h1 id="Introduction">Introduction</h1><p>Fundamentally, an image is a matrix of numerical values.</p>
-<h1 id="Accessing_pixel_values(存取像素值)">Accessing pixel values(存取像素值)</h1><h2 id="1-salt-and-pepper_noise(椒盐噪声)">1.salt-and-pepper noise(椒盐噪声)</h2><h3 id="(1)Definition">(1)Definition</h3><p>is a particular type of noise in which some pixels are replaced by a white or a black pixel.(This type of noise can occur in faulty communication when the value of some pixels is lost during transmission) </p>
+<h1 id="Introduction"><strong>Introduction</strong></h1><h2 id="Fundamentally,_an_image_is_a_matrix_of_numerical_values-">Fundamentally, an image is a matrix of numerical values.</h2><h1 id="Accessing_pixel_values(存取像素值)"><strong>Accessing pixel values(存取像素值)</strong></h1><h2 id="1-salt-and-pepper_noise(椒盐噪声)">1.salt-and-pepper noise(椒盐噪声)</h2><h3 id="(1)Definition">(1)Definition</h3><p>is a particular type of noise in which some pixels are replaced by a white or a black pixel.(This type of noise can occur in faulty communication when the value of some pixels is lost during transmission) </p>
 <h3 id="(2)Add_salt-and-pepper_noise_to_an_image">(2)Add salt-and-pepper noise to an image</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">salt</span><span class="params">(cv::Mat &amp;image, <span class="keyword">int</span> n)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n; ++k)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> i = rand() % image.cols;	<span class="comment">//column, 列，image's width</span></span><br><span class="line">		<span class="keyword">int</span> j = rand() % image.rows;	<span class="comment">//row, 行	image's height</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(<span class="number">1</span> == image.channels())	<span class="comment">//gray-level image</span></span><br><span class="line">		&#123;</span><br><span class="line">			image.at&lt;uchar&gt;(j, i) = <span class="number">255</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(<span class="number">3</span> == image.channels())	<span class="comment">//color image</span></span><br><span class="line">		&#123;</span><br><span class="line">			image.at&lt;cv::Vec3b&gt;(j, i)[<span class="number">0</span>] = <span class="number">255</span>;</span><br><span class="line">			image.at&lt;cv::Vec3b&gt;(j, i)[<span class="number">1</span>] = <span class="number">255</span>;</span><br><span class="line">			image.at&lt;cv::Vec3b&gt;(j, i)[<span class="number">2</span>] = <span class="number">255</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="(3)The_Difference_of_gray-level_image_and_color_image">(3)The Difference of gray-level image and color image</h3><p>In the case of a gray-level image, the number 255 is assigned to the single 8-bit value. For a color image, you need to assign 255 to the three primary color channels in order to obtain a white pixel.</p>
 <h3 id="(4)How_to_access_the_different_attributes_of_an_image-">(4)How to access the different attributes of an image.</h3><p>For element access, <code>cv::Mat</code> has the method <code>at(int y, int x)</code>.但是返回类型必须要在编译的时候知道，所以程序员必须给定类型，这也是为什么 <code>at</code> method 用模版来实现，所以调用<code>at</code> method用如下方式，举例说明：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">image.at&lt;uchar&gt;(j, i) = <span class="number">255</span>;</span><br></pre></td></tr></table></figure></p>
@@ -241,7 +227,7 @@ Performing simple image ari">
 <p>2-element and 4-element vectors(<code>cv::Vec2b</code> and <code>cv::Vec4b</code>)<br><code>s:short, i:int, f:float, d:double</code>, 定义成模版类<code>cv::Vec&lt;T,N&gt;</code>where <code>T</code> is the type and <code>N</code> is the number of vector element.</p>
 <h3 id="(5)Use_cv::Mat__to_access_pixels">(5)Use cv::Mat_ to access pixels</h3><p>Using <code>at</code> method is cumbersome(笨重的；累赘的；难处理的)because the returned type must be specified as a template argument for each call.<br>So it is possible to use the <code>cv::Mat_</code> class which is a template subclass of <code>cv::Mat</code>.<br>Among the extra methods, there is the <code>operator</code> <code>()</code> allowing direct access to matrix elements.<br>Therefore, if image is a reference to a uchar matrix, then one can write:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cv::Mat_&lt;uchar&gt; im2= image; <span class="comment">// im2 refers to image</span></span><br><span class="line">im2(<span class="number">50</span>,<span class="number">100</span>)= <span class="number">0</span>; <span class="comment">// access to row 50 and column 100</span></span><br></pre></td></tr></table></figure></p>
 <p><code>cv::Mat_</code>的元素类型在创建实例的时候已经声明，操作符<code>()</code>在编译期就知道需要返回的数据类型。他和<code>at</code>返回值也是一样的，所以使用<code>()</code>看起来更加简洁方便一点。</p>
-<h1 id="Scanning_an_image_with_pointers(使用指针遍历图像)">Scanning an image with pointers(使用指针遍历图像)</h1><h2 id="In-place_transformation">In-place transformation</h2><p>Definition: The transformation is directly applied to the input image, which is called an in-place transformation.</p>
+<h1 id="Scanning_an_image_with_pointers(使用指针遍历图像)"><strong>Scanning an image with pointers(使用指针遍历图像)</strong></h1><h2 id="In-place_transformation">In-place transformation</h2><p>Definition: The transformation is directly applied to the input image, which is called an in-place transformation.</p>
 <h2 id="双重循环遍历像素">双重循环遍历像素</h2><h3 id="1-代码">1.代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nl = image.rows;	<span class="comment">//number of lines</span></span><br><span class="line"><span class="keyword">int</span> nc = image.cols * image.channels();		<span class="comment">//total number of elements per line</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nl; ++j)</span><br><span class="line">&#123;</span><br><span class="line">	uchar *data = image.ptr&lt;uchar&gt;(j);	<span class="comment">//get the address of row j</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nc; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="comment">//降低图像中的颜色数目，个人愚见：书上仅仅是通过降低图像颜色这个示例来告诉我们如何去用指针遍历像素</span></span><br><span class="line">		data[i] = data[i]/div*div + div/<span class="number">2</span>;		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里颜色降低的原理就是降低维度，一般彩色图像是0~255，现在变成32个维度，即某通道的强度值是0~7时，用4来表示，为8~15时，用12来表示，大概就是这么个意思，我觉得没必要去细究。</p>
 <h3 id="2-作用原理">2.作用原理</h3><p>Opencv中默认使用BGR的通道顺序，因此第一个通道通常是蓝色的。一个W*H的彩色图像，需要W*H*3个uchar构成的内存块。<br>    但是处于效率的考虑，每行可能会填补一些额外像素，因为行的长度是4或8的倍数,一些多媒体处理芯片(如Intel的MMX架构)<br>可以更高校的处理图像。这些额外的像素不会被显示或者保存，填补的值会被忽略。opencv将填补后的一行的长度指定为关键字。<br>如果没有对图像进行填补，图像的有效长度就等于图像的真实宽度。<code>step</code>代表以字节为单位的图像的有效宽度。即使图像类型元素不是uchar，<strong>step</strong>依然<strong>代表着一行的字节数</strong>。<br>像素的大小可以有<code>elemSize</code> method得到：对于一个三通道的<code>short</code>型矩阵<code>(CV_16SC3)</code>,<code>elemSize</code>返回6。<br>通道数可以由<code>channels</code> method得到：例如：<code>int nc = image.cols * image.channels();</code><br>为了简化指针运算，<code>cv::Mat</code>提供了<strong><code>ptr</code>函数可以得到图像任意行的首地址</strong>。如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uchar *data = image.ptr&lt;uchar&gt;(j);	<span class="comment">//返回第j行的首地址</span></span><br></pre></td></tr></table></figure></p>
@@ -255,9 +241,18 @@ Performing simple image ari">
     
 <nav id="article-nav">
   
+    <a href="/2015/10/26/151026-OpenCV-Manipulating-the-pixels-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          OpenCV 学习笔记(2) Manipulating the Pixels (下)
+        
+      </div>
+    </a>
+  
   
     <a href="/2015/10/25/151026-CV-Introduction/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Opencv 学习笔记(一)</div>
+      <div class="article-nav-title">Opencv 学习笔记(1)</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -286,7 +281,7 @@ Performing simple image ari">
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="151026-OpenCV-Manipulating-the-Pixels" data-title="Manipulating the Pixels" data-url="site:ocxs.coding.io/2015/10/26/151026-OpenCV-Manipulating-the-Pixels/"></div>
+	<div class="ds-thread" data-thread-key="151026-OpenCV-Manipulating-the-Pixels" data-title="OpenCV 学习笔记(2) Manipulating the Pixels (上)" data-url="site:ocxs.coding.io/2015/10/26/151026-OpenCV-Manipulating-the-Pixels/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
