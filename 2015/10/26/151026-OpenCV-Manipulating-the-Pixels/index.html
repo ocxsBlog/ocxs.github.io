@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Manipulating the Pixels | Ocxs&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本节导读：
+
+Accessing pixel valuesScanning an image with pointersScanning an image with iteratorsWriting effcient image scanning loopsScanning an image with neighbor accessPerforming simple image arithmeti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Manipulating the Pixels">
+<meta property="og:url" content="site:ocxs.coding.io/2015/10/26/151026-OpenCV-Manipulating-the-Pixels/index.html">
+<meta property="og:site_name" content="Ocxs's blog">
+<meta property="og:description" content="本节导读：
+
+Accessing pixel valuesScanning an image with pointersScanning an image with iteratorsWriting effcient image scanning loopsScanning an image with neighbor accessPerforming simple image arithmeti">
+<meta property="og:updated_time" content="2015-10-26T13:03:25.626Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Manipulating the Pixels">
+<meta name="twitter:description" content="本节导读：
+
+Accessing pixel valuesScanning an image with pointersScanning an image with iteratorsWriting effcient image scanning loopsScanning an image with neighbor accessPerforming simple image arithmeti">
+  
+    <link rel="alternative" href="/atom.xml" title="Ocxs&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">ocxs</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">To be better</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Computer-Vision/" style="font-size: 10px;">Computer Vision</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/PAT-data-structure/" style="font-size: 20px;">PAT data structure</a> <a href="/tags/data-structure/" style="font-size: 15px;">data structure</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">To be better!</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">ocxs</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">ocxs</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">To be better</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-151026-OpenCV-Manipulating-the-Pixels" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/26/151026-OpenCV-Manipulating-the-Pixels/" class="article-date">
+  	<time datetime="2015-10-26T10:45:30.000Z" itemprop="datePublished">2015-10-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Manipulating the Pixels
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本节导读：</p>
+<blockquote>
+<p>Accessing pixel values<br>Scanning an image with pointers<br>Scanning an image with iterators<br>Writing effcient image scanning loops<br>Scanning an image with neighbor access<br>Performing simple image arithmetic<br>Defining regions of interest<br><a id="more"></a></p>
+</blockquote>
+<h1 id="Introduction">Introduction</h1><p>Fundamentally, an image is a matrix of numerical values.</p>
+<h1 id="Accessing_pixel_values(存取像素值)">Accessing pixel values(存取像素值)</h1><h2 id="1-salt-and-pepper_noise(椒盐噪声)">1.salt-and-pepper noise(椒盐噪声)</h2><h3 id="(1)Definition">(1)Definition</h3><p>is a particular type of noise in which some pixels are replaced by a white or a black pixel.(This type of noise<br>can occur in faulty communication when the value of some pixels is lost during transmission) </p>
+<h3 id="Add_salt-and-pepper_noise_to_an_image">Add salt-and-pepper noise to an image</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">salt</span><span class="params">(cv::Mat &amp;image, <span class="keyword">int</span> n)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n; ++k)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> i = rand() % image.cols;	<span class="comment">//column, 列，image's width</span></span><br><span class="line">		<span class="keyword">int</span> j = rand() % image.rows;	<span class="comment">//row, 行	image's height</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(<span class="number">1</span> == image.channels())	<span class="comment">//gray-level image</span></span><br><span class="line">		&#123;</span><br><span class="line">			image.at&lt;uchar&gt;(j, i) = <span class="number">255</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(<span class="number">3</span> == image.channels())	<span class="comment">//color image</span></span><br><span class="line">		&#123;</span><br><span class="line">			image.at&lt;cv::Vec3b&gt;(j, i)[<span class="number">0</span>] = <span class="number">255</span>;</span><br><span class="line">			image.at&lt;cv::Vec3b&gt;(j, i)[<span class="number">1</span>] = <span class="number">255</span>;</span><br><span class="line">			image.at&lt;cv::Vec3b&gt;(j, i)[<span class="number">2</span>] = <span class="number">255</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="(3)The_Difference_of_gray-level_image_and_color_image">(3)The Difference of gray-level image and color image</h3><p>In the case of a gray-level image, the number 255 is assigned to the single 8-bit value. For a color image, you need to assign 255 to the three<br>primary color channels in order to obtain a white pixel.</p>
+<h3 id="(4)How_to_access_the_different_attributes_of_an_image-">(4)How to access the different attributes of an image.</h3><p>For element access, <code>cv::Mat</code> has the method <code>at(int y, int x)</code>.但是返回类型必须要在编译的时候知道，所以程序员必须给定类型，这也是为什么<br><code>at</code> method 用模版来实现，所以调用<code>at</code> method用如下方式，举例说明：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">image.at&lt;uchar&gt;(j, i) = <span class="number">255</span>;</span><br></pre></td></tr></table></figure></p>
+<p>这里我们需要保证指定的类型是矩阵中的类型，对于上述例子，必须保证<code>uchar</code>是<code>image</code>的元素类型。<br>In color images, each pixel is associated with three components: the red, green, and blue<br>channels.Therefore, a cv::Mat containing a color image will return a vector of three 8-bit<br>values.opencv定义了short vectors ：<code>cv::Vec3b</code>.It is a vector of 3 <code>unsigned chars</code>.<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">image.at&lt;cv::Vec3b&gt;(j,i)[channel]= value;</span><br></pre></td></tr></table></figure></p>
+<p>2-element and 4-element vectors(<code>cv::Vec2b</code> and <code>cv::Vec4b</code>)<br>s:short, i:int, f:float, d:double, 定义成模版类<code>cv::Vec&lt;T,N&gt;</code>where <code>T</code> is the type and <code>N</code> is the number of vector element.</p>
+<h3 id="(5)Use_cv::Mat__to_access_pixels">(5)Use cv::Mat_ to access pixels</h3><p>Using <code>at</code> method is cumbersome(笨重的；累赘的；难处理的)because the<br>returned type must be specified as a template argument for each call. So it is possible to use the <code>cv::Mat_</code> class which is a template subclass of<br><code>cv::Mat</code>.Among the extra methods, there is the <code>operator``()</code> allowing direct access to matrix elements.<br>Therefore, if image is a reference to a uchar matrix, then one can write:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cv::Mat_&lt;uchar&gt; im2= image; <span class="comment">// im2 refers to image</span></span><br><span class="line">im2(<span class="number">50</span>,<span class="number">100</span>)= <span class="number">0</span>; <span class="comment">// access to row 50 and column 100</span></span><br></pre></td></tr></table></figure></p>
+<p><code>cv::Mat_</code>的元素类型在创建实例的时候已经声明，操作符<code>()</code>在编译期就知道需要返回的数据类型。他和<code>at</code>返回值也是一样的，所以使用<code>()</code>看起来更加简洁方便一点。</p>
+<h1 id="Scanning_an_image_with_pointers(使用指针遍历图像)">Scanning an image with pointers(使用指针遍历图像)</h1><h2 id="In-place_transformation">In-place transformation</h2><p>Definition: The transformation is directly applied to the input image, which is called an in-place transformation.</p>
+<h2 id="双重循环遍历像素">双重循环遍历像素</h2><h3 id="代码">代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nl = image.rows;	<span class="comment">//number of lines</span></span><br><span class="line"><span class="keyword">int</span> nc = image.cols * image.channels();		<span class="comment">//total number of elements per line</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nl; ++j)</span><br><span class="line">&#123;</span><br><span class="line">	uchar *data = image.ptr&lt;uchar&gt;(j);	<span class="comment">//get the address of row j</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nc; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="comment">//降低图像中的颜色数目，个人愚见：书上仅仅是通过降低图像颜色这个示例来告诉我们如何去用指针遍历像素</span></span><br><span class="line">		data[i] = data[i]/div*div + div/<span class="number">2</span>;		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里颜色降低的原理就是降低维度，一般彩色图像是0~255，现在变成32个维度，即某通道的强度值是0~7时，用4来表示，为8~15时，用12来表示，大概就是这么个意思，我觉得没必要去细究。</p>
+<h3 id="作用原理">作用原理</h3><p>Opencv中默认使用BGR的通道顺序，因此第一个通道通常是蓝色的。一个W<em>H的彩色图像，需要W</em>H<em>3个uchar构成的内存块。<br>但是处于效率的考虑，每行可能会填补一些额外像素，因为行的长度是4或8的倍数,一些多媒体处理芯片(如Intel的MMX架构)<br>可以更高校的处理图像。这些额外的像素不会被显示或者保存，填补的值会被忽略。opencv将填补后的一行的长度指定为关键字。<br>如果没有对图像进行填补，图像的有效长度就等于图像的真实宽度。step代表以字节为单位的图像的有效宽度。即使图像类型元素不是uchar，<br><strong>step</strong>依然<strong>代表着一行的字节数</strong>。<br>像素的大小可以有<code>elemSize</code> method得到：对于一个三通道的<code>short</code>型矩阵<code>(CV_16SC3)</code>,<code>elemSize</code>返回6。<br>通道数可以由<code>channels</code> method得到：例如：`int nc = image.cols </em> image.channels();<code>为了简化指针运算，</code>cv::Mat<code>提供了**</code>ptr`函数可以得到图像任意行的首地址**。如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uchar *data = image.ptr&lt;uchar&gt;(j);	<span class="comment">//返回第j行的首地址</span></span><br></pre></td></tr></table></figure></p>
+<p>此外，之前提到的颜色缩减（降低图像颜色数目），还可以通过位运算实现，如下：（当作一个编程技巧）<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uchar mask = <span class="number">0xFF</span> &lt;&lt; n;	<span class="comment">//e.g. for div = 16, mask = 0xF0</span></span><br><span class="line">data[i] = (data[i] &amp; mask) + div/<span class="number">2</span>;		<span class="comment">//这种实现方法就要比上面的data[i] = data[i]/div*div + div/2;高明了</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/10/25/151026-CV-Introduction/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Opencv 学习笔记(一)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="151026-OpenCV-Manipulating-the-Pixels" data-title="Manipulating the Pixels" data-url="site:ocxs.coding.io/2015/10/26/151026-OpenCV-Manipulating-the-Pixels/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 ocxs
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
