@@ -23,7 +23,7 @@ Writing effcient image scanning loops
 Scanning an image with neighbor access
 Performing simple image arithmetic 
 Defining regions of interest">
-<meta property="og:updated_time" content="2015-10-26T13:22:58.563Z">
+<meta property="og:updated_time" content="2015-10-27T09:04:45.020Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV 学习笔记(2) Manipulating the Pixels (下)">
 <meta name="twitter:description" content="本节导读：
@@ -223,7 +223,70 @@ Defining regions of interest">
 </li>
 </ul>
 </blockquote>
-<h1 id="Writing_effcient_image_scanning_loops(编写高效的图像遍历循环)"><strong>Writing effcient image scanning loops(编写高效的图像遍历循环)</strong></h1><h1 id="Scanning_an_image_with_neighbor_access(遍历图像和邻域操作)"><strong>Scanning an image with neighbor access(遍历图像和邻域操作)</strong></h1><h1 id="Performing_simple_image_arithmetic(进行简单的图像算术)"><strong>Performing simple image arithmetic(进行简单的图像算术)</strong></h1><h1 id="Defining_regions_of_interest(定义感兴趣区域)"><strong>Defining regions of interest(定义感兴趣区域)</strong></h1>
+<h1 id="一-Writing_effcient_image_scanning_loops(编写高效的图像遍历循环)"><strong>一.Writing effcient image scanning loops(编写高效的图像遍历循环)</strong></h1><p>除非必要，否则不能以降低代码清晰度的代价去提升性能，简单的代码易维护和调试。</p>
+<h2 id="1-实现方法">1.实现方法</h2><p>实现方法在上一节里都写得差不多了，这一块主要是做对比分析，如图所示：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Method</th>
+<th>Average time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">data[i]= data[i]/div*div + div/2;</td>
+<td>37ms</td>
+</tr>
+<tr>
+<td style="text-align:center">*data++= *data/div*div + div/2;</td>
+<td>37ms</td>
+</tr>
+<tr>
+<td style="text-align:center">*data++= v - v%div + div/2;</td>
+<td>52ms</td>
+</tr>
+<tr>
+<td style="text-align:center">*data++= *data&amp;mask + div/2;</td>
+<td>35ms</td>
+</tr>
+<tr>
+<td style="text-align:center">colorReduce(input, output);</td>
+<td>44ms</td>
+</tr>
+<tr>
+<td style="text-align:center">i&lt;image.cols*image.channels();</td>
+<td>65ms</td>
+</tr>
+<tr>
+<td style="text-align:center">MatIterator</td>
+<td>67ms</td>
+</tr>
+<tr>
+<td style="text-align:center">.at(j,i)</td>
+<td>80ms</td>
+</tr>
+<tr>
+<td style="text-align:center">3-channel loop</td>
+<td>29ms</td>
+</tr>
+</tbody>
+</table>
+<p>这里书上介绍了两个函数，<code>cv::getTickCount()</code>和<code>cv::getTickFrequency()</code>;用法如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> duration;</span><br><span class="line">duration = <span class="keyword">static_cast</span>&lt;<span class="keyword">double</span>&gt;(cv::getTickCount());</span><br><span class="line">colorReduce(image); <span class="comment">// the function to be tested</span></span><br><span class="line">duration = <span class="keyword">static_cast</span>&lt;<span class="keyword">double</span>&gt;(cv::getTickCount())-duration;</span><br><span class="line">duration /= cv::getTickFrequency(); <span class="comment">// the elapsed time in ms</span></span><br></pre></td></tr></table></figure></p>
+<p>不得不说代码写的还真规范，要是我这样的渣写，肯定就不会想到用<code>static_cast&lt;double&gt;</code>来强制转换，直接<code>(double)</code>;<br>从上面的表格中可以看出，用指针遍历快，迭代器遍历慢。<code>at</code>最慢，不过<code>at</code>的设计是用来随机存取像素值的，不适用遍历整幅图像。<br>迭代器的设计目标就是简化图像遍历的过程从而降低出错的机会，所以如果遍历整幅图像还是用指针，快，作为程序员，应该有避免错误的能力。</p>
+<p>下面介绍一下书上提到的一些优化细节，</p>
+<h3 id="(1)能提前计算的都提前计算出来">(1)能提前计算的都提前计算出来</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nc= image.cols * image.channels();</span><br><span class="line">…</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nc; i++) &#123;</span><br></pre></td></tr></table></figure>
+<p>来替换<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;image.cols * image.channels(); i++) &#123;</span><br></pre></td></tr></table></figure></p>
+<p>这样就不用每次都要来计算<code>image.channels()</code>，重复计算有耗时，应丢弃，提前计算好用局部变量存储起来。</p>
+<h3 id="(2)能在一个循环里解决的就不要在折腾了">(2)能在一个循环里解决的就不要在折腾了</h3><p>比如在处理三通道图像时，之前的代码中，内层循环有是这么设计的，使循环次数为<code>image.cols * image.channels()</code>，书上就说了，我们可以使循环次数变成<code>image.cols</code><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">colorReduce</span><span class="params">(cv::Mat &amp;image, <span class="keyword">int</span> div=<span class="number">64</span>)</span> </span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> nl= image.rows; <span class="comment">// number of lines</span></span><br><span class="line">	<span class="keyword">int</span> nc= image.cols ; <span class="comment">// number of columns</span></span><br><span class="line">	<span class="comment">// is it a continous image?</span></span><br><span class="line">	<span class="keyword">if</span> (image.isContinuous()) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// then no padded pixels</span></span><br><span class="line">		nc= nc*nl;</span><br><span class="line">		nl= <span class="number">1</span>; <span class="comment">// it is now a 1D array</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;nl; j++) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// pointer to first column of line j</span></span><br><span class="line">		uchar* data= image.ptr&lt;uchar&gt;(j);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nc; i++) </span><br><span class="line">		&#123;</span><br><span class="line">			*data++= div/<span class="number">2</span>;	<span class="comment">//data[i][0]</span></span><br><span class="line">			*data++= div/<span class="number">2</span>;	<span class="comment">//data[i][1]</span></span><br><span class="line">			*data++= div/<span class="number">2</span>;	<span class="comment">//data[i][2]</span></span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面这段代码，按照书上的意思是<strong>最快的图像遍历</strong>方法了！(如果我没理解错的话，有错欢迎指正！)</p>
+<h2 id="2-扩展">2.扩展</h2><p>多线程处理是另外一个提升算法效率的方式，OpenMP 与 Intel Threading Building Blocks(TBB)是两个比较流行的并行编程API。<br>VS2013里有可以直接用OpenMP，具体用法搜索一下，我用过，基础的操作还是蛮简单的，看一下就会用了，奈何自己笔记本就两核，只提升了2倍。</p>
+<h1 id="二-Scanning_an_image_with_neighbor_access(遍历图像和邻域操作)"><strong>二.Scanning an image with neighbor access(遍历图像和邻域操作)</strong></h1><p>与其说这一节教你怎么进行邻域操作，倒不如说教你怎么进行图像锐化，一共两种方法，第一种原始的指针操作，第二种自定义核算子，利用OpenCV函数<code>filter2D</code>来操作，更加快捷，二者结果一样，甚至核的尺寸如果比较大，后者效率更高。<br>锐化算子的计算方式：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sharpened_pixel= <span class="number">5</span>*current-left-right-up-down;</span><br><span class="line"><span class="comment">//current代表当前像素值，left代表当前像素位置左边的像素值，依次类推</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="1-原始的指针操作">1.原始的指针操作</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sharpen</span><span class="params">(<span class="keyword">const</span> cv::Mat &amp;image, cv::Mat &amp;result)</span> </span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="comment">// allocate if necessary</span></span><br><span class="line">	result.create(image.size(), image.type());</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j= <span class="number">1</span>; j&lt;image.rows-<span class="number">1</span>; j++) </span><br><span class="line">	&#123; 	<span class="comment">// for all rows</span></span><br><span class="line">		<span class="comment">// (except first and last)</span></span><br><span class="line">		<span class="keyword">const</span> uchar* previous = image.ptr&lt;<span class="keyword">const</span> uchar&gt;(j-<span class="number">1</span>); 	<span class="comment">// previous row</span></span><br><span class="line">		<span class="keyword">const</span> uchar* current = image.ptr&lt;<span class="keyword">const</span> uchar&gt;(j); 		<span class="comment">// current row</span></span><br><span class="line">		<span class="keyword">const</span> uchar* next = image.ptr&lt;<span class="keyword">const</span> uchar&gt;(j+<span class="number">1</span>); 		<span class="comment">// next row</span></span><br><span class="line">		uchar* output= result.ptr&lt;uchar&gt;(j); 					<span class="comment">// output row</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;image.cols-<span class="number">1</span>; i++) </span><br><span class="line">		&#123;</span><br><span class="line">			*output++= cv::saturate_cast&lt;uchar&gt;(<span class="number">5</span>*current[i]-current[i-<span class="number">1</span>] -current[i+<span class="number">1</span>]-previous[i]-next[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// Set the unprocess pixels to 0</span></span><br><span class="line">	result.row(<span class="number">0</span>).setTo(cv::Scalar(<span class="number">0</span>));</span><br><span class="line">	result.row(result.rows-<span class="number">1</span>).setTo(cv::Scalar(<span class="number">0</span>));</span><br><span class="line">	result.col(<span class="number">0</span>).setTo(cv::Scalar(<span class="number">0</span>));</span><br><span class="line">	result.col(result.cols-<span class="number">1</span>).setTo(cv::Scalar(<span class="number">0</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里值得注意的两点</p>
+<h3 id="(1)cv::saturate_cast&lt;uchar&gt;_method">(1)<code>cv::saturate_cast&lt;uchar&gt;</code> method</h3><p>他的作用是：用来对计算结果进行截断，对计算结果(1) 小于0的像素值截断为0；(2)大于255的截断为255；(3)输入参数是浮点数的话，会对其取整至最接近输入值的整数。</p>
+<h3 id="(2)边缘像素的处理">(2)边缘像素的处理</h3><p>由于边缘像素的邻域不完整，无法按照上述进行操作运算，所以书上就直接让其变为0。使用OpenCV提供的函数进行如下操作：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result.row(<span class="number">0</span>).setTo(cv::Scalar(<span class="number">0</span>));<span class="comment">//如果是一个三通道的图像，则需要使用cv::Scalar(0,0,0)来指定像素三个通道的目标值</span></span><br></pre></td></tr></table></figure></p>
+<p><code>row</code> and <code>col</code> method ：They return a special <code>cv::Mat</code> instance composed of a single line (or a single column) as specified in a parameter.<br>See <a href="http://docs.opencv.org/modules/core/doc/basic_structures.html?highlight=setto#mat-row" target="_blank" rel="external">row</a>  and <a href="http://docs.opencv.org/modules/core/doc/basic_structures.html?highlight=setto#mat-col" target="_blank" rel="external">col</a><br><code>cv::Mat::setTo</code> method: Sets all or some of the array elements to the specified value.    See <a href="http://docs.opencv.org/modules/core/doc/basic_structures.html?highlight=setto#mat-setto" target="_blank" rel="external">setTo</a></p>
+<h2 id="2-使用filter2D_method">2.使用<code>filter2D</code> method</h2><h1 id="三-Performing_simple_image_arithmetic(进行简单的图像算术)"><strong>三.Performing simple image arithmetic(进行简单的图像算术)</strong></h1><h1 id="四-Defining_regions_of_interest(定义感兴趣区域)"><strong>四.Defining regions of interest(定义感兴趣区域)</strong></h1>
       
     </div>
     
