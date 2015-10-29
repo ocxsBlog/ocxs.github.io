@@ -3,18 +3,36 @@
 <head>
   <meta charset="utf-8">
   
-  <title>about | Ocxs&#39;s blog</title>
+  <title>OpenCV 学习笔记(3) Processing images with classes | Ocxs&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="哈哈哈">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="site:ocxs.coding.io/about/index.html">
+  <meta name="description" content="In this chapter, we will cover:
+
+
+Using the Strategy pattern in algorithm design
+Using a Controller to communicate with processing modules
+Using the Singleton design pattern
+Using the Model-View-Contr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV 学习笔记(3) Processing images with classes">
+<meta property="og:url" content="site:ocxs.coding.io/2015/10/28/151028-OpenCV-Processing-images-with-classes/index.html">
 <meta property="og:site_name" content="Ocxs's blog">
-<meta property="og:description" content="哈哈哈">
-<meta property="og:updated_time" content="2015-08-04T11:53:31.289Z">
+<meta property="og:description" content="In this chapter, we will cover:
+
+
+Using the Strategy pattern in algorithm design
+Using a Controller to communicate with processing modules
+Using the Singleton design pattern
+Using the Model-View-Contr">
+<meta property="og:updated_time" content="2015-10-29T02:19:54.712Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
-<meta name="twitter:description" content="哈哈哈">
+<meta name="twitter:title" content="OpenCV 学习笔记(3) Processing images with classes">
+<meta name="twitter:description" content="In this chapter, we will cover:
+
+
+Using the Strategy pattern in algorithm design
+Using a Controller to communicate with processing modules
+Using the Singleton design pattern
+Using the Model-View-Contr">
   
     <link rel="alternative" href="/atom.xml" title="Ocxs&#39;s blog" type="application/atom+xml">
   
@@ -158,11 +176,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-151028-OpenCV-Processing-images-with-classes" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/about/index.html" class="article-date">
-  	<time datetime="2015-08-04T11:52:59.000Z" itemprop="datePublished">2015-08-04</time>
+      <a href="/2015/10/28/151028-OpenCV-Processing-images-with-classes/" class="article-date">
+  	<time datetime="2015-10-28T07:50:26.000Z" itemprop="datePublished">2015-10-28</time>
 </a>
     </div>
   
@@ -175,7 +193,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      about
+      OpenCV 学习笔记(3) Processing images with classes
     </h1>
   
 
@@ -183,6 +201,10 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
+	</div>
+
         
 
         <div class="clearfix"></div>
@@ -191,7 +213,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>哈哈哈</p>
+        <p>In this chapter, we will cover:</p>
+<blockquote>
+<ul>
+<li>Using the Strategy pattern in algorithm design</li>
+<li>Using a Controller to communicate with processing modules</li>
+<li>Using the Singleton design pattern</li>
+<li>Using the Model-View-Controller architecture to design an application</li>
+<li>Converting color spaces<a id="more"></a>
+</li>
+</ul>
+</blockquote>
+<p>这一大章主要将如何用类来更好的封装我们写的算法，这个我觉得跟OpenCV的关系倒是不是太大，得看你C++学的6不6，项目开发经验6不6，做得多，有人提点一下，设计出来的自然会好很多。</p>
+<h1 id="一-Using_the_Strategy_pattern_in_algorithm_design"><strong>一.Using the Strategy pattern in algorithm design</strong></h1><h2 id="1-街区距离和欧式距离">1.街区距离和欧式距离</h2><p>点A(x1, y1),点B(x2, y2),则<br>街区距离(cityblock distance)：<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><br>$$d=\left|x_2-x_1\right|+\left|y_2-y_1\right|$$<br>欧式距离(<a href="https://en.wikipedia.org/wiki/Euclidean_distance" target="_blank" rel="external">Euclidean distance</a> )<br>SSd=\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$</p>
 
       
     </div>
@@ -199,6 +233,16 @@
   </div>
   
     
+<nav id="article-nav">
+  
+  
+    <a href="/2015/10/26/151026-OpenCV-Manipulating-the-pixels-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">OpenCV 学习笔记(2) Manipulating the Pixels (下)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
@@ -222,7 +266,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="undefined" data-title="about" data-url="site:ocxs.coding.io/about/index.html"></div>
+	<div class="ds-thread" data-thread-key="151028-OpenCV-Processing-images-with-classes" data-title="OpenCV 学习笔记(3) Processing images with classes" data-url="site:ocxs.coding.io/2015/10/28/151028-OpenCV-Processing-images-with-classes/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -266,7 +310,7 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
