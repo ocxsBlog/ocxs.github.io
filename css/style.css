@@ -149,20 +149,18 @@ h3 {
   display: block;
 }
 h1 {
-  font-size: 1.8em;
+  font-size: 1.6em;
 }
 h2 {
-  font-size: 1.5em;
+  font-size: 1.4em;
 }
 h3 {
-  font-size: 1.3em;
+  font-size: 1.2em;
 }
-h4 {
-  font-size: 1.1em;
-}
+h4,
 h5,
 h6 {
-  font-size: 1em;
+  font-size: 1.1em;
 }
 a {
   text-decoration: none;
@@ -911,7 +909,7 @@ a {
 }
 .article-index .brief {
   display: block;
-  color: #a8a8a8;
+  color: #808080;
   font-size: 12px;
   line-height: 14px;
   height: 7px;
@@ -924,10 +922,10 @@ a {
   font-size: 30px;
   float: left;
   margin: 4px 4px 0 -12px;
-  color: #c8c8c8;
+  color: #b0b0b0;
 }
 .article-title {
-  color: #696969;
+  color: #505050;
   margin-left: 0px;
   font-weight: 300;
   line-height: 35px;
@@ -942,7 +940,7 @@ a {
   transition: color 0.3s;
 }
 .article-title:hover {
-  color: #b0a0aa;
+  color: #a0909a;
 }
 .article-inner {
   position: relative;
