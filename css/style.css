@@ -859,6 +859,7 @@ a {
   position: relative;
   border: 1px solid #ddd;
   background: #fff;
+  color: #111;
   -webkit-transition: all 0.2s ease-in;
 }
 .article.show {
