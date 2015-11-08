@@ -23,7 +23,7 @@ Computing the image histogram
 Applying look-up tables to modify image appearance
 Equalizing the image histogram
 Backprojecting a histogram to detect specific image co">
-<meta property="og:updated_time" content="2015-11-08T03:58:48.343Z">
+<meta property="og:updated_time" content="2015-11-08T04:00:26.471Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV 学习笔记(4) Counting the pixels with Histograms(上)">
 <meta name="twitter:description" content="In this chapter, we will cover:
@@ -255,7 +255,48 @@ Backprojecting a histogram to detect specific image co">
 <p>引用书上的话：均值漂移算法以迭代的方式锁定概率函数的局部最大值。它的原理是寻找预定义窗口中数据点的重心，或者说是加权平均值。该算法将窗口中心移动到数据点的重心处，并重复这个过程直到窗口重心收敛到一个稳定点。OpenCV文档定义了两种终止条件：迭代的最大次数以及窗口中心的位移值(低于该值即认为算法以及收敛)。这两个条件保存在<code>cv::TermCriteria</code>实例中。<code>cv::meanShift</code>函数返回本次调用中迭代的次数。显而易见，结果的质量取决于输入的概率图及初始位置。</p>
 <p>此外，更多meanshift算法理解可以参考<a href="http://www.360doc.com/content/13/1025/12/12105052_324083534.shtml" target="_blank" rel="external">文章</a>，讲的还算比较浅显易懂。</p>
 <h1 id="六-Retrieving_similar_images_using_histogram_comparison"><strong>六.Retrieving similar images using histogram comparison</strong></h1><p><a href="http://docs.opencv.org/2.4.3/doc/tutorials/imgproc/histograms/histogram_comparison/histogram_comparison.html#histogram-comparison" target="_blank" rel="external">Histogram Comparison</a><br>参考上面这个链接写的，<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> RetrieveImage</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	RetrieveImage(cv::Mat image) : src(image)</span><br><span class="line">	&#123;</span><br><span class="line">		src_hist = getHist(src);</span><br><span class="line">	&#125;</span><br><span class="line">	cv::<span class="function">MatND <span class="title">getHist</span><span class="params">(<span class="keyword">const</span> cv::Mat &amp;image)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">compare</span><span class="params">(<span class="keyword">const</span> cv::Mat &amp;image, <span class="keyword">int</span> compareMethod)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	cv::Mat src;</span><br><span class="line">	cv::MatND src_hist;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">cv::MatND RetrieveImage::getHist(<span class="keyword">const</span> cv::Mat &amp;image)</span><br><span class="line">&#123;</span><br><span class="line">	cv::Mat hsv;</span><br><span class="line">	cv::Mat imageCopy = image.clone();</span><br><span class="line">	cv::cvtColor(imageCopy, hsv, CV_BGR2HSV);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">float</span> h_ranges[<span class="number">2</span>] = &#123; <span class="number">0.0</span>, <span class="number">180.0</span> &#125;;</span><br><span class="line">	<span class="keyword">float</span> s_ranges[<span class="number">2</span>] = &#123; <span class="number">0.0</span>, <span class="number">200.0</span> &#125;;</span><br><span class="line">	<span class="keyword">int</span> channels[<span class="number">2</span>] = &#123; <span class="number">0</span>, <span class="number">1</span> &#125;;</span><br><span class="line">	<span class="keyword">int</span> h_bins = <span class="number">30</span>, s_bins = <span class="number">50</span>;</span><br><span class="line">	<span class="keyword">int</span> histSize[<span class="number">2</span>] = &#123; h_bins, s_bins&#125;;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">float</span> *ranges[<span class="number">2</span>] = &#123; h_ranges, s_ranges &#125;;</span><br><span class="line"></span><br><span class="line">	cv::MatND hist;</span><br><span class="line">	cv::calcHist(&amp;hsv, <span class="number">1</span>, channels, cv::Mat(), hist, <span class="number">2</span>, histSize, ranges);</span><br><span class="line">	normalize(hist, hist, <span class="number">0</span>, <span class="number">1</span>, cv::NORM_MINMAX);</span><br><span class="line">	<span class="keyword">return</span> hist;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">double</span> RetrieveImage::compare(<span class="keyword">const</span> cv::Mat &amp;image, <span class="keyword">int</span> compareMethod)</span><br><span class="line">&#123;</span><br><span class="line">	cv::MatND hist = getHist(image);</span><br><span class="line">	<span class="keyword">return</span> cv::compareHist(src_hist, hist, compareMethod);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	cv::Mat img1 = cv::imread(<span class="string">"../../resource/church01.jpg"</span>);</span><br><span class="line">	cv::Mat img2 = cv::imread(<span class="string">"../../resource/church02.jpg"</span>);</span><br><span class="line">	cv::Mat img3 = cv::imread(<span class="string">"../../resource/church03.jpg"</span>);</span><br><span class="line">	cv::Mat img4 = cv::imread(<span class="string">"../../resource/building.jpg"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="function">RetrieveImage <span class="title">ri</span><span class="params">(img1)</span></span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">double</span> img1_img1 = ri.compare(img1, i);</span><br><span class="line">		<span class="keyword">double</span> img1_img2 = ri.compare(img2, i);</span><br><span class="line">		<span class="keyword">double</span> img1_img3 = ri.compare(img3, i);</span><br><span class="line">		<span class="keyword">double</span> img1_img4 = ri.compare(img4, i);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Method [%d] compare result: %f, %f, %f, %f \n"</span>, i, img1_img1, img1_img2, img1_img3, img1_img4);</span><br><span class="line">	&#125;</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure></p>
-<p>上面的图片是从本书的网站上下载的图片，前三张图片比较相似，最后一张图片是非常不相似，所以放结果如下：<br>|Method|img1_img1|img1_img2|img1_img3|img1_img4|<br>|:—:|<br>|Correlation|1  |0.867352  |0.857962  |0.0196779|<br>|Chi-square|0  |3.06412  |11.6898  |1287.79|<br>|Intersection|13.9362  |10.585|  10.2582 | 3.03085|<br>|Bhattacharyya|0  |0.22271  |0.242008  |0.759152|</p>
+<p>上面的图片是从本书的网站上下载的图片，前三张图片比较相似，最后一张图片是非常不相似，所以放结果如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Method</th>
+<th>img1_img1</th>
+<th>img1_img2</th>
+<th>img1_img3</th>
+<th>img1_img4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Correlation</td>
+<td>1</td>
+<td>0.867352</td>
+<td>0.857962</td>
+<td>0.0196779</td>
+</tr>
+<tr>
+<td style="text-align:center">Chi-square</td>
+<td>0</td>
+<td>3.06412</td>
+<td>11.6898</td>
+<td>1287.79</td>
+</tr>
+<tr>
+<td style="text-align:center">Intersection</td>
+<td>13.9362</td>
+<td>10.585</td>
+<td>10.2582</td>
+<td>3.03085</td>
+</tr>
+<tr>
+<td style="text-align:center">Bhattacharyya</td>
+<td>0</td>
+<td>0.22271</td>
+<td>0.242008</td>
+<td>0.759152</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
 <p>For the Correlation and Intersection methods, the higher the metric, the more accurate the match. As we can see, the match base-base is the highest of all as expected. Also we can observe that the match base-half is the second best match (as we predicted). For the other two metrics, the less the result, the better the match. We can observe that the matches between the test 1 and test 2 with respect to the base are worse, which again, was expected.<br>see more in <a href="http://docs.opencv.org/2.4.9/modules/imgproc/doc/histograms.html?highlight=comparehist#comparehist" target="_blank" rel="external">cv::compareHist</a></p>
 </blockquote>
