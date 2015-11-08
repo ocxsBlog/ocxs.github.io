@@ -23,7 +23,7 @@ Computing the image histogram
 Applying look-up tables to modify image appearance
 Equalizing the image histogram
 Backprojecting a histogram to detect specific image co">
-<meta property="og:updated_time" content="2015-11-08T04:00:26.471Z">
+<meta property="og:updated_time" content="2015-11-08T04:04:12.027Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV 学习笔记(4) Counting the pixels with Histograms(上)">
 <meta name="twitter:description" content="In this chapter, we will cover:
@@ -298,8 +298,9 @@ Backprojecting a histogram to detect specific image co">
 </tbody>
 </table>
 <blockquote>
-<p>For the Correlation and Intersection methods, the higher the metric, the more accurate the match. As we can see, the match base-base is the highest of all as expected. Also we can observe that the match base-half is the second best match (as we predicted). For the other two metrics, the less the result, the better the match. We can observe that the matches between the test 1 and test 2 with respect to the base are worse, which again, was expected.<br>see more in <a href="http://docs.opencv.org/2.4.9/modules/imgproc/doc/histograms.html?highlight=comparehist#comparehist" target="_blank" rel="external">cv::compareHist</a></p>
+<p>For the <strong>Correlation and Intersection</strong> methods, the higher the metric, the more accurate the match. As we can see, the match img1_img1 is the highest of all as expected.For the other two metrics(<strong>Chi-square and Bhattacharyya</strong>), the less the result, the better the match.  </p>
 </blockquote>
+<p>see more in <a href="http://docs.opencv.org/2.4.9/modules/imgproc/doc/histograms.html?highlight=comparehist#comparehist" target="_blank" rel="external">cv::compareHist</a></p>
 
       
     </div>
