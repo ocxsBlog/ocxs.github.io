@@ -99,7 +99,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Computer-Vision/" style="font-size: 16.67px;">Computer Vision</a> <a href="/tags/OpenCV/" style="font-size: 13.33px;">OpenCV</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/PAT-data-structure/" style="font-size: 20px;">PAT data structure</a> <a href="/tags/data-structure/" style="font-size: 10px;">data structure</a>
+						<a href="/tags/Computer-Vision/" style="font-size: 15px;">Computer Vision</a> <a href="/tags/OpenCV/" style="font-size: 15px;">OpenCV</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/PAT-data-structure/" style="font-size: 20px;">PAT data structure</a> <a href="/tags/data-structure/" style="font-size: 10px;">data structure</a>
 					</div>
 				</section>
 				
@@ -154,64 +154,6 @@
 	</div>
 </nav>
       <div class="body-wrap">
-  
-    <article id="post-150803-pat11" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/03/150803-pat11/" class="article-date">
-  	<time datetime="2015-08-03T14:06:11.000Z" itemprop="datePublished">2015-08-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/03/150803-pat11/">04-树6. Huffman Codes</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>In 1953, David A. Huffman published his paper “A Method for the Construction of Minimum-Redundancy Codes”, and hence printed his name in the history of computer science. As a professor who gives the final exam problem on Huffman codes, I am encountering a big problem: the Huffman codes are NOT unique. For example, given a string “aaaxuaxz”, we can observe that the frequencies of the characters ‘a’, ‘x’, ‘u’ and ‘z’ are 4, 2, 1 and 1, respectively. We may either encode the symbols as {‘a’=0, ‘x’=10, ‘u’=110, ‘z’=111}, or in another way as {‘a’=1, ‘x’=01, ‘u’=001, ‘z’=000}, both compress the string into 14 bits. Another set of code can be given as {‘a’=0, ‘x’=11, ‘u’=100, ‘z’=101}, but {‘a’=0, ‘x’=01, ‘u’=011, ‘z’=001} is NOT correct since “aaaxuaxz” and “aazuaxax” can both be decoded from the code 00001011001001. The students are submitting all kinds of codes, and I need a computer program to help me determine which ones are correct and which ones are not.<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PAT/">PAT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PAT-data-structure/">PAT data structure</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/03/150803-pat11/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
   
     <article id="post-150803-pat10" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -739,9 +681,70 @@
 
 
   
+    <article id="post-150803_pat1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/03/150803_pat1/" class="article-date">
+  	<time datetime="2015-08-03T13:52:36.000Z" itemprop="datePublished">2015-08-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/03/150803_pat1/">00-自测5. Shuffling Machine (20)</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Shuffling is a procedure used to randomize a deck of playing cards. Because standard shuffling techniques are seen as weak, and in order to avoid “inside jobs” where employees collaborate with gamblers by performing inadequate shuffles, many casinos employ automatic shuffling machines. Your task is to simulate a shuffling machine.</p>
+<p>The machine shuffles a deck of 54 cards according to a given random order and repeats for a given number of times. It is assumed that the initial status of a card deck is in the following order:</p>
+<p>S1, S2, …, S13, H1, H2, …, H13, C1, C2, …, C13, D1, D2, …, D13, J1, J2</p>
+<p>where “S” stands for “Spade”, “H” for “Heart”, “C” for “Club”, “D” for “Diamond”, and “J” for “Joker”. A given order is a permutation of distinct integers in [1, 54]. If the number at the i-th position is j, it means to move the card from position i to position j. For example, suppose we only have 5 cards: S3, H5, C1, D13 and J2. Given a shuffling order {4, 2, 5, 3, 1}, the result will be: J2, H5, D13, S3, C1. If we are to repeat the shuffling again, the result will be: C1, H5, S3, J2, D13.<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PAT/">PAT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PAT-data-structure/">PAT data structure</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/03/150803_pat1/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
     </nav>
   
 </div>

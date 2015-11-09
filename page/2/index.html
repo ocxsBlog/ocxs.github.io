@@ -99,7 +99,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Computer-Vision/" style="font-size: 16.67px;">Computer Vision</a> <a href="/tags/OpenCV/" style="font-size: 13.33px;">OpenCV</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/PAT-data-structure/" style="font-size: 20px;">PAT data structure</a> <a href="/tags/data-structure/" style="font-size: 10px;">data structure</a>
+						<a href="/tags/Computer-Vision/" style="font-size: 15px;">Computer Vision</a> <a href="/tags/OpenCV/" style="font-size: 15px;">OpenCV</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/PAT-data-structure/" style="font-size: 20px;">PAT data structure</a> <a href="/tags/data-structure/" style="font-size: 10px;">data structure</a>
 					</div>
 				</section>
 				
@@ -154,64 +154,6 @@
 	</div>
 </nav>
       <div class="body-wrap">
-  
-    <article id="post-150822-tree-3" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/22/150822-tree-3/" class="article-date">
-  	<time datetime="2015-08-22T11:30:06.000Z" itemprop="datePublished">2015-08-22</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/22/150822-tree-3/">树（下）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一-堆（Heap）">一.堆（Heap）</h3>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/data-structure/">data structure</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/22/150822-tree-3/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
   
     <article id="post-150822-pat1" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -736,9 +678,67 @@
 
 
   
+    <article id="post-150803-pat11" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/03/150803-pat11/" class="article-date">
+  	<time datetime="2015-08-03T14:06:11.000Z" itemprop="datePublished">2015-08-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/03/150803-pat11/">04-树6. Huffman Codes</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>In 1953, David A. Huffman published his paper “A Method for the Construction of Minimum-Redundancy Codes”, and hence printed his name in the history of computer science. As a professor who gives the final exam problem on Huffman codes, I am encountering a big problem: the Huffman codes are NOT unique. For example, given a string “aaaxuaxz”, we can observe that the frequencies of the characters ‘a’, ‘x’, ‘u’ and ‘z’ are 4, 2, 1 and 1, respectively. We may either encode the symbols as {‘a’=0, ‘x’=10, ‘u’=110, ‘z’=111}, or in another way as {‘a’=1, ‘x’=01, ‘u’=001, ‘z’=000}, both compress the string into 14 bits. Another set of code can be given as {‘a’=0, ‘x’=11, ‘u’=100, ‘z’=101}, but {‘a’=0, ‘x’=01, ‘u’=011, ‘z’=001} is NOT correct since “aaaxuaxz” and “aazuaxax” can both be decoded from the code 00001011001001. The students are submitting all kinds of codes, and I need a computer program to help me determine which ones are correct and which ones are not.<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PAT/">PAT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PAT-data-structure/">PAT data structure</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/03/150803-pat11/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </div>
