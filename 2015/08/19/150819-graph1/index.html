@@ -11,8 +11,8 @@
 <meta property="og:url" content="site:ocxsBlog.github.io/2015/08/19/150819-graph1/index.html">
 <meta property="og:site_name" content="Ocxs's blog">
 <meta property="og:description" content="一.什么是图1.基本定义">
-<meta property="og:image" content="site:ocxsBlog.github.io/source/img/150819-1.jpg">
-<meta property="og:updated_time" content="2015-10-25T12:36:39.042Z">
+<meta property="og:image" content="site:ocxsBlog.github.io/img/150819-1.jpg">
+<meta property="og:updated_time" content="2015-11-18T15:00:11.671Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图（上）">
 <meta name="twitter:description" content="一.什么是图1.基本定义">
@@ -233,7 +233,7 @@
 </ul>
 </li>
 <li>邻接表<ul>
-<li><img src="/source/img/150819-1.jpg" alt="Alt text"></li>
+<li><img src="/img/150819-1.jpg" alt="Alt text"></li>
 <li>邻接表的优点：<ul>
 <li>方便找任一节点的邻接点</li>
 <li>节约稀疏图的空间（需要N个头指针+2E个结点（每个结点至少两个域））问：E小于多少，用邻接表划算： N + 2<em>E</em>2 &lt; N*N 解得：E&lt; N(N-1)/4;</li>
@@ -251,12 +251,12 @@
 </blockquote>
 <h2 id="二-图的遍历">二.图的遍历</h2><h3 id="1-深度优先搜索（Depth_First_Search，_DFS）">1.深度优先搜索（Depth First Search， DFS）</h3><blockquote>
 <ul>
-<li>伪码描述  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(Vertex V)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	visited[V] = <span class="literal">true</span>;<span class="comment">//代表该结点被访问了</span></span><br><span class="line">	<span class="keyword">for</span>(V的每个邻接点W)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!visited[W])	<span class="comment">//如果还没被访问过</span></span><br><span class="line">		&#123;</span><br><span class="line">			DFS(W);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>伪码描述<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(Vertex V)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	visited[V] = <span class="literal">true</span>;<span class="comment">//代表该结点被访问了</span></span><br><span class="line">	<span class="keyword">for</span>(V的每个邻接点W)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!visited[W])	<span class="comment">//如果还没被访问过</span></span><br><span class="line">		&#123;</span><br><span class="line">			DFS(W);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </blockquote>
-<pre><code>跟树的先序遍历很类似
-</code></pre><blockquote>
+<p>跟树的先序遍历很类似</p>
+<blockquote>
 <ul>
 <li>时间复杂度<br>  若有N个顶点，E条边，时间复杂度是<ul>
 <li>若用邻接表存储图，有O(N+E);    //邻接表只要遍历N个结点后面的链接的个数E即可</li>
@@ -267,7 +267,7 @@
 </blockquote>
 <h3 id="2-广度优先搜索（Breadth_First_Search，BFS）">2.广度优先搜索（Breadth First Search，BFS）</h3><blockquote>
 <ul>
-<li>伪代码  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(Vertex V)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	visited[V] = <span class="literal">true</span>;</span><br><span class="line">	EnQuene(V,Q);<span class="comment">//入队</span></span><br><span class="line">	<span class="keyword">while</span>(!IsEmpty(Q))</span><br><span class="line">	&#123;</span><br><span class="line">		V = DeQuene(Q);<span class="comment">//出队</span></span><br><span class="line">		<span class="keyword">for</span>(V的每个邻接点W)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(!visited[W])</span><br><span class="line">			&#123;</span><br><span class="line">				visited[W] = <span class="literal">true</span>;</span><br><span class="line">				EnQuene(W, Q);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>伪代码<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(Vertex V)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	visited[V] = <span class="literal">true</span>;</span><br><span class="line">	EnQuene(V,Q);<span class="comment">//入队</span></span><br><span class="line">	<span class="keyword">while</span>(!IsEmpty(Q))</span><br><span class="line">	&#123;</span><br><span class="line">		V = DeQuene(Q);<span class="comment">//出队</span></span><br><span class="line">		<span class="keyword">for</span>(V的每个邻接点W)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(!visited[W])</span><br><span class="line">			&#123;</span><br><span class="line">				visited[W] = <span class="literal">true</span>;</span><br><span class="line">				EnQuene(W, Q);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </blockquote>
@@ -279,7 +279,8 @@
 </blockquote>
 <h3 id="3-名词解释：">3.名词解释：</h3><blockquote>
 <ul>
-<li>概念<ul>
+<li><p>概念</p>
+<ul>
 <li><strong>连通</strong>：如果V到W存在一条路径，则称V和W是连通的</li>
 <li><strong>路径</strong>：V和W的<strong>路径</strong>是一系列顶点｛V，V1，V2···｝的集合，其中任一对相邻顶点都是图中的边。<strong>路径的长度</strong>是路径中的边数（如果带权，则是所有边的权重和），如果V到W之间的所有顶点都不同，则称<strong>简单路径</strong>。</li>
 <li><strong>回路</strong>：起点等于终点的路径</li>
@@ -294,8 +295,9 @@
 <li><strong>强连通分量</strong>：有向图的极大强连通子图</li>
 </ul>
 </li>
-<li>图不连通怎么办？（如何遍历？）<ul>
-<li>伪码描述  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ListCompontents</span><span class="params">(Graph G)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(each V in G)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!visited[V])</span><br><span class="line">		&#123;</span><br><span class="line">			DFS(V);	<span class="comment">//or BFS(V);	//每一个DFS(BFS)遍历一个连通分量</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>图不连通怎么办？（如何遍历？）</p>
+<ul>
+<li>伪码描述<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ListCompontents</span><span class="params">(Graph G)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(each V in G)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!visited[V])</span><br><span class="line">		&#123;</span><br><span class="line">			DFS(V);	<span class="comment">//or BFS(V);	//每一个DFS(BFS)遍历一个连通分量</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
