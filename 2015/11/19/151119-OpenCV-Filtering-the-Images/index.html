@@ -23,7 +23,7 @@ Filtering images using low-pass filters
 Filtering images using a median filter
 Applying directional filters to detect edges
 Computing the Laplacian of an image">
-<meta property="og:updated_time" content="2015-11-19T13:04:43.972Z">
+<meta property="og:updated_time" content="2015-11-19T13:25:12.544Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV 学习笔记(5) Filtering the Images">
 <meta name="twitter:description" content="In this chapter, we will cover:
@@ -221,12 +221,15 @@ Computing the Laplacian of an image">
 </li>
 </ul>
 </blockquote>
-<h1 id="一-Introduction"><strong>一.Introduction</strong></h1><p>observing the frequency of those variations in an image constitutes another way of characterizing an image. This point of view is referred to as the <strong>frequency domain</strong>(频域),<br>while characterizing an image by observing its gray-level distribution is referred to as the <strong>spatial domain</strong>(空间域).<br>由上面可知，频域是分析图像强度(intensity)的变化,空间域分析图像灰度的分布;那么在频域中去分析图像，高频信息是有图像强度的快速变化产生，一般对应图像的边缘信息，因为在边缘图像强度才会变化很快， 那么对应的低频信息多是图像中某一块区域，如上一张牛的图片中的背景区域，或者前景区域(牛)，不会陡变，所以是低频信息，但是从牛到背景的 这个边缘，就会发生陡变，那么对应高频。</p>
+<h1 id="一-Introduction"><strong>一.Introduction</strong></h1><p>observing the frequency of those variations in an image constitutes another way of characterizing an image. This point of view is referred to as the <strong>frequency domain</strong>(频域), while characterizing an image by observing its gray-level distribution is referred to as the <strong>spatial domain</strong>(空间域).<br>由上面可知，频域是分析图像强度(intensity)的变化,空间域分析图像灰度的分布;那么在频域中去分析图像，高频信息是有图像强度的快速变化产生，一般对应图像的边缘信息，因为在边缘图像强度才会变化很快， 那么对应的低频信息多是图像中某一块区域，如上一章那个牛的图片中的背景区域，或者前景区域(牛)，不会陡变，所以是低频信息，但是从牛到背景的 这个边缘，就会发生陡变，那么对应高频。</p>
 <p>图像是二维的，它包含垂直频率(垂直方向的变化)和水平频率(水平方向的变化)。</p>
 <p>而滤波(Filtering)的作用就是增强部分频段，同时限制(或衰减)其他频段。<strong>Low-pass</strong>(低通)滤波器就是消除图像中高频信息，<strong>High-pass</strong>(高通)滤波器就是去除低频成分，让高频成分通过。</p>
 <h2 id="本章主要讲述用于图像处理的滤波器。">本章主要讲述用于图像处理的滤波器。</h2><h1 id="二-Filtering_images_using_low-pass_filters"><strong>二.Filtering images using low-pass filters</strong></h1><p>如书上所说，low-pass滤波器去除高频信息，那么就是想降低图像变化的幅度。OpenCV中实现该功能的函数是<code>cv::blur</code>,作用是将每个像素替换为相邻矩形内像素的平均值，从而实现平滑。也称<code>cv::blur</code>为boxFilter(箱式滤波器)。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv::blur(image, result, cv::Size(<span class="number">5</span>, <span class="number">5</span>));</span><br></pre></td></tr></table></figure></p>
-<p>第三个参数是定义kernel的大小，kernel是一个N*N的矩阵，anchor 默认是矩阵中心， See more in <a href="http://docs.opencv.org/2.4.9/modules/imgproc/doc/filtering.html?highlight=blur#blur" target="_blank" rel="external">cv::blur</a>.</p>
-<p>\begin{equation}<br>K=\frac{1}{ksize.width*ksize.height}\left[<br>\begin{matrix}<br>1&amp;1&amp;1&amp;·&amp;·&amp;1&amp;1&amp;\<br>1&amp;1&amp;1&amp;·&amp;·&amp;1&amp;1&amp;\<br> &amp; &amp;·&amp;·&amp;·&amp; &amp; &amp;\<br>1&amp;1&amp;1&amp;·&amp;·&amp;1&amp;1&amp;<br>\end{matrix}<br>\right]<br>\end{equation}</p>
+<p>第三个参数是定义kernel的大小，kernel是一个N*N的矩阵, 如公式(1)所示，anchor 默认是矩阵中心， See more in <a href="http://docs.opencv.org/2.4.9/modules/imgproc/doc/filtering.html?highlight=blur#blur" target="_blank" rel="external">cv::blur</a>.</p>
+<p>\begin{equation}<br>K=\frac{1}{ksize.width*ksize.height}<br>\begin{bmatrix}<br>1&amp;1&amp; \cdots &amp;1&amp;1&amp; \\<br>1&amp;1&amp; \cdots &amp;1&amp;1&amp; \\<br>&amp;&amp; \cdots \cdots \cdots &amp; \\<br>1&amp;1&amp; \cdots &amp;1&amp;1&amp;<br>\end{bmatrix}    \tag{1}<br>\end{equation} </p>
+<p>有些情况，需要对靠近的像素分配更多的权重，常用的加权方案是基于高斯函数(Gaussian Function),OpenCV中实现该功能的函数<code>cv::GaussianBlur</code>:</p>
+<pre><code class="cpp">cv::GaussianBlur(image,result,cv::Size(<span class="number">5</span>,<span class="number">5</span>),<span class="number">1.5</span>);
+</code></pre>
 <h1 id="三-Filtering_images_using_a_median_filter"><strong>三.Filtering images using a median filter</strong></h1><h1 id="四-Applying_directional_filters_to_detect_edges"><strong>四.Applying directional filters to detect edges</strong></h1><h1 id="五-Computing_the_Laplacian_of_an_image"><strong>五.Computing the Laplacian of an image</strong></h1>
       
     </div>
