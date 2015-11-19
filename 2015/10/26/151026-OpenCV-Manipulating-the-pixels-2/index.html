@@ -23,7 +23,7 @@ Writing effcient image scanning loops
 Scanning an image with neighbor access
 Performing simple image arithmetic 
 Defining regions of interest">
-<meta property="og:updated_time" content="2015-10-28T06:32:43.139Z">
+<meta property="og:updated_time" content="2015-11-19T02:42:59.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV 学习笔记(2) Manipulating the Pixels (下)">
 <meta name="twitter:description" content="本节导读：
@@ -225,45 +225,45 @@ Defining regions of interest">
 <thead>
 <tr>
 <th style="text-align:center">Method</th>
-<th>Average time</th>
+<th style="text-align:center">Average time</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:center">data[i]= data[i]/div*div + div/2;</td>
-<td>37ms</td>
+<td style="text-align:center">37ms</td>
 </tr>
 <tr>
 <td style="text-align:center">*data++= *data/div*div + div/2;</td>
-<td>37ms</td>
+<td style="text-align:center">37ms</td>
 </tr>
 <tr>
 <td style="text-align:center">*data++= v - v%div + div/2;</td>
-<td>52ms</td>
+<td style="text-align:center">52ms</td>
 </tr>
 <tr>
 <td style="text-align:center">*data++= *data&amp;mask + div/2;</td>
-<td>35ms</td>
+<td style="text-align:center">35ms</td>
 </tr>
 <tr>
 <td style="text-align:center">colorReduce(input, output);</td>
-<td>44ms</td>
+<td style="text-align:center">44ms</td>
 </tr>
 <tr>
 <td style="text-align:center">i&lt;image.cols*image.channels();</td>
-<td>65ms</td>
+<td style="text-align:center">65ms</td>
 </tr>
 <tr>
 <td style="text-align:center">MatIterator</td>
-<td>67ms</td>
+<td style="text-align:center">67ms</td>
 </tr>
 <tr>
 <td style="text-align:center">.at(j,i)</td>
-<td>80ms</td>
+<td style="text-align:center">80ms</td>
 </tr>
 <tr>
 <td style="text-align:center">3-channel loop</td>
-<td>29ms</td>
+<td style="text-align:center">29ms</td>
 </tr>
 </tbody>
 </table>

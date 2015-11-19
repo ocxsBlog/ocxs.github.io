@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>OpenCV 学习笔记(5) Filtering the Images | Ocxs&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="In this chapter, we will cover:
+
+
+Filtering images using low-pass filters
+Filtering images using a median filter
+Applying directional filters to detect edges
+Computing the Laplacian of an image">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV 学习笔记(5) Filtering the Images">
+<meta property="og:url" content="site:ocxsBlog.github.io/2015/11/19/151119-OpenCV-Filtering-the-Images/index.html">
+<meta property="og:site_name" content="Ocxs's blog">
+<meta property="og:description" content="In this chapter, we will cover:
+
+
+Filtering images using low-pass filters
+Filtering images using a median filter
+Applying directional filters to detect edges
+Computing the Laplacian of an image">
+<meta property="og:updated_time" content="2015-11-19T13:04:43.972Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenCV 学习笔记(5) Filtering the Images">
+<meta name="twitter:description" content="In this chapter, we will cover:
+
+
+Filtering images using low-pass filters
+Filtering images using a median filter
+Applying directional filters to detect edges
+Computing the Laplacian of an image">
+  
+    <link rel="alternative" href="/atom.xml" title="Ocxs&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">ocxs</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">To be better</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Computer-Vision/" style="font-size: 15px;">Computer Vision</a> <a href="/tags/OpenCV/" style="font-size: 15px;">OpenCV</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/PAT-data-structure/" style="font-size: 20px;">PAT data structure</a> <a href="/tags/data-structure/" style="font-size: 10px;">data structure</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">Computer Vision.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">ocxs</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">ocxs</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">To be better</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-151119-OpenCV-Filtering-the-Images" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/19/151119-OpenCV-Filtering-the-Images/" class="article-date">
+  	<time datetime="2015-11-19T12:14:57.000Z" itemprop="datePublished">2015-11-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      OpenCV 学习笔记(5) Filtering the Images
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>In this chapter, we will cover:</p>
+<blockquote>
+<ul>
+<li>Filtering images using low-pass filters</li>
+<li>Filtering images using a median filter</li>
+<li>Applying directional filters to detect edges</li>
+<li>Computing the Laplacian of an image<a id="more"></a>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+</li>
+</ul>
+</blockquote>
+<h1 id="一-Introduction"><strong>一.Introduction</strong></h1><p>observing the frequency of those variations in an image constitutes another way of characterizing an image. This point of view is referred to as the <strong>frequency domain</strong>(频域),<br>while characterizing an image by observing its gray-level distribution is referred to as the <strong>spatial domain</strong>(空间域).<br>由上面可知，频域是分析图像强度(intensity)的变化,空间域分析图像灰度的分布;那么在频域中去分析图像，高频信息是有图像强度的快速变化产生，一般对应图像的边缘信息，因为在边缘图像强度才会变化很快， 那么对应的低频信息多是图像中某一块区域，如上一张牛的图片中的背景区域，或者前景区域(牛)，不会陡变，所以是低频信息，但是从牛到背景的 这个边缘，就会发生陡变，那么对应高频。</p>
+<p>图像是二维的，它包含垂直频率(垂直方向的变化)和水平频率(水平方向的变化)。</p>
+<p>而滤波(Filtering)的作用就是增强部分频段，同时限制(或衰减)其他频段。<strong>Low-pass</strong>(低通)滤波器就是消除图像中高频信息，<strong>High-pass</strong>(高通)滤波器就是去除低频成分，让高频成分通过。</p>
+<h2 id="本章主要讲述用于图像处理的滤波器。">本章主要讲述用于图像处理的滤波器。</h2><h1 id="二-Filtering_images_using_low-pass_filters"><strong>二.Filtering images using low-pass filters</strong></h1><p>如书上所说，low-pass滤波器去除高频信息，那么就是想降低图像变化的幅度。OpenCV中实现该功能的函数是<code>cv::blur</code>,作用是将每个像素替换为相邻矩形内像素的平均值，从而实现平滑。也称<code>cv::blur</code>为boxFilter(箱式滤波器)。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv::blur(image, result, cv::Size(<span class="number">5</span>, <span class="number">5</span>));</span><br></pre></td></tr></table></figure></p>
+<p>第三个参数是定义kernel的大小，kernel是一个N*N的矩阵，anchor 默认是矩阵中心， See more in <a href="http://docs.opencv.org/2.4.9/modules/imgproc/doc/filtering.html?highlight=blur#blur" target="_blank" rel="external">cv::blur</a>.</p>
+<p>\begin{equation}<br>K=\frac{1}{ksize.width*ksize.height}\left[<br>\begin{matrix}<br>1&amp;1&amp;1&amp;·&amp;·&amp;1&amp;1&amp;\<br>1&amp;1&amp;1&amp;·&amp;·&amp;1&amp;1&amp;\<br> &amp; &amp;·&amp;·&amp;·&amp; &amp; &amp;\<br>1&amp;1&amp;1&amp;·&amp;·&amp;1&amp;1&amp;<br>\end{matrix}<br>\right]<br>\end{equation}</p>
+<h1 id="三-Filtering_images_using_a_median_filter"><strong>三.Filtering images using a median filter</strong></h1><h1 id="四-Applying_directional_filters_to_detect_edges"><strong>四.Applying directional filters to detect edges</strong></h1><h1 id="五-Computing_the_Laplacian_of_an_image"><strong>五.Computing the Laplacian of an image</strong></h1>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/11/09/151109-OpenCV-Transforming-Images-with-Morphological-Operations/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">OpenCV 学习笔记(5) Transforming Images with Morphological Operations</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="151119-OpenCV-Filtering-the-Images" data-title="OpenCV 学习笔记(5) Filtering the Images" data-url="site:ocxsBlog.github.io/2015/11/19/151119-OpenCV-Filtering-the-Images/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 ocxs
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

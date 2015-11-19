@@ -22,7 +22,7 @@ Eroding and dilating images using morphological filters
 Opening and closing images using morphological filters
 Detecting edges and corners using morphological filters">
 <meta property="og:image" content="site:ocxsBlog.github.io/img/151109-watershed.jpg">
-<meta property="og:updated_time" content="2015-11-18T14:59:09.346Z">
+<meta property="og:updated_time" content="2015-11-19T02:46:49.512Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV 学习笔记(5) Transforming Images with Morphological Operations">
 <meta name="twitter:description" content="In this chapter, we will cover:
@@ -221,7 +221,7 @@ Detecting edges and corners using morphological filters">
 <h1 id="一-Eroding_and_dilating_images_using_morphological_filters"><strong>一.Eroding and dilating images using morphological filters</strong></h1><p><strong>Erosion and dilation</strong> are the most fundamental morphological operators.</p>
 <p>The fundamental instrument in mathematical morphology is the structuring element(结构元素).A structuring element is simply defined as a configuration of pixels (a shape) on which an origin is defined (also called <strong>anchor point</strong>).数学形态学最基本的工具是结构元素。结构元素定义为像素的结构(形状)以及一个锚点。</p>
 <p>形态学中，我们一般规定，高像素(白色)表示前景物体，用低像素(黑色)表示背景。一张图像A，对其取反(255-x)得到图像B，那么说A是B的补(B是A的补).补(Complement).</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//Read input image</span><br><span class="line">cv::Mat image= cv::imread("binary.bmp");</span><br><span class="line">//Erode the image</span><br><span class="line">cv::Mat eroded; // the destination image</span><br><span class="line">cv::erode(image,eroded,cv::Mat());</span><br><span class="line">//Display the eroded image</span><br><span class="line">cv::namedWindow("Eroded Image");");</span><br><span class="line">cv::imshow("Eroded Image",eroded);</span><br><span class="line">//Dilate the image</span><br><span class="line">cv::Mat dilated; // the destination image</span><br><span class="line">cv::dilate(image,dilated,cv::Mat());</span><br><span class="line">//Display the dilated image</span><br><span class="line">cv::namedWindow("Dilated Image");</span><br><span class="line">cv::imshow("Dilated Image",dilated);</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cv::Mat image= cv::imread(<span class="string">"binary.bmp"</span>);</span><br><span class="line"></span><br><span class="line">cv::Mat eroded; </span><br><span class="line">cv::erode(image,eroded,cv::Mat());</span><br><span class="line"></span><br><span class="line">cv::namedWindow(<span class="string">"Eroded Image"</span>);</span><br><span class="line">cv::imshow(<span class="string">"Eroded Image"</span>,eroded);</span><br><span class="line"></span><br><span class="line">cv::Mat dilated; </span><br><span class="line">cv::dilate(image,dilated,cv::Mat());</span><br><span class="line"></span><br><span class="line">cv::namedWindow(<span class="string">"Dilated Image"</span>);</span><br><span class="line">cv::imshow(<span class="string">"Dilated Image"</span>,dilated);</span><br></pre></td></tr></table></figure>
 <p>图书上都有，代码也是摘自书上，通俗说：腐蚀使图像变瘦，膨胀使其变胖。</p>
 <p>前面说过，要进行腐蚀和膨胀操作，我们用一个结构元素，结构元素有很多种，比如3*3矩阵，半径为3的圆，当anchor point对准图像中像素(given pixel)(相当于把结构元素对准后贴上去)，anchor point周围的几个元素相应的也对其到图像中这个given pixel周围的像素上。那么是怎么进行操作的呢？<br><strong>腐蚀</strong>：找出结构元素与原图像重合的所有像素中像素值<strong>最小的</strong>那个值，用这个值替代这个given pixel，也就是和anchor point重合的这个点。<br><strong>膨胀</strong>：··········································<strong>最大的</strong>·····································································。<br>see more in <a href="http://www.cnblogs.com/slysky/archive/2011/10/16/2214015.html" target="_blank" rel="external">here</a></p>
 <p>所以腐蚀可以去除独立的噪声点，而膨胀可以填充物体的一些“孔洞”。</p>
@@ -310,7 +310,7 @@ Detecting edges and corners using morphological filters">
 <p>这里掩模mask必须是<code>8-bit single-channel</code>的，然后构造掩模时，直接将全部元素赋值为0，即<code>GC_BGD</code>,然后之前说过，<code>cv::Mat</code>这样的操作只是浅拷贝，他们仍指向同一块内存，所以在这里提取ROI，将ROI这一块的像素值换成3，也就是相当于将mask这一块的像素值换位3，即<code>GC_PR_FGD</code>,然后将其传递进函数，进行运算。</p>
 <p>然后第三个参数在<code>GC_INIT_WITH_MASK</code>是不起作用的，后面的代码基本跟<code>mode == GC_INIT_WITH_RECT</code>的代码道理相同，不在赘述。</p>
 <p>grabCut算法的原理，可以看看这几篇文章，<a href="http://blog.csdn.net/zouxy09/article/details/8532111" target="_blank" rel="external">文章1</a>，<a href="http://blog.csdn.net/zouxy09/article/details/8534954" target="_blank" rel="external">文章2</a>, GrabCut算法是由Graph Cut算法衍生出来的。</p>
-<p>Graph Cut算法是发表在ICCV2001会议上的成果，见<a href="http://www.cs.cmu.edu/~efros/courses/LBMV07/Papers/boykov-iccv-01.pdf" target="_blank" rel="external">Interactive Graph Cuts for Optimal Boundary &amp; Region Segmentation of Objects in N-D Images</a>;<br>Grab Cut算法是发表在ToG上的成果<a href="http://research.microsoft.com/en-us/um/people/ablake/papers/ablake/siggraph04.pdf" target="_blank" rel="external">“GrabCut” — Interactive Foreground Extraction using Iterated Graph Cuts</a>。</p>
+<p>(1)Graph Cut算法是发表在ICCV2001会议上的成果，见<a href="http://www.cs.cmu.edu/~efros/courses/LBMV07/Papers/boykov-iccv-01.pdf" target="_blank" rel="external">Interactive Graph Cuts for Optimal Boundary &amp; Region Segmentation of Objects in N-D Images</a>;<br>(2)Grab Cut算法是发表在ToG上的成果<a href="http://research.microsoft.com/en-us/um/people/ablake/papers/ablake/siggraph04.pdf" target="_blank" rel="external">“GrabCut” — Interactive Foreground Extraction using Iterated Graph Cuts</a>。</p>
 <p>这一章结束了，等后面有时间，好好看一下这两篇论文，看看能不能实现出来，对了，还有分水岭算法，看看paper上的原理，看看能不能自己把轮子造出来，而不是做一个只会调API的码农。。。</p>
 
       
@@ -320,6 +320,15 @@ Detecting edges and corners using morphological filters">
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/11/19/151119-OpenCV-Filtering-the-Images/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          OpenCV 学习笔记(5) Filtering the Images
+        
+      </div>
+    </a>
   
   
     <a href="/2015/10/31/151031-OpenCV-Counting-the-pixels-with-Histograms/" id="article-nav-older" class="article-nav-link-wrap">
