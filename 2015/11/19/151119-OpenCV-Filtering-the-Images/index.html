@@ -23,7 +23,7 @@ Filtering images using low-pass filters
 Filtering images using a median filter
 Applying directional filters to detect edges
 Computing the Laplacian of an image">
-<meta property="og:updated_time" content="2015-11-23T05:17:56.804Z">
+<meta property="og:updated_time" content="2015-11-23T06:54:18.765Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV 学习笔记(6) Filtering the Images">
 <meta name="twitter:description" content="In this chapter, we will cover:
@@ -228,11 +228,11 @@ Computing the Laplacian of an image">
 <p>第三个参数是定义kernel的大小，kernel是一个N*N的矩阵, 如公式(1)所示，anchor 默认是矩阵中心， See more in <a href="http://docs.opencv.org/2.4.9/modules/imgproc/doc/filtering.html?highlight=blur#blur" target="_blank" rel="external">cv::blur</a>.</p>
 <p>\begin{equation}<br>K=\frac{1}{ksize.width*ksize.height}<br>\begin{bmatrix}<br>1&amp;1&amp; \cdots &amp;1&amp;1&amp; \\<br>1&amp;1&amp; \cdots &amp;1&amp;1&amp; \\<br>&amp;&amp; \cdots \cdots \cdots &amp; \\<br>1&amp;1&amp; \cdots &amp;1&amp;1&amp;<br>\end{bmatrix}    \tag{1}<br>\end{equation} </p>
 <h2 id="(2)高斯滤波cv::GaussianBlur"><strong>(2)高斯滤波cv::GaussianBlur</strong></h2><ul>
-<li>OpenCV 函数调用</li>
+<li><strong>OpenCV 函数调用</strong></li>
 </ul>
 <p>　　 有些情况，需要对靠近的像素分配更多的权重，常用的加权方案是基于高斯函数(Gaussian Function),OpenCV中实现该功能的函数<code>cv::GaussianBlur</code>:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv::GaussianBlur(image,result,cv::Size(<span class="number">5</span>,<span class="number">5</span>),<span class="number">1.5</span>);</span><br></pre></td></tr></table></figure></p>
 <ul>
-<li>数学原理</li>
+<li><strong>数学原理</strong></li>
 </ul>
 <p>　　在高斯滤波器中，像素的权重和它离开中心像素点距离成正比。一维高斯函数的形式如公式(2)所示: </p>
 <p>\begin{equation}<br>G(x) = Ae^{-x^2/2\sigma^2}    \tag{2}<br>\end{equation} </p>
