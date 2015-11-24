@@ -23,7 +23,7 @@ Filtering images using low-pass filters
 Filtering images using a median filter
 Applying directional filters to detect edges
 Computing the Laplacian of an image">
-<meta property="og:updated_time" content="2015-11-23T06:54:18.765Z">
+<meta property="og:updated_time" content="2015-11-24T01:40:58.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV 学习笔记(6) Filtering the Images">
 <meta name="twitter:description" content="In this chapter, we will cover:
@@ -209,6 +209,15 @@ Computing the Laplacian of an image">
     
     <div class="article-entry" itemprop="articleBody">
       
+	  
+	  <!-- Table of Contents -->
+	
+	  <div id="toc" class="toc-article">
+		<strong class="toc-title">Table of Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Filtering_images_using_low-pass_filters"><span class="toc-number">2.</span> <span class="toc-text">Filtering images using low-pass filters</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#箱式滤波器cv::blur"><span class="toc-number">2.1.</span> <span class="toc-text">箱式滤波器cv::blur</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高斯滤波cv::GaussianBlur"><span class="toc-number">2.2.</span> <span class="toc-text">高斯滤波cv::GaussianBlur</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#金字塔"><span class="toc-number">2.3.</span> <span class="toc-text">金字塔</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Filtering_images_using_a_median_filter"><span class="toc-number">3.</span> <span class="toc-text">Filtering images using a median filter</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Applying_directional_filters_to_detect_edges"><span class="toc-number">4.</span> <span class="toc-text">Applying directional filters to detect edges</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Computing_the_Laplacian_of_an_image"><span class="toc-number">5.</span> <span class="toc-text">Computing the Laplacian of an image</span></a></li></ol>
+	  </div>
+	
+	
         <p>In this chapter, we will cover:</p>
 <blockquote>
 <ul>
@@ -219,15 +228,15 @@ Computing the Laplacian of an image">
 </li>
 </ul>
 </blockquote>
-<h1 id="一-Introduction"><strong>一.Introduction</strong></h1><p>　　observing the frequency of those variations in an image constitutes another way of characterizing an image. This point of view is referred to as the <strong>frequency domain</strong>(频域), while characterizing an image by observing its gray-level distribution is referred to as the <strong>spatial domain</strong>(空间域).<br>　　由上面可知，频域是分析图像强度(intensity)的变化,空间域分析图像灰度的分布;那么在频域中去分析图像，高频信息是有图像强度的快速变化产生，一般对应图像的边缘信息，因为在边缘图像强度才会变化很快， 那么对应的低频信息多是图像中某一块区域，如上一章那个牛的图片中的背景区域，或者前景区域(牛)，不会陡变，所以是低频信息，但是从牛到背景的 这个边缘，就会发生陡变，那么对应高频。</p>
+<h1 id="Introduction"><strong>Introduction</strong></h1><p>　　Observing the frequency of those variations in an image constitutes another way of characterizing an image. This point of view is referred to as the <strong>frequency domain</strong>(频域), while characterizing an image by observing its gray-level distribution is referred to as the <strong>spatial domain</strong>(空间域).<br>　　由上面可知，频域是分析图像强度(intensity)的变化,空间域分析图像灰度的分布;那么在频域中去分析图像，高频信息是有图像强度的快速变化产生，一般对应图像的边缘信息，因为在边缘图像强度才会变化很快， 那么对应的低频信息多是图像中某一块区域，如上一章那个牛的图片中的背景区域，或者前景区域(牛)，不会陡变，所以是低频信息，但是从牛到背景的 这个边缘，就会发生陡变，那么对应高频。</p>
 <p>　　图像是二维的，它包含垂直频率(垂直方向的变化)和水平频率(水平方向的变化)。</p>
 <p>　　而滤波(Filtering)的作用就是增强部分频段，同时限制(或衰减)其他频段。<strong>Low-pass</strong>(低通)滤波器就是消除图像中高频信息，<strong>High-pass</strong>(高通)滤波器就是去除低频成分，让高频成分通过。</p>
 <p>　　本章主要讲述用于图像处理的滤波器。</p>
 <hr>
-<h1 id="二-Filtering_images_using_low-pass_filters"><strong>二.Filtering images using low-pass filters</strong></h1><h2 id="(1)箱式滤波器cv::blur"><strong>(1)箱式滤波器cv::blur</strong></h2><p>　　如书上所说，low-pass滤波器去除高频信息，那么就是想降低图像变化的幅度。OpenCV中实现该功能的函数是<code>cv::blur</code>,作用是将每个像素替换为相邻矩形内像素的平均值，从而实现平滑。也称<code>cv::blur</code>为boxFilter(箱式滤波器)。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv::blur(image, result, cv::Size(<span class="number">5</span>, <span class="number">5</span>));</span><br></pre></td></tr></table></figure></p>
-<p>第三个参数是定义kernel的大小，kernel是一个N*N的矩阵, 如公式(1)所示，anchor 默认是矩阵中心， See more in <a href="http://docs.opencv.org/2.4.9/modules/imgproc/doc/filtering.html?highlight=blur#blur" target="_blank" rel="external">cv::blur</a>.</p>
+<h1 id="Filtering_images_using_low-pass_filters"><strong>Filtering images using low-pass filters</strong></h1><h2 id="箱式滤波器cv::blur"><strong>箱式滤波器cv::blur</strong></h2><p>　　如书上所说，low-pass滤波器去除高频信息，那么就是想降低图像变化的幅度。OpenCV中实现该功能的函数是<code>cv::blur</code>,作用是将每个像素替换为相邻矩形内像素的平均值，从而实现平滑。也称<code>cv::blur</code>为boxFilter(箱式滤波器)。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cv::blur(image, result, cv::Size(<span class="number">5</span>, <span class="number">5</span>), anchor, borderType);</span><br><span class="line">cv::boxFilter(image, result, src.type(), anchor, <span class="literal">true</span>, borderType);</span><br></pre></td></tr></table></figure></p>
+<p>　　上面两个等价，当<code>cv::boxFilter</code>的第五个参数为true，第三个参数设定输出与输入类型一致，她就是均值滤波，第五个参数为false，则相当于把公式(1)前面的系数去掉，<code>cv::blur</code>第三个参数是定义kernel的大小，kernel是一个N*N的矩阵, 如公式(1)所示，anchor 默认是矩阵中心， See more in <a href="http://docs.opencv.org/2.4.9/modules/imgproc/doc/filtering.html?highlight=blur#blur" target="_blank" rel="external">cv::blur</a> and <a href="http://docs.opencv.org/2.4.9/modules/imgproc/doc/filtering.html#boxfilter" target="_blank" rel="external">cv::boxFilter</a>.</p>
 <p>\begin{equation}<br>K=\frac{1}{ksize.width*ksize.height}<br>\begin{bmatrix}<br>1&amp;1&amp; \cdots &amp;1&amp;1&amp; \\<br>1&amp;1&amp; \cdots &amp;1&amp;1&amp; \\<br>&amp;&amp; \cdots \cdots \cdots &amp; \\<br>1&amp;1&amp; \cdots &amp;1&amp;1&amp;<br>\end{bmatrix}    \tag{1}<br>\end{equation} </p>
-<h2 id="(2)高斯滤波cv::GaussianBlur"><strong>(2)高斯滤波cv::GaussianBlur</strong></h2><ul>
+<h2 id="高斯滤波cv::GaussianBlur"><strong>高斯滤波cv::GaussianBlur</strong></h2><ul>
 <li><strong>OpenCV 函数调用</strong></li>
 </ul>
 <p>　　 有些情况，需要对靠近的像素分配更多的权重，常用的加权方案是基于高斯函数(Gaussian Function),OpenCV中实现该功能的函数<code>cv::GaussianBlur</code>:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv::GaussianBlur(image,result,cv::Size(<span class="number">5</span>,<span class="number">5</span>),<span class="number">1.5</span>);</span><br></pre></td></tr></table></figure></p>
@@ -238,15 +247,26 @@ Computing the Laplacian of an image">
 <p>\begin{equation}<br>G(x) = Ae^{-x^2/2\sigma^2}    \tag{2}<br>\end{equation} </p>
 <p>　　归一化系数A使得不同权重之和为1，σ来控制高斯函数的高度(高斯函数就是以前学的正态分布的那个函数，所以正态分布也叫高斯分布)，这个值越大，生成的函数越平坦，越小，越抖。(可以说σ是描述数据分布的离散程度，σ越大，数据越分散，σ越小，数据越集中，而学正态分布也知道σ代表方差，方差小数据自然就集中的平均数μ附近，也恰好说明函数图像为何很抖)。<br>　　正太分布里有个3σ原则，也能说明为啥他能控制高斯函数的高度：P（μ-σ&lt;X≤μ+σ）=68.3%；P（μ-2σ&lt;X≤μ+2σ）=95.4%；P（μ-3σ&lt;X≤μ+3σ）=99.7%；  </p>
 <p>　　OpenCV提供<code>cv::getGaussianKernel</code>函数根据提供的σ来计算系数：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv::Mat gauss= cv::getGaussianKernel(<span class="number">9</span>,sigma,CV_32F);</span><br></pre></td></tr></table></figure></p>
+<p>不同的σ计算出来的系数自然也就不一样，这里列出书上的例子：<br>(a)σ = 0.5<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">0.0</span> <span class="number">0.0</span> <span class="number">0.00026</span> <span class="number">0.10645</span> <span class="number">0.78657</span> <span class="number">0.10645</span> <span class="number">0.00026</span> <span class="number">0.0</span> <span class="number">0.0</span>]</span><br></pre></td></tr></table></figure></p>
+<p>(b)σ = 1.5<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">0.00761</span> <span class="number">0.036075</span> <span class="number">0.10959</span> <span class="number">0.21345</span> <span class="number">0.26666</span> <span class="number">0.21345</span> <span class="number">0.10959</span> <span class="number">0.03608</span> <span class="number">0.00761</span> ]</span><br></pre></td></tr></table></figure></p>
 <p>　　这里可以参考这篇文章：<a href="http://wenku.baidu.com/view/674d13c1d5bbfd0a7956738b.html" target="_blank" rel="external">深入剖析高斯滤波</a>，文中指出：</p>
 <p>　　在图像处理中，高斯滤波一般有两种实现方式，一种是离散化的滑动窗口进行卷积运算，另一种是通过傅立叶变化来实现。最常见的就是第一种卷积核实现，只有当离散化的窗口非常大，计算非常耗时（这时可使用可分离滤波器）的情况下，可能会考虑基于傅里叶变换的实现方法。这里我们只讨论第一种方法。</p>
 <p>　　我们可以看到这篇文章的那个图，二维高斯函数可以用matlab仿真出来，网上有许多这样的代码。文中说：离散化的主旨就是保留高斯函数中心能量最集中的中间部分，忽略四周能量很小的平坦区域。这就可以为离中心像素近的权重大，离得远的权重小。</p>
-<p>　　这里重点把文中的第三个问题摘抄出来：<strong>为什么使用可分离滤波器？</strong></p>
-<p>　　即书上为啥不直接用二维高斯函数来滤波，而是用一维高斯函数，先对图像的行用一维高斯滤波器(影响垂直方向的频率)，在对图像的列应用相同的一维高斯滤波器(影响的是水平方向的频率)，处理结果一样，利用的是高斯函数可以写成可分离的形式，因此可以采用可分离滤波器实现来加速。所谓的可分离滤波器，就是可以把多维的卷积化成多个一维卷积。具体到二维的高斯滤波，就是指先对行做一维卷积，再对列做一维卷积。这样就可以将计算复杂度从O(M*M*N*N)降到O(2*M*M*N)，M，N分别是图像和滤波器的窗口大小，具体为啥如果以后回头看这篇文章的我想不出来先打自己一下，然后去看文章的链接。(对当初学信号与系统时的一些东西稍微理解的更深一点，以前只会计算题目。。。)</p>
+<ul>
+<li>这里重点把文中的第三个问题摘抄出来：<strong>为什么使用可分离滤波器？</strong></li>
+</ul>
+<p>　　即书上为啥不直接用二维高斯函数来滤波，而是用一维高斯函数，先对图像的行用一维高斯滤波器(影响垂直方向的频率)，在对图像的列应用相同的一维高斯滤波器(影响的是水平方向的频率)，处理结果一样，利用的是高斯函数可以写成可分离的形式(Gaussian filter is a <strong>separable filter</strong>)，因此可以采用可分离滤波器实现来加速。所谓的可分离滤波器，就是可以把多维的卷积化成多个一维卷积。具体到二维的高斯滤波，就是指先对行做一维卷积，再对列做一维卷积。这样就可以将计算复杂度从O(M*M*N*N)降到O(2*M*M*N)，M，N分别是图像和滤波器的窗口大小，具体为啥如果以后回头看这篇文章的我想不出来先打自己一下，然后去看文章的链接。(对当初学信号与系统时的一些东西稍微理解的更深一点，以前只会计算题目。。。)</p>
+<p>　　在OpenCV中可以调用<code>cv::sepFilter2D</code>来使用分离的滤波器，怎么使用，看一眼文档立马就会了，见<a href="http://docs.opencv.org/2.4.9/modules/imgproc/doc/filtering.html#sepfilter2d" target="_blank" rel="external">cv::sepFilter2D</a>.这里书上还说了一个函数<code>cv::filter2D</code>,可以使用它来直接进行二维滤波,具体使用见<a href="http://ocxsblog.github.io/2015/10/26/151026-OpenCV-Manipulating-the-pixels-2/">OpenCV 学习笔记(2) Manipulating the Pixels (下)</a>.<br>　　在使用<code>cv::GaussianBlur</code>函数时，第三个参数Size，<strong>长宽必须是奇数</strong>，此外，如果size为0，函数将根据第四个参数σ自动确定较为合适的系数的数量，至于怎么确定的，参考前面链接里的那篇文章，里面有把OPenCV源码拿出来讲解。此外，反过来提供尺寸的值，设置σ为0，函数也能自动确定较好的σ值。</p>
+<h2 id="金字塔"><strong>金字塔</strong></h2><p>　　再将图像按照2的倍数缩放时，由于原来图像中的高频分量(如尖锐的边缘)在缩小图中可能呈现出楼梯状，造成失真，为了使缩小后没有这样的情况，那么就先对原图像进行低通滤波，然后在缩小，OpenCV就提供这样的函数，<code>cv::pyrDown</code>:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cv::Mat reducedImage;</span><br><span class="line">cv::pyrDown(image, reducedImage);</span><br></pre></td></tr></table></figure></p>
+<p>　　<code>cv::pyrDown</code>做了两件事，先对原图像进行低通滤波，然后隔行隔列的去除<strong>偶数行</strong>像素(官网说的，见<a href="http://docs.opencv.org/2.4.9/modules/imgproc/doc/filtering.html#pyrdown" target="_blank" rel="external">cv::pyrDown</a>)，缩小为原来的一半。与之对应的函数叫<code>cv::pyrUp</code>,他们经常用来创建图像金字塔(<strong>image pyramids</strong>)。<strong>常常用于高效的图像分析</strong>，例如想要检测图像中的物体，首先在金字塔顶层的小尺寸图像进行检测，然后定位感兴趣的物体，并在包含高分辨图像的低层金字塔中进行更精确的搜索。此外改变图像尺寸也可以使用<code>cv::resize</code>.</p>
 <hr>
-<h1 id="三-Filtering_images_using_a_median_filter"><strong>三.Filtering images using a median filter</strong></h1><hr>
-<h1 id="四-Applying_directional_filters_to_detect_edges"><strong>四.Applying directional filters to detect edges</strong></h1><hr>
-<h1 id="五-Computing_the_Laplacian_of_an_image"><strong>五.Computing the Laplacian of an image</strong></h1><h2 id="—-">—-</h2>
+<h1 id="Filtering_images_using_a_median_filter"><strong>Filtering images using a median filter</strong></h1><p>　　上一节说的都隶属于线性滤波器的范畴，这一节的中值滤波器就是非线性滤波器。中值滤波器对去除椒盐噪点(Salt-and-Pepper,前面的章节讲过)很有帮助，OpenCV的函数是<code>cv::medianBlur</code>:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv::medianBlur(image, result, <span class="number">5</span>);</span><br></pre></td></tr></table></figure></p>
+<p>　　由于他是非线性的，无法表示成之前的矩阵形式(因为取中位数，不确定性)，她就是用相邻区域内的中值来替代当前的像素值。这也是为啥能对付椒盐噪点，突然冒出来的黑色或白色必然不会是中位数，早晚被替换掉，因为噪点只能改变平均数，但是改变不了中位数，除非他们聚集在一起很多，不过这也可能就不是噪点了。函数的第三个参数是确定相邻区域的大小(kSize*ksize的区域)，必须是<strong>大于1且为奇数</strong>。中值滤波同时还具有保留边缘锐利度的优点，还能去除相同区域中的纹理。(这里还需注意使用medianBlur的时候，需要注意输入的要求，具体见<a href="http://docs.opencv.org/2.4.9/modules/imgproc/doc/filtering.html?highlight=medianblur#cv2.medianBlur" target="_blank" rel="external">cv::medianBlur</a>)</p>
+<hr>
+<h1 id="Applying_directional_filters_to_detect_edges"><strong>Applying directional filters to detect edges</strong></h1><p>　　之前主要讲的是低通滤波，接下来说高通滤波，经常用来做边缘检测(<strong>edge detection</strong>);</p>
+<hr>
+<h1 id="Computing_the_Laplacian_of_an_image"><strong>Computing the Laplacian of an image</strong></h1><hr>
+
       
     </div>
     
