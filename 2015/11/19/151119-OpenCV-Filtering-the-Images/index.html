@@ -23,7 +23,7 @@ Filtering images using low-pass filters
 Filtering images using a median filter
 Applying directional filters to detect edges
 Computing the Laplacian of an image">
-<meta property="og:updated_time" content="2015-11-24T09:08:40.915Z">
+<meta property="og:updated_time" content="2015-11-24T12:49:12.171Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV 学习笔记(6) Filtering the Images">
 <meta name="twitter:description" content="In this chapter, we will cover:
@@ -209,15 +209,13 @@ Computing the Laplacian of an image">
     
     <div class="article-entry" itemprop="articleBody">
       
-	  
 	  <!-- Table of Contents -->
-	
-	  <div id="toc" class="toc-article">
-		<strong class="toc-title">Table of Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Filtering_images_using_low-pass_filters"><span class="toc-number">2.</span> <span class="toc-text">Filtering images using low-pass filters</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#箱式滤波器cv::blur"><span class="toc-number">2.1.</span> <span class="toc-text">箱式滤波器cv::blur</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高斯滤波cv::GaussianBlur"><span class="toc-number">2.2.</span> <span class="toc-text">高斯滤波cv::GaussianBlur</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#金字塔"><span class="toc-number">2.3.</span> <span class="toc-text">金字塔</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Filtering_images_using_a_median_filter"><span class="toc-number">3.</span> <span class="toc-text">Filtering images using a median filter</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Applying_directional_filters_to_detect_edges"><span class="toc-number">4.</span> <span class="toc-text">Applying directional filters to detect edges</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sobel滤波器"><span class="toc-number">4.1.</span> <span class="toc-text">Sobel滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#示例"><span class="toc-number">4.1.1.</span> <span class="toc-text">示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用原理"><span class="toc-number">4.1.2.</span> <span class="toc-text">作用原理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Computing_the_Laplacian_of_an_image"><span class="toc-number">5.</span> <span class="toc-text">Computing the Laplacian of an image</span></a></li></ol>
-	  </div>
-	
-	
+		
+		  <div id="toc" class="toc-article">
+			<strong class="toc-title">Table of Contents</strong>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Filtering_images_using_low-pass_filters"><span class="toc-number">2.</span> <span class="toc-text">Filtering images using low-pass filters</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#箱式滤波器cv::blur"><span class="toc-number">2.1.</span> <span class="toc-text">箱式滤波器cv::blur</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高斯滤波cv::GaussianBlur"><span class="toc-number">2.2.</span> <span class="toc-text">高斯滤波cv::GaussianBlur</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#金字塔"><span class="toc-number">2.3.</span> <span class="toc-text">金字塔</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Filtering_images_using_a_median_filter"><span class="toc-number">3.</span> <span class="toc-text">Filtering images using a median filter</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Applying_directional_filters_to_detect_edges"><span class="toc-number">4.</span> <span class="toc-text">Applying directional filters to detect edges</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sobel滤波器"><span class="toc-number">4.1.</span> <span class="toc-text">Sobel滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#示例"><span class="toc-number">4.1.1.</span> <span class="toc-text">示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用原理"><span class="toc-number">4.1.2.</span> <span class="toc-text">作用原理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Computing_the_Laplacian_of_an_image"><span class="toc-number">5.</span> <span class="toc-text">Computing the Laplacian of an image</span></a></li></ol>
+		  </div>
+		
         <p>In this chapter, we will cover:</p>
 <blockquote>
 <ul>
@@ -285,6 +283,8 @@ Computing the Laplacian of an image">
 <p>图像的梯度是一个二维向量，如公式(5)所示，它拥有距离和方向，梯度向量的距离通常给出变化的幅度，通常使用欧拉距离(也称L2 norm)：</p>
 <p>\begin{equation}<br>\left|grad(I)\right| =<br>\sqrt{<br>{\left(\frac{\partial I}{\partial x}\right)}^2 + {\left(\frac{\partial I}{\partial y}\right)}^2<br>}    \tag{9}<br>\end{equation} </p>
 <p>由于L2 norm的计算费时，所以经常有L1 norm替代，即取绝对值：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sobel= <span class="built_in">abs</span>(sobelX)+<span class="built_in">abs</span>(sobelY);</span><br></pre></td></tr></table></figure></p>
+<p>梯度向量总是指向变化最剧烈的方向，在图像中， 这意味着梯度向量总是与边缘正交，从暗处指向亮出。梯度的方向是：</p>
+<p>\begin{equation}<br>\angle grad(I) = \alpha tan \left(-\frac{\partial I}{\partial y} \bigg/ \frac{\partial I}{\partial x} \right)    \tag{10}<br>\end{equation} </p>
 <hr>
 <h1 id="Computing_the_Laplacian_of_an_image"><strong>Computing the Laplacian of an image</strong></h1><hr>
 
