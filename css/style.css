@@ -911,7 +911,7 @@ a {
 .article-index .brief {
   display: block;
   color: #808080;
-  font-size: 12px;
+  font-size: 16px;
   line-height: 14px;
   height: 7px;
   padding-left: 2px;
@@ -981,7 +981,7 @@ a {
   border: 1px solid #ccc;
   font-family: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
   word-wrap: break-word;
-  font-size: 14px;
+  font-size: 16px;
 }
 .article-entry blockquote {
   background: #ddd;
@@ -1012,8 +1012,8 @@ a {
 }
 .article-entry ul,
 .article-entry ol {
-  font-size: 14px;
-  margin: 10px 0px;
+  font-size: 16px;
+  margin: 16px 0px;
 }
 .article-entry li ul,
 .article-entry li ol {
@@ -1071,13 +1071,13 @@ a {
   padding: 5px 15px;
   overflow-x: auto;
   color: #657b83;
-  font-size: 10px;
+  font-size: 16px;
   border: 1px solid #ccc;
   text-shadow: 0 1px #444;
   font-family: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
 }
 .article-entry pre code {
-  font-size: 14px;
+  font-size: 16px;
 }
 .article-entry table {
   width: 100%;
@@ -1134,7 +1134,7 @@ a {
 .article-more-link a {
   background: #4d4d4d;
   color: #fff;
-  font-size: 12px;
+  font-size: 16px;
   padding: 2px 8px 4px;
   line-height: 16px;
   -webkit-border-radius: 2px;
@@ -1192,6 +1192,34 @@ a {
 }
 #article-nav #article-nav-older {
   float: right;
+}
+.toc-article {
+  background: #eee;
+  border: 1px solid #bbb;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  margin: 1.5em 0 0.3em 1.5em;
+  padding: 1.2em 1em 0 1em;
+  max-width: 38%;
+}
+.toc-title {
+  font-size: 120%;
+}
+#toc {
+  line-height: 1em;
+  font-size: 0.9em;
+  float: right;
+}
+#toc .toc {
+  padding: 0;
+  margin: 1em;
+  line-height: 1.8em;
+}
+#toc .toc li {
+  list-style-type: none;
+}
+#toc .toc-child {
+  margin-left: 1em;
 }
 @-moz-keyframes cd-bounce-1 {
   0% {
