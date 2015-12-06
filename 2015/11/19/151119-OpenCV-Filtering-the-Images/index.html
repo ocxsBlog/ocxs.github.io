@@ -23,7 +23,7 @@ Filtering images using low-pass filters
 Filtering images using a median filter
 Applying directional filters to detect edges
 Computing the Laplacian of an image">
-<meta property="og:updated_time" content="2015-11-26T03:14:05.646Z">
+<meta property="og:updated_time" content="2015-12-06T10:57:26.397Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV 学习笔记(6) Filtering the Images">
 <meta name="twitter:description" content="In this chapter, we will cover:
@@ -118,7 +118,7 @@ Computing the Laplacian of an image">
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Computer-Vision/" style="font-size: 15px;">Computer Vision</a> <a href="/tags/OpenCV/" style="font-size: 15px;">OpenCV</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/PAT-data-structure/" style="font-size: 20px;">PAT data structure</a> <a href="/tags/data-structure/" style="font-size: 10px;">data structure</a>
+						<a href="/tags/Computer-Vision/" style="font-size: 15px;">Computer Vision</a> <a href="/tags/ComputerVision/" style="font-size: 10px;">ComputerVision</a> <a href="/tags/OpenCV/" style="font-size: 17.5px;">OpenCV</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/PAT-data-structure/" style="font-size: 20px;">PAT data structure</a> <a href="/tags/data-structure/" style="font-size: 12.5px;">data structure</a>
 					</div>
 				</section>
 				
@@ -243,6 +243,12 @@ Computing the Laplacian of an image">
 </ul>
 <p>　　在高斯滤波器中，像素的权重和它离开中心像素点距离成正比。一维高斯函数的形式如公式(2)所示: </p>
 <p>\begin{equation}<br>G(x) = Ae^{-x^2/2\sigma^2}    \tag{2}<br>\end{equation} </p>
+
+　　二维高斯函数的形式如公式(3)所示:
+\begin{equation}
+G(x,y) = Ae^{- \left( \frac{{\left(x-{\mu}_{x} \right)}^{2}}{2{{\sigma}_{x}}^{2}} + \frac{{\left(y-{\mu}_{y} \right)}^{2}}{2{{\sigma}_{y}}^{2}}	\right)} \tag{3}
+\end{equation} 
+
 <p>　　归一化系数A使得不同权重之和为1，σ来控制高斯函数的高度(高斯函数就是以前学的正态分布的那个函数，所以正态分布也叫高斯分布)，这个值越大，生成的函数越平坦，越小，越抖。(可以说σ是描述数据分布的离散程度，σ越大，数据越分散，σ越小，数据越集中，而学正态分布也知道σ代表方差，方差小数据自然就集中的平均数μ附近，也恰好说明函数图像为何很抖)。<br>　　正太分布里有个3σ原则，也能说明为啥他能控制高斯函数的高度：P（μ-σ&lt;X≤μ+σ）=68.3%；P（μ-2σ&lt;X≤μ+2σ）=95.4%；P（μ-3σ&lt;X≤μ+3σ）=99.7%；  </p>
 <p>　　OpenCV提供<code>cv::getGaussianKernel</code>函数根据提供的σ来计算系数：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv::Mat gauss= cv::getGaussianKernel(<span class="number">9</span>,sigma,CV_32F);</span><br></pre></td></tr></table></figure></p>
 <p>不同的σ计算出来的系数自然也就不一样，这里列出书上的例子：<br>(a)σ = 0.5<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">0.0</span> <span class="number">0.0</span> <span class="number">0.00026</span> <span class="number">0.10645</span> <span class="number">0.78657</span> <span class="number">0.10645</span> <span class="number">0.00026</span> <span class="number">0.0</span> <span class="number">0.0</span>]</span><br></pre></td></tr></table></figure></p>
