@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Particle Filter | Ocxs&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Introduction
+Method
+Bayes 滤波理论
+重要性采样
+SIS算法
+Resample算法
+SIR算法
+
+
+Result
+References">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Particle Filter">
+<meta property="og:url" content="site:ocxsBlog.github.io/2015/12/06/151206-particle-filter/index.html">
+<meta property="og:site_name" content="Ocxs's blog">
+<meta property="og:description" content="Introduction
+Method
+Bayes 滤波理论
+重要性采样
+SIS算法
+Resample算法
+SIR算法
+
+
+Result
+References">
+<meta property="og:updated_time" content="2015-12-06T13:39:10.861Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Particle Filter">
+<meta name="twitter:description" content="Introduction
+Method
+Bayes 滤波理论
+重要性采样
+SIS算法
+Resample算法
+SIR算法
+
+
+Result
+References">
+  
+    <link rel="alternative" href="/atom.xml" title="Ocxs&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">ocxs</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">To be better</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Algorithms/" style="font-size: 10px;">Algorithms</a> <a href="/tags/Computer-Vision/" style="font-size: 16.67px;">Computer Vision</a> <a href="/tags/ComputerVision/" style="font-size: 10px;">ComputerVision</a> <a href="/tags/OpenCV/" style="font-size: 16.67px;">OpenCV</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/PAT-data-structure/" style="font-size: 20px;">PAT data structure</a> <a href="/tags/Particle-Filter/" style="font-size: 10px;">Particle Filter</a> <a href="/tags/data-structure/" style="font-size: 13.33px;">data structure</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">Computer Vision.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">ocxs</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">ocxs</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">To be better</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-151206-particle-filter" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/06/151206-particle-filter/" class="article-date">
+  	<time datetime="2015-12-06T11:14:32.000Z" itemprop="datePublished">2015-12-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Particle Filter
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithms/">Algorithms</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Particle-Filter/">Particle Filter</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+	  <!-- Table of Contents -->
+		
+		  <div id="toc" class="toc-article">
+			<strong class="toc-title">Table of Contents</strong>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#估计理论的发展"><span class="toc-number">1.1.</span> <span class="toc-text">估计理论的发展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#粒子滤波的背景介绍"><span class="toc-number">1.2.</span> <span class="toc-text">粒子滤波的背景介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#名词解释"><span class="toc-number">1.3.</span> <span class="toc-text">名词解释</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Method"><span class="toc-number">2.</span> <span class="toc-text">Method</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Bayes_滤波理论"><span class="toc-number">2.1.</span> <span class="toc-text">Bayes 滤波理论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要性采样"><span class="toc-number">2.2.</span> <span class="toc-text">重要性采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SIS算法"><span class="toc-number">2.3.</span> <span class="toc-text">SIS算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resample算法"><span class="toc-number">2.4.</span> <span class="toc-text">Resample算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SIR算法"><span class="toc-number">2.5.</span> <span class="toc-text">SIR算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Result"><span class="toc-number">3.</span> <span class="toc-text">Result</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#References"><span class="toc-number">4.</span> <span class="toc-text">References</span></a></li></ol>
+		  </div>
+		
+        <blockquote>
+<ul>
+<li>Introduction</li>
+<li>Method<ul>
+<li>Bayes 滤波理论</li>
+<li>重要性采样</li>
+<li>SIS算法</li>
+<li>Resample算法</li>
+<li>SIR算法</li>
+</ul>
+</li>
+<li>Result</li>
+<li>References</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+<h1 id="Introduction"><strong>Introduction</strong></h1><h2 id="估计理论的发展"><strong>估计理论的发展</strong></h2><p>　　从1795年高斯(K.Gauss)提出最小二乘估计法开始，估计理论及其方法经历了一个由低级到高级不断发展的过程。最小二乘估计法不考虑观测信号的统计特性，仅保证测量误差的方差最小，一般情况下其估计性能较差。<br>　　1942年Weiner提出了充分利用输入信号和观测信号统计特性的维纳滤波方法，它是一种线性最小方差滤波方法。维纳滤波是一种非递推的频域方法，不便于实时应用。<br>　　1960 年卡尔曼(R.E.Kalman)提出了适用于高斯线性系统状态的递推时域滤波方法即卡尔曼滤波，它是高斯线性系统的最优滤波器。<br>　　1969年 Bucy等人提出了可用于非线性系统的次优滤波器即扩展卡尔曼滤波（EKF），将卡尔曼滤波理论进一步推广到非线性领域。从此 EKF 成为非线性系统估计领域的经典方法。EKF 的基本思想是采用参数化的解析形式<strong>对系统模型的非线性进行线性近似</strong>，基于高斯假设用 Bayes 估计原理进行估计。</p>
+<p>以上提出的这些估计方法，都属于Bayes估计，在Bayes估计下，又分最优估计和次优估计。</p>
+<ul>
+<li><strong>最优估计</strong>包括：Kalman滤波，网格(Grid)方法，Bene和Damu滤波；</li>
+<li><strong>次优估计</strong>：实际问题因为面临大量非线性非高斯问题，最优估计很难找到<a href="http://baike.baidu.com/link?url=vSjhp0H2Fzcp930C9JGHdFB0JkQYL-h4F7emUzZii26AbfQLMe7BuDAz6yJMKezAqrH5i74Di5RE27koJAulwa" target="_blank" rel="external">解析解</a>,所以用次优或逼近算法，可分为四大类：<ul>
+<li><strong>解析逼近方法</strong>：包括扩展卡尔曼滤波(Extended Kalman Filter，EKF)，高阶EKF，迭代EKF，其共性如上所说：对非线性进行线性近似。</li>
+<li><strong>数值逼近方法</strong>：也称基于网格的逼近方法，它将连续状态空间分解为若干个网格单元，利用离散变量求和来代替积分来逼近状态后验分布，为了获得较好的逼近效果，要求网格必须足够密集，这在状态空间维数较高时导致计算量剧增。隐马尔科夫模型(Hidden Markov Model，HMM)是此种方法的代表，广泛应用于语音处理。</li>
+<li><strong>高斯和逼近方法</strong>：针对状态后验分布无法用单个高斯分布有效逼近的问题（例如当后验分布多峰时），高斯和逼近方法采用多个高斯分布的加权和来逼近。该类方法的主要困难在于混合个数的合理选择及混合个数可能随时间呈指数增加。</li>
+<li><strong>采样方法</strong>：采样方法使用一组样本来逼近状态后验分布，其典型代表有unscented Kalman滤波（UKF）和<strong>粒子滤波（Particle Filter，PF）</strong>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="粒子滤波的背景介绍"><strong>粒子滤波的背景介绍</strong></h2><p>　　好了，上面介绍的最后，主角终于登场了，大概也知道为啥会提出粒子滤波了，因为理想很丰满，现实太骨感，哪有那么多线性高斯的问题呢？实际上还是非线性非高斯多啊，先简要介绍PF算法，如下：<br>　　粒子滤波使用了大量随机样本，采用用蒙特卡罗仿真(Monte Carlo Simulation)来完成递推贝叶斯滤波(Recursive Bayesian Filter)过程，其核心是使用一组具有相应权值的随机样本（粒子）来表示<strong>状态的后验分布</strong>。该方法的基本思路是选取一个<strong>重要性概率密度</strong>并从中进行随机抽样，得到一些带有相应<strong>权值</strong>的随机样本后，在状态观测的基础上调节权值的大小和粒子的位置，再使用这些样本来逼近状态后验分布，最后通过这组样本的加权求和作为状态的估计值。粒子滤波不受系统模型的线性和高斯假设约束，采用样本形式而不是函数形式对状态概率密度进行描述，使其不需要对状态变量的概率分布作过多的约束，适用于任意非线性非高斯动态系统，是目前最适合于非线性、非高斯系统状态的滤波方法。</p>
+<p>　　在上世纪50年代，有了序贯重要性采样(Sequential Importance Sampling，SIS)算法，一种通过离散随机样本逼近概率分布的蒙特卡罗方法（Monte Carlo）。后来针对SIS算法中的粒子<strong>退化</strong>(degeneracy)问题，1993年Gardon等人重采样(resampling)，得到新的算法–序列重要性重采样算法（Sequential Importance Resampling，SIR）。但是还没完，SIR算法又出现粒子多样性匮乏问题，针对退化和多样性匮乏这两个问题，又提出下面两个解决办法：</p>
+<ul>
+<li><strong>优化重采样，减小粒子多样性匮乏</strong>：目前最常用最简单的四种重采样算法：(1)多项式重采样算法,(2)残差重采样算法,(3)分层重采样算法,(4)系统重采样算法，这四种方法以速度和结果综合考量，系统重采样最优。当然又更好的算法：Gibbs采样器和Metropolis-Hasting方法等<strong>马尔可夫链蒙特卡洛(MCMC)方法</strong>解决粒子退化问题。针对重采样，科学家们搞出来了遗传粒子滤波器，正则化粒子滤波（regularized particle filter，RPF）算法，辅助粒子滤波（auxiliary particle filter,APF）算法。</li>
+<li><strong>产生既接近系统状态真实概率密度又便于从中抽样的重要性概率密度</strong>：如UPF(Unscented Particle Filter),高斯粒子滤波（Gaussian particle filter,GPF）算法,高斯混合粒子滤波（Gaussian sum particle filter,GSP）算法.</li>
+</ul>
+<p>　　上面简单的介绍了一下PF的背景，下面开始进入正题，我也是最近因为课设接触了粒子滤波，大部分理论是直接copy别人的论文上面的，参考文献附在文章最后，我觉得对于一个不了解刚入门的东西，看CNKI的文献比直接阅读英文文献要好一点(尤其是那些博士论文的背景介绍部分，讲的很详细的，可以当科普文章看)，毕竟前辈们用更加严谨的说法用我的母语来讲述PF的理论，比我自己说的要好的多，也更能轻松的让我理解，copy过来也是为自己以后复习方便，中间加入自己的一些理解，<strong>如果有大神看到错误，恳请指出~</strong></p>
+<h2 id="名词解释"><strong>名词解释</strong></h2><p>粒子退化(degeneracy)问题:</p>
+<h1 id="Method"><strong>Method</strong></h1><h2 id="Bayes_滤波理论"><strong>Bayes 滤波理论</strong></h2><h2 id="重要性采样"><strong>重要性采样</strong></h2><h2 id="SIS算法"><strong>SIS算法</strong></h2><h2 id="Resample算法"><strong>Resample算法</strong></h2><h2 id="SIR算法"><strong>SIR算法</strong></h2><h1 id="Result">Result</h1><h1 id="References">References</h1><ul>
+<li>梁军. 粒子滤波算法及其应用. 哈尔滨工业大学博士论文，2009.6</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/11/19/151119-OpenCV-Filtering-the-Images/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">OpenCV 学习笔记(6) Filtering the Images</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="151206-particle-filter" data-title="Particle Filter" data-url="site:ocxsBlog.github.io/2015/12/06/151206-particle-filter/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 ocxs
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div id="totop" style="position:fixed;bottom:100px;right:50px;cursor: pointer;">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+<script src="/js/totop.js"></script>
+  </div>
+</body>
+</html>
