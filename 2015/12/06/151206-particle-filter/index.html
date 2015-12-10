@@ -31,7 +31,7 @@ SIR算法
 
 Result
 References">
-<meta property="og:updated_time" content="2015-12-09T15:29:48.446Z">
+<meta property="og:updated_time" content="2015-12-10T15:21:47.275Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Particle Filter">
 <meta name="twitter:description" content="Introduction
@@ -225,7 +225,7 @@ References">
 		
 		  <div id="toc" class="toc-article">
 			<strong class="toc-title">Table of Contents</strong>
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#估计理论的发展"><span class="toc-number">1.1.</span> <span class="toc-text">估计理论的发展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#粒子滤波的背景介绍"><span class="toc-number">1.2.</span> <span class="toc-text">粒子滤波的背景介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#名词解释"><span class="toc-number">1.3.</span> <span class="toc-text">名词解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PF的收敛性分析"><span class="toc-number">1.4.</span> <span class="toc-text">PF的收敛性分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Method"><span class="toc-number">2.</span> <span class="toc-text">Method</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#动态系统的状态空间模型"><span class="toc-number">2.1.</span> <span class="toc-text">动态系统的状态空间模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bayes_滤波理论"><span class="toc-number">2.2.</span> <span class="toc-text">Bayes 滤波理论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要性采样"><span class="toc-number">2.3.</span> <span class="toc-text">重要性采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SIS算法"><span class="toc-number">2.4.</span> <span class="toc-text">SIS算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resample算法"><span class="toc-number">2.5.</span> <span class="toc-text">Resample算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SIR算法"><span class="toc-number">2.6.</span> <span class="toc-text">SIR算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Result"><span class="toc-number">3.</span> <span class="toc-text">Result</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#References"><span class="toc-number">4.</span> <span class="toc-text">References</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#估计理论的发展"><span class="toc-number">1.1.</span> <span class="toc-text">估计理论的发展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#粒子滤波的背景介绍"><span class="toc-number">1.2.</span> <span class="toc-text">粒子滤波的背景介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#名词解释"><span class="toc-number">1.3.</span> <span class="toc-text">名词解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PF的收敛性分析"><span class="toc-number">1.4.</span> <span class="toc-text">PF的收敛性分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Method"><span class="toc-number">2.</span> <span class="toc-text">Method</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#动态系统的状态空间模型"><span class="toc-number">2.1.</span> <span class="toc-text">动态系统的状态空间模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bayes_滤波理论"><span class="toc-number">2.2.</span> <span class="toc-text">Bayes 滤波理论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#引言"><span class="toc-number">2.2.1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#递推更新求后验PDF"><span class="toc-number">2.2.2.</span> <span class="toc-text">递推更新求后验PDF</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要性采样"><span class="toc-number">2.3.</span> <span class="toc-text">重要性采样</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#贝叶斯重要性采样"><span class="toc-number">2.3.1.</span> <span class="toc-text">贝叶斯重要性采样</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#序贯重要性采样"><span class="toc-number">2.3.2.</span> <span class="toc-text">序贯重要性采样</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SIS算法"><span class="toc-number">2.4.</span> <span class="toc-text">SIS算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resample算法"><span class="toc-number">2.5.</span> <span class="toc-text">Resample算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SIR算法"><span class="toc-number">2.6.</span> <span class="toc-text">SIR算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Result"><span class="toc-number">3.</span> <span class="toc-text">Result</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#References"><span class="toc-number">4.</span> <span class="toc-text">References</span></a></li></ol>
 		  </div>
 		
         <blockquote>
@@ -307,8 +307,8 @@ p(y_k|x_k)
 
 P.S. 一阶markov过程在这里的意思就是说系统状态$x_k$只和$x_{k-1}$有关，和$k-1$之前的状态(例如$x_{k-2}$)通通无关。同理如果$x_k$和$x_{k-1}$，$x_{k-2}$有关，和$k-2$之前的状态(例如$x_{k-3}$)通通无关就叫二阶markov过程。依次类推。
 
-<h2 id="Bayes_滤波理论"><strong>Bayes 滤波理论</strong></h2><p>　　贝叶斯估计理论及其方法为动态系统的估计问题提供了一类严谨的解决框架，它利用已知的信息建立系统状态的概率密度估计，可以得到对系统状态估计的最优解。贝叶斯估计利用系统方程预测状态的先验概率密度，再利用最新的观测值进行修正，得到状态的后验概率密度，包括了观测值和先验知识在内的所有可利用的信息。<br>　　卡尔曼滤波、扩展卡尔曼滤波和粒子滤波都是基于状态空间模型的贝叶斯估计具体实现算法。<br>　　卡尔曼滤波要求系统线性和噪声服从高斯分布；扩展卡尔曼滤波同样要求噪声服从高斯分布。而粒子滤波不用满足系统为线性、噪声高斯分布的限制条件。粒子滤波是蒙特卡罗方法和贝叶斯估计理论结合的产物，它通过非参数化的蒙特卡罗模拟方法从时域实现递推贝叶斯估计。</p>
-<p>　　<strong>贝叶斯估计的主要目的是利用先验知识和实际观测数据来构造未知系统状态的概率密度函数</strong>。	设$k$代表时间，$x_{0:k}$代表未知变量列即$x_{0:k}={x_i:i=0,...,k}$,$y_{1:k}$代表观测变量列即$y_{1:k}={y_i:i=1,...,k}$,若给定观测量$y_{1:k}$，则未知量$x_{0:k}$的条件概率分布为:
+<h2 id="Bayes_滤波理论"><strong>Bayes 滤波理论</strong></h2><h3 id="引言"><strong>引言</strong></h3><p>　　贝叶斯估计理论及其方法为动态系统的估计问题提供了一类严谨的解决框架，它利用已知的信息建立系统状态的概率密度估计，可以得到对系统状态估计的最优解。贝叶斯估计利用系统方程预测状态的先验概率密度，再利用最新的观测值进行修正，得到状态的后验概率密度，包括了观测值和先验知识在内的所有可利用的信息。<br>　　卡尔曼滤波、扩展卡尔曼滤波和粒子滤波都是基于状态空间模型的贝叶斯估计具体实现算法。<br>　　卡尔曼滤波要求系统线性和噪声服从高斯分布；扩展卡尔曼滤波同样要求噪声服从高斯分布。而粒子滤波不用满足系统为线性、噪声高斯分布的限制条件。粒子滤波是蒙特卡罗方法和贝叶斯估计理论结合的产物，它通过非参数化的蒙特卡罗模拟方法从时域实现递推贝叶斯估计。</p>
+<p>　　<strong>贝叶斯估计的主要目的是利用先验知识和实际观测数据来构造未知系统状态的概率密度函数</strong>。	设$k$代表时间，$x_{0:k}$代表未知变量列即$x_{0:k}=\{{x_i:i=0,...,k}\}$,$y_{1:k}$代表观测变量列即$y_{1:k}=\{y_i:i=1,...,k\}$,若给定观测量$y_{1:k}$，则未知量$x_{0:k}$的条件概率分布为:
 \begin{equation}
 p(x_{0:k}|y_{1:k}) = \frac{p(x_{0:k})p(y_{1:k}|x_{0:k})}{\int p(y_{1:k}|x_{0:k})p(x_{0:k})dx_{0:k}} \tag{3}
 \end{equation}
@@ -322,8 +322,63 @@ p(x_{0:k}|y_{1:k}) = \frac{p(x_{0:k})p(y_{1:k}|x_{0:k})}{\int p(y_{1:k}|x_{0:k})
 p(x_{0:k}|y_{1:k}) = \int \int .. \int p(x_{0:k}|y_{1:k})dx_0dx_1...d_{x-1} \tag{4}
 \end{equation} 
 
-<h2 id="重要性采样"><strong>重要性采样</strong></h2><h2 id="SIS算法"><strong>SIS算法</strong></h2><h2 id="Resample算法"><strong>Resample算法</strong></h2><h2 id="SIR算法"><strong>SIR算法</strong></h2><h1 id="Result"><strong>Result</strong></h1><h1 id="References"><strong>References</strong></h1><ul>
+
+　　对于动态系统，从该后验滤波概率密度就可以计算系统状态的各种估计，如以均值作为系统状态的估值等.由(3)和(4)式可见，当每一个新观测数据到来时，后验滤波概率密度$p(x_k|y_{1:k})$就要被重新计算一次，这是十分不方便的。为此，采用如下递推更新方法来获得该后验滤波概率密度:
+
+<ul>
+<li>(1)<strong>预测</strong>—从$k-1$时刻所得到的后验滤波概率密度$p(x_{k-1}|y_{1:k-1})$出发，利用系统模型来预测$k$时刻$x_k$的概率密度，得到$k$时刻$x_k$的先验滤波概率密度$p(x_k|y_{1:k-1})$;</li>
+<li>(2)<strong>更新</strong>—当$k$时刻的观测值$y_k$到来时，利用它修正上述先验滤波概率密度，从而得到$k$时刻的后验滤波概率密度$p(x_k|y_{1:k})$。</li>
+</ul>
+<p>　　设$k-1$时刻滤波概率密度$p(x_{k-1}|y_{1:k-1})$已知，假设系统状态$x_k$服从一阶马尔可夫过程且系统观测$y_k$独立。</p>
+<hr>
+<h3 id="递推更新求后验PDF"><strong>递推更新求后验PDF</strong></h3><p>　　首先，通过预测步骤得到不包含$k$时刻观测值的$k$时刻系统状态先验滤波概率密度$p(x_k|y_{1:k-1})$如下:
+\begin{equation}
+p(x_k|y_{1:k-1}) = \int p(x_k|x_{k-1}) p(x_{k-1}|y_{1:k-1}) dx_{k-1} \tag{5}
+\end{equation}
+
+其中，$p(x_k|x_{k-1})$是系统状态的转移概率密度。
+<br>文献[2]中指出式(5)即<a href="https://en.wikipedia.org/wiki/Chapman%E2%80%93Kolmogorov_equation" target="_blank" rel="external">Chapman–Kolmogorov equation</a>,然而我并没有看懂wiki里的解释。下面解释一下式(5)是怎么得到的：</p>
+<ul>
+<li>(1)首先我们知道$x_k$服从一阶markov过程，所以$p(x_k|x_{k-1}, y_{1:k-1}) = p(x_k|x_{k-1})$ ;</li>
+<li>(2)把上式带入式(5)中，利用Bayes公式替换即可，具体如下：
+\begin{equation}
+p(x_k|y_{1:k-1}) = \int p(x_k|x_{k-1}) p(x_{k-1}|y_{1:k-1}) dx_{k-1} \\
+\quad=\int p(x_k|x_{k-1}, y_{1:k-1}) p(x_{k-1}|y_{1:k-1}) dx_{k-1} \\
+\quad=\int \frac{p(x_k,x_{k-1}, y_{1:k-1})}{p(x_{k-1}, y_{1:k-1})}\frac{p(x_{k-1},y_{1:k-1})}{p(y_{1:k-1})}dx_{k-1} \\
+\quad=\int \frac{p(x_k,x_{k-1}, y_{1:k-1})}{p(y_{1:k-1})}  dx_{k-1} \\
+\quad=\int p(x_k,x_{k-1})| p(y_{1:k-1})  dx_{k-1}	\tag{6}
+\end{equation} 
+
+</li>
+</ul>
+<p>然后，利用$k$时刻的观测值$y_k$，通过更新步骤修正$p(x_k|y_{1:k-1})$，得到$k$时刻系统状态后验滤波概率密度$p(x_k|y_{1:k})$，其推导过程如下：<br>由贝叶斯公式有,<br>
+$$p(x_k|y_{1:k}) = \frac{p(x_k)p(y_{1:k}|x_k)}{p(y_{1:k})} = \frac{p(x_k)p(y_k, y_{1:k-1})|x_k)}{p(y_{1:k})} \tag{7}$$
+<br>由条件概率定义有:<br>
+$$p(y_k, y_{1:k-1}) = p(y_{1:k-1}) p(y_k | y_{1:k-1})  \tag{8}$$
+<br>由联合分布概率公式有:<br>
+$$p(y_k, y_{1:k-1}|x_k) = \frac{p(y_k, y_{1:k-1}, x_k)}{p(x_k)} 
+= \frac{p(y_k, y_{1:k-1}, x_k)}{p(y_{1:k-1}, x_k)} \frac{p(y_{1:k-1}, x_k)}{p(x_k)} = p(y_k|y_{1:k-1}, x_k)p(y_{1:k-1}|x_k) \tag{9}$$
+<br>又由贝叶斯公式有:<br>
+$$p(y_{1:k}|x_k) = \frac{p(y_{1:k})p(x_k|y_{1:k})}{p(x_k)} \tag{10}$$
+<br>将式(8)(9)(10)代入式(7)得:<br>
+$$p(x_k|y_{1:k}) = \frac{p(y_k, y_{1:k-1}, x_k) p(x_k|y_{1:k-1}) p(y_{1:k}) p(x_k)}{p(x_k) p(y_{1:k-1}) p(y_k|y_{1:k-1})} \tag{11}$$
+<br>根据假设各个系统观测$y_k$相互独立，即有:<br>
+$$p(y_k|y_{1:k-1}, x_k) = p(y_k|x_k) \tag{12}$$
+<br>将(12)式代入(11)式并消去分子和分母的共同项,得后验滤波概率密度 $p(x_k|y_{1:k})$如下:<br>
+$$p(x_k|y_{1:k}) = \frac{p(y_k|x_k) p(x_k|t_{1:k-1})}{p(y_k|y_{1:k-1})} \tag{13}$$
+<br>其中，$p(y_k|x_k)$是似然概率密度，它与观测方程和观测噪声$v_k$的统计特性有关：<br>
+$$p(y_k|x_k) = \int \delta (y_k - h(x_k, v_k))p(v_k) dv_k \tag{14}$$
+<br>这里，$\delta(.)$是Dirac delta函数，$p(v_k)$是$v_k$的概率密度。<strong>然而我并不知道式(14)是怎么得来的，是什么道理</strong>。而<br>
+$$p(y_k|y_{1:k-1}) = \int p(v_k|x_k) p(x_k|y_{1:k-1}) dx_k \tag{15}$$
+<br>它一般是一个归一化常数。</p>
+<p>　　这样由(5)式和(13)式就构成了后验滤波概率密度的递推公式，实现了由$k-1$时刻后验滤波概率密度$p(x_{k-1}|y_{1:k-1})$到$k$时刻后验滤波概率密度$p(x_k|y_{1:k})$的递推更新过程，从理论上提供了求后验滤波概率密度的方法。</p>
+<p>　　但实际问题中只有很少类型的系统可以直接利用上述解析方法求得后验滤波概率密度。例如，针对线性高斯系统的卡尔曼滤波器。对于大多数动态系统，由于各种原因（例如，在很多实际问题中上述(5)式的积分是很难实现的），直接利用上述方法很难求得后验滤波概率密度的解析解，该方法在实际操作中受到较大的限制。下面的贝叶斯重要性采样和序贯重要性采样给出了这个问题的解决方法。</p>
+<hr>
+<h2 id="重要性采样"><strong>重要性采样</strong></h2><h3 id="贝叶斯重要性采样"><strong>贝叶斯重要性采样</strong></h3><hr>
+<h3 id="序贯重要性采样"><strong>序贯重要性采样</strong></h3><hr>
+<h2 id="SIS算法"><strong>SIS算法</strong></h2><h2 id="Resample算法"><strong>Resample算法</strong></h2><h2 id="SIR算法"><strong>SIR算法</strong></h2><h1 id="Result"><strong>Result</strong></h1><h1 id="References"><strong>References</strong></h1><ul>
 <li>[1]梁军. 粒子滤波算法及其应用. 哈尔滨工业大学博士论文，2009.6</li>
+<li>[2]Arulampalam, M. Sanjeev, et al. “<a href="http://cis-linux1.temple.edu/~latecki/Courses/RobotFall08/Papers/ParticleFilterTutorial.pdf" target="_blank" rel="external">A Tutorial on Particle Filters for Online Nonlinear/Non-Gaussian Bayesian Tracking.</a>“ IEEE Transactions on Signal Processing 50.2(2002):174 - 188.</li>
 </ul>
 
       
