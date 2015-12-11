@@ -31,7 +31,7 @@ SIR算法
 
 Result
 References">
-<meta property="og:updated_time" content="2015-12-11T15:17:55.409Z">
+<meta property="og:updated_time" content="2015-12-11T16:31:23.458Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Particle Filter">
 <meta name="twitter:description" content="Introduction
@@ -437,7 +437,10 @@ $$ w_k(x_{0:k}(i)) = \frac{ {w_k}^{*}(x_{0:k}(i))}{ \sum_{i=1}^{N} {w_k}^{*}(x_{
 </p>
 <p>称为归一化权值。<br>　　<strong>贝叶斯重要性采样的核心思想</strong>是利用一系列随机样本及其权值来近似表示所需的后验概率密度，进而得到所需统计量的估计值。一个随机变量的后验概率密度可以用一系列离散样本及其权值来近似表示，近似的程度高低依赖于样本的数量$N$。通常，随机变量的后验概率密度无法直接得到的，而贝叶斯重要性采样提供了一种解决该问题的方法。</p>
 <hr>
-<h3 id="序贯重要性采样"><strong>序贯重要性采样</strong></h3><p>由上述分析可见，贝叶斯重要性采样方法存在如下缺陷：每当新的观测数据$y_k$到来时都需要重新从重要性概率密度</p>
+<h3 id="序贯重要性采样"><strong>序贯重要性采样</strong></h3><p>　　由上述分析可见，贝叶斯重要性采样方法存在如下缺陷：每当新的观测数据 $y_k$到来时都需要重新从重要性概率密度 $q(x_{0:k} | y_{1:k})$中抽取样本$\{x_{0:k}(i),i=1,...,N\}$,并且需要按照式(19)重新计算每个$x_{0:k}(i)$ 的权值$w_k(x_{0:k}(i))$ ，这就会占用很大的存储空间以及增大了计算量，不便于实际应用。序贯重要性采样（Sequential Importance Sampling,SIS）将贝叶斯重要性采样方法写成序列形式，其权值采用递归更新方式计算，使概率密度估计以递推方式实现。<br>　　为了递推估计概率密度，重要性概率密度  $q(x_{0:k} | y_{1:k})$ 可分解为(前面讲过，联合概率分布公式)：
+
+$$ q(x_{0:k} | y_{1:k}) = q(x_k|x_{0:k-1}, y_{1:k}) q(x_{0:k-1} | y_{1:k}) \tag{25}$$
+<br>即随着观测数据的不断到来，新样本 $x_{0:k-1}(i) \sim q(x_{0:k}|y_{1:k})$可以通过将新数据$x_k(i) \sim q(x_k|x_{0:k-1}(i), y_{1:k})$添加进旧样本$x_{0:k-1}(i) \sim q(x_{0:k-1} | y_{1:k-1})$ 中得到。</p>
 <hr>
 <h2 id="SIS算法"><strong>SIS算法</strong></h2><h2 id="Resample算法"><strong>Resample算法</strong></h2><h2 id="SIR算法"><strong>SIR算法</strong></h2><h1 id="Result"><strong>Result</strong></h1><h1 id="References"><strong>References</strong></h1><ul>
 <li>[1]梁军. 粒子滤波算法及其应用. 哈尔滨工业大学博士论文，2009.6</li>
