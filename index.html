@@ -99,7 +99,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Algorithms/" style="font-size: 10px;">Algorithms</a> <a href="/tags/Computer-Vision/" style="font-size: 17.5px;">Computer Vision</a> <a href="/tags/OpenCV/" style="font-size: 15px;">OpenCV</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/PAT-data-structure/" style="font-size: 20px;">PAT data structure</a> <a href="/tags/Particle-Filter/" style="font-size: 10px;">Particle Filter</a> <a href="/tags/data-structure/" style="font-size: 12.5px;">data structure</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
+						<a href="/tags/Algorithms/" style="font-size: 10px;">Algorithms</a> <a href="/tags/Computer-Vision/" style="font-size: 17.5px;">Computer Vision</a> <a href="/tags/OpenCV/" style="font-size: 15px;">OpenCV</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/PAT-data-structure/" style="font-size: 20px;">PAT data structure</a> <a href="/tags/Particle-Filter/" style="font-size: 10px;">Particle Filter</a> <a href="/tags/data-structure/" style="font-size: 12.5px;">data structure</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/statistical-machine-learning/" style="font-size: 10px;">statistical machine learning</a>
 					</div>
 				</section>
 				
@@ -155,6 +155,72 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-160303-SML01" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/02/160303-SML01/" class="article-date">
+  	<time datetime="2016-03-02T08:38:26.000Z" itemprop="datePublished">2016-03-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/02/160303-SML01/">统计学习理论学习笔记（一）</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+	  <!-- Table of Contents -->
+		
+        <h1 id="第一章_统计学习方法概论"><strong>第一章 统计学习方法概论</strong></h1><h2 id="统计学习"><strong>统计学习</strong></h2><p>统计学习，也称统计机器学习（statistical machine learning）。统计学习方法：监督学习（supervised learning）、非监督学习（unsupervised learning）、半监督学习（semi-supervised learning）、强化学习（reinforcement learning）等。<br>统计学习方法三要素：模型（model）、策略（strategy）、算法（algorithm）。</p>
+<h2 id="监督学习"><strong>监督学习</strong></h2><p>监督学习的任务是学习一个模型，使模型能够对任意给定的输入，对其相应的输出做出一个好的预测。</p>
+<ul>
+<li>输入/输出空间（input/output space）:将输入与输出空间可以是有限元素的集合。</li>
+<li>特征空间（feature space）：每个具体的输入是一个实例（instance），通常有特征向量（feature vector）表示，这时所有特征向量存在的空间称为特征空间。</li>
+</ul>
+<p>习惯上，input：X，output：Y，输入输出的取值用小写x，y。输入实例x的特征向量记作(多用列向量表示)<br>
+$$x = (x^{(1)}, x^{(2)},···, x^{(i)},···,x^{(n)})^T$$
+<br>其中 $$x^{(i)}$$ 表示$x$的第$i$个特征。<br>训练数据由输入（或特征向量）与输出对组成，训练集通常表示为<br>$$T = {(x_1,y_1), (x_2,y_2), ···, (x_N,y_N)}$$<br>测试数据也由相应的输入与输出对组成。输入与输出对又称为样本（sample）或样本点。</p>
+<p>统计学习假设数据存在一定的规律，假设输入与输出的随机变量X和Y遵循联合概论分布$P(X,Y)$。<br><img src="/img/160303-1.jpg" alt="160303-1.jpg"><br>图1<br>监督学习的目的是学习一个由输入到输出的映射，这一映射用模型来表示。模型属于由输入空间到输出空间的映射的集合，这个集合就是<strong>假设空间（hypothesis space）</strong>。假设空间的确立就意味着学习范围的确定。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/statistical-machine-learning/">statistical machine learning</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-151224-extracting-lines-contours-and-components" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -185,10 +251,10 @@
 <blockquote>
 <ul>
 <li>Detecting image contours with the Canny operator</li>
-<li>Detecting lines in images with the Hough transform</li>
-<li>Fitting a line to a set of points</li>
-<li>Extracting the components’ contours</li>
-<li>Computing components’ shape descriptors</li>
+<li>Detecting lines in images with the Hough transform    （使用Hough变换检测直线）</li>
+<li>Fitting a line to a set of points    （用直线拟合一组点）</li>
+<li>Extracting the components’ contours（提取连通区域的轮廓）</li>
+<li>Computing components’ shape descriptors    </li>
 </ul>
 </blockquote>
       
@@ -722,64 +788,6 @@
       
         <p class="article-more-link">
           <a  href="/2015/10/26/151026-OpenCV-Manipulating-the-Pixels/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-151026-CV-Introduction" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/10/25/151026-CV-Introduction/" class="article-date">
-  	<time datetime="2015-10-25T12:49:09.000Z" itemprop="datePublished">2015-10-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/25/151026-CV-Introduction/">Opencv 学习笔记(1)</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>阅读opencv2计算机视觉编程手册的一些笔记，供自己快速以后查阅!<br>一.opencv的各大模块<br>二.opencv示例代码<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/10/25/151026-CV-Introduction/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
