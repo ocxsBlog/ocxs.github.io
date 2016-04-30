@@ -1,0 +1,599 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="computer vision,dpm," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="IntroductionUnpack it in your [PATH] and open it using Matlab. Add voc-release5 file to path in MATLAB. And you should read README in voc-release5 file firstly.If you want to use this code, you first">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VOC Release 5在windows上的使用">
+<meta property="og:url" content="site:ocxsBlog.github.io/2016/04/29/160429-DPM-Release-on-Windows/index.html">
+<meta property="og:site_name" content="Ocxs's blog">
+<meta property="og:description" content="IntroductionUnpack it in your [PATH] and open it using Matlab. Add voc-release5 file to path in MATLAB. And you should read README in voc-release5 file firstly.If you want to use this code, you first">
+<meta property="og:updated_time" content="2016-04-30T05:54:41.749Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VOC Release 5在windows上的使用">
+<meta name="twitter:description" content="IntroductionUnpack it in your [PATH] and open it using Matlab. Add voc-release5 file to path in MATLAB. And you should read README in voc-release5 file firstly.If you want to use this code, you first">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> VOC Release 5在windows上的使用 | Ocxs's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ocxs's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">To be better</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                VOC Release 5在windows上的使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-04-29T17:46:51+08:00" content="2016-04-29">
+              2016-04-29
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/29/160429-DPM-Release-on-Windows/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/29/160429-DPM-Release-on-Windows/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Introduction">Introduction</h1><p>Unpack it in your <code>[PATH]</code> and open it using Matlab. Add voc-release5 file to path in MATLAB. And you should read README in voc-release5 file firstly.<br>If you want to use this code, you first step is run compile.m. But voc-release5 code can only run on linux or OS X, So let’s modify source code in order to make it work on Windows.</p>
+<a id="more"></a>
+<h1 id="Requirements">Requirements</h1><ol>
+<li>Visual Studio 2013 (I don’t know whether VS2012 or VS2010 works or not, but you can try)</li>
+<li>Matlab 2015a (I don’t know whether Matlab201*a\/b works or not, but you can try)</li>
+<li><a href="https://sourceforge.net/projects/pthreads4w/" target="_blank" rel="external">pthread library</a></li>
+</ol>
+<h1 id="compile">compile</h1><p>You should run <code>pwd</code> to ensure your current path is <code>[PATH]\\voc-release5</code>.And run compile.m</p>
+<h2 id="Delete_system_juding_code">Delete system juding code</h2><p>Firstly, you will get error like this:<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Error <span class="keyword">using</span> compile (<span class="built_in">line</span> <span class="number">14</span>)</span><br><span class="line">This code is <span class="operator">not</span> supported <span class="command"><span class="keyword">on</span> <span class="title">Windows</span>.</span></span><br></pre></td></tr></table></figure></p>
+<p>Open your compile.m, you’ll find this code according to your error information.<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ispc</span><br><span class="line">  <span class="keyword">error</span>('This code <span class="keyword">is</span> <span class="keyword">not</span> supported <span class="function_start"><span class="keyword">on</span></span> Windows.');</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>Comment it using “%” (Or you can use ‘CTRL+R’ in Matlab) , like this:</p>
+<figure class="highlight mojolicious"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"></span><span class="perl"><span class="variable">%if</span> ispc</span><span class="xml"></span><br><span class="line"></span><span class="perl">%  error(<span class="string">'This code is not supported on Windows.'</span>);</span><span class="xml"></span><br><span class="line"></span><span class="perl"><span class="variable">%end</span></span><span class="xml"></span><br><span class="line"></span><span class="perl"><span class="variable">%this</span> code judge what <span class="keyword">system</span> you <span class="keyword">use</span>, so you should Comment it.</span><span class="xml"></span></span><br></pre></td></tr></table></figure>
+<p>Of course you can delete it directly.</p>
+<p>Go on running compile.m, error information as follows:<br><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Error</span> <span class="keyword">using</span> fv_compile (line <span class="number">14</span>)</span><br><span class="line">This code <span class="keyword">is</span> <span class="keyword">not</span> supported <span class="keyword">on</span> Windows.</span><br><span class="line"></span><br><span class="line"><span class="keyword">Error</span> <span class="keyword">in</span> compile (line <span class="number">48</span>)</span><br><span class="line">  fv_compile(opt, verb);</span><br></pre></td></tr></table></figure></p>
+<p>And you can use the same way to find code causing error according to error information and then to fix this bug.</p>
+<h2 id="Modify_time-h">Modify time.h</h2><p>And Go on(‘go on’ means run compile.m again), you’ll get error like this:<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Error</span> using mex</span><br><span class="line">cascade.<span class="keyword">cc</span></span><br><span class="line"><span class="keyword">e</span>:\projects\pedestrain_detection\voc-release5\star-cascade\<span class="keyword">timer</span>.<span class="literal">h</span>(6) : fatal <span class="keyword">error</span> C1083: Cannot <span class="keyword">open</span> <span class="keyword">include</span> <span class="keyword">file</span>:</span><br><span class="line">'sys/time.<span class="keyword">h</span>': <span class="keyword">No</span> such <span class="keyword">file</span> or directory</span><br></pre></td></tr></table></figure></p>
+<p>Open <code>time.h</code>, and you can use this code as follows to replace it. See more details in <a href="http://blog.csdn.net/masibuaa/article/details/20651005" target="_blank" rel="external">link 1</a>.<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">ifndef</span> _TIMER_H_  </span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> _TIMER_H_  </span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span>  </span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;sstream&gt;</span>  </span></span><br><span class="line"><span class="comment">//#include &lt;sys/time.h&gt; //windows下的time.h中没有timeval定义  </span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;windows.h&gt;</span> //windows下代替<span class="string">&lt;sys/time.h&gt;</span>  </span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;time.h&gt;</span> //windows下代替<span class="string">&lt;sys/time.h&gt;</span>  </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;  </span><br><span class="line"></span><br><span class="line"><span class="comment">//windows下没有gettimeofday函数，从网上找的一个替代函数  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gettimeofday</span><span class="params">(<span class="keyword">struct</span> timeval *tp, <span class="keyword">void</span> *tzp)</span>  </span><br><span class="line"></span>&#123;  </span><br><span class="line">    <span class="keyword">time_t</span> clock;  </span><br><span class="line">    <span class="keyword">struct</span> tm tm;  </span><br><span class="line">    SYSTEMTIME wtm;  </span><br><span class="line">    GetLocalTime(&amp;wtm);  </span><br><span class="line">    tm.tm_year     = wtm.wYear - <span class="number">1900</span>;  </span><br><span class="line">    tm.tm_mon     = wtm.wMonth - <span class="number">1</span>;  </span><br><span class="line">    tm.tm_mday     = wtm.wDay;  </span><br><span class="line">    tm.tm_hour     = wtm.wHour;  </span><br><span class="line">    tm.tm_min     = wtm.wMinute;  </span><br><span class="line">    tm.tm_sec     = wtm.wSecond;  </span><br><span class="line">    tm. tm_isdst    = -<span class="number">1</span>;  </span><br><span class="line">    clock = mktime(&amp;tm);  </span><br><span class="line">    tp-&gt;tv_sec = clock;  </span><br><span class="line">    tp-&gt;tv_usec = wtm.wMilliseconds * <span class="number">1000</span>;  </span><br><span class="line">    <span class="keyword">return</span> (<span class="number">0</span>);  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> timer &#123;  </span><br><span class="line"><span class="keyword">public</span>:  </span><br><span class="line">  timer(<span class="built_in">string</span> timer_name) &#123;  </span><br><span class="line">    name = timer_name;  </span><br><span class="line">    total_time = <span class="number">0</span>;  </span><br><span class="line">    calls = <span class="number">0</span>;  </span><br><span class="line">  &#125;;  </span><br><span class="line"></span><br><span class="line">  ~timer() &#123;&#125;;  </span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">tic</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">struct</span> timeval tv;  </span><br><span class="line">    gettimeofday(&amp;tv, <span class="literal">NULL</span>);  </span><br><span class="line">    last_time = (<span class="keyword">double</span>)tv.tv_sec + <span class="number">1e-6</span>*(<span class="keyword">double</span>)tv.tv_usec;  </span><br><span class="line">    calls++;  </span><br><span class="line">  &#125;;  </span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">toc</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">struct</span> timeval tv;  </span><br><span class="line">    gettimeofday(&amp;tv, <span class="literal">NULL</span>);  </span><br><span class="line">    <span class="keyword">double</span> cur_time = (<span class="keyword">double</span>)tv.tv_sec + <span class="number">1e-6</span>*(<span class="keyword">double</span>)tv.tv_usec;  </span><br><span class="line">    total_time += cur_time - last_time;  </span><br><span class="line">  &#125;;  </span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">const</span> <span class="keyword">char</span> *<span class="title">msg</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="built_in">ostringstream</span> oss;  </span><br><span class="line">    oss &lt;&lt; <span class="string">"timer '"</span> &lt;&lt; name   </span><br><span class="line">        &lt;&lt; <span class="string">"' = "</span> &lt;&lt; total_time &lt;&lt; <span class="string">" sec in "</span>   </span><br><span class="line">        &lt;&lt; calls &lt;&lt; <span class="string">" call(s)"</span>;  </span><br><span class="line">    <span class="keyword">return</span> oss.str().c_str();  </span><br><span class="line">  &#125;;  </span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">mexPrintTimer</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    mexPrintf(<span class="string">"timer '%s' = %f sec in %d call(s)\n"</span>, name.c_str(), total_time, calls);  </span><br><span class="line">  &#125;;  </span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">double</span> <span class="title">getTotalTime</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> total_time;  </span><br><span class="line">  &#125;;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:  </span><br><span class="line">  <span class="built_in">string</span> name;  </span><br><span class="line">  <span class="keyword">int</span> calls;  </span><br><span class="line">  <span class="keyword">double</span> last_time;  </span><br><span class="line">  <span class="keyword">double</span> total_time;  </span><br><span class="line">&#125;;  </span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Modify_resize-cc">Modify resize.cc</h2><p>Go on , get error like this:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Error using mex</span><br><span class="line"><span class="attribute">resize</span><span class="class">.cc</span></span><br><span class="line">E:\Projects\pedestrain_detection\voc-release5\features\<span class="attribute">resize</span>.<span class="function"><span class="title">cc</span><span class="params">(<span class="number">36</span>)</span></span> : error C2057: expected constant expression</span><br><span class="line">E:\Projects\pedestrain_detection\voc-release5\features\<span class="attribute">resize</span>.<span class="function"><span class="title">cc</span><span class="params">(<span class="number">36</span>)</span></span> : error C2466: cannot allocate an array of constant</span><br><span class="line">size <span class="number">0</span></span><br><span class="line">E:\Projects\pedestrain_detection\voc-release5\features\<span class="attribute">resize</span>.<span class="function"><span class="title">cc</span><span class="params">(<span class="number">36</span>)</span></span> : error C2133: <span class="string">'ofs'</span> : unknown size</span><br><span class="line">E:\Projects\pedestrain_detection\voc-release5\features\<span class="attribute">resize</span>.<span class="function"><span class="title">cc</span><span class="params">(<span class="number">70</span>)</span></span> : error C3861: <span class="string">'bzero'</span>: identifier not found</span><br></pre></td></tr></table></figure></p>
+<p>Open <code>features\resize.cc</code>, on line 36, replace it using<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alphainfo *ofs = <span class="built_in">new</span> alphainfo[<span class="built_in">len</span>];</span><br></pre></td></tr></table></figure></p>
+<p>And go on ,get error like this:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Error using mex</span><br><span class="line"><span class="attribute">resize</span><span class="class">.cc</span></span><br><span class="line">E:\Projects\pedestrain_detection\voc-release5\features\<span class="attribute">resize</span>.<span class="function"><span class="title">cc</span><span class="params">(<span class="number">70</span>)</span></span> : error C3861: <span class="string">'bzero'</span>: identifier not found</span><br></pre></td></tr></table></figure></p>
+<p>Add this code in <code>resize.cc</code>. See more details in <a href="http://stackoverflow.com/questions/3492647/what-are-the-alternative-for-win32-to-alarm-bzero-bcopy-when-porting-c-code" target="_blank" rel="external">link 2</a>:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hexcolor">#def</span>ine <span class="function"><span class="title">bzero</span><span class="params">(b,len)</span></span> (<span class="function"><span class="title">memset</span><span class="params">((b)</span></span>, <span class="string">'\0'</span>, (len)), (void) <span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="Modify_dt-cc">Modify dt.cc</h2><p>And Go on,get error like this:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Error using mex</span><br><span class="line"><span class="tag">dt</span><span class="class">.cc</span></span><br><span class="line">E:\Projects\pedestrain_detection\voc-release5\gdetect\<span class="tag">dt</span>.<span class="function"><span class="title">cc</span><span class="params">(<span class="number">61</span>)</span></span> : error C2065: <span class="string">'int32_t'</span> : undeclared identifier</span><br><span class="line">E:\Projects\pedestrain_detection\voc-release5\gdetect\<span class="tag">dt</span>.<span class="function"><span class="title">cc</span><span class="params">(<span class="number">61</span>)</span></span> : error C2065: <span class="string">'Ix'</span> : undeclared identifier</span><br><span class="line">E:\Projects\pedestrain_detection\voc-release5\gdetect\<span class="tag">dt</span>.<span class="function"><span class="title">cc</span><span class="params">(<span class="number">61</span>)</span></span> : error C2059: syntax error : <span class="string">')'</span></span><br><span class="line">E:\Projects\pedestrain_detection\voc-release5\gdetect\<span class="tag">dt</span>.<span class="function"><span class="title">cc</span><span class="params">(<span class="number">62</span>)</span></span> : error C2065: <span class="string">'int32_t'</span> : undeclared identifier</span><br><span class="line">E:\Projects\pedestrain_detection\voc-release5\gdetect\<span class="tag">dt</span>.<span class="function"><span class="title">cc</span><span class="params">(<span class="number">62</span>)</span></span> : error C2065: <span class="string">'Iy'</span> : undeclared identifier</span><br><span class="line">...<span class="class">.and</span> so on</span><br></pre></td></tr></table></figure></p>
+<p>We have two ways to fix it. See more details in <a href="http://stackoverflow.com/questions/5162784/uint32-t-identifier-not-found-error" target="_blank" rel="external">link 3</a>.</p>
+<ol>
+<li>Add <code>#include &lt;stdint.h&gt;</code></li>
+<li>Add <code>typedef __int32 int32_t; typedef unsigned __int32 uint32_t;</code></li>
+</ol>
+<p>Before fix this bug, you can run <code>mex -setup</code> to check what c compiler you use. If you use VS2013, you can use the first way.</p>
+<p>Then go on and get same error and use same way to fix it.</p>
+<h2 id="Change_-o_to_-output">Change <code>-o</code> to <code>-output</code></h2><p>Go on and get this error:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Error</span> using mex</span><br><span class="line">Unknown MEX argument <span class="string">'-o'</span>.</span><br><span class="line"><span class="built_in">Error</span> <span class="keyword">in</span> compile (line <span class="number">64</span>)</span><br><span class="line">  <span class="built_in">eval</span>([mexcmd <span class="string">' gdetect/fconvsse.cc -o fconv'</span>]);</span><br></pre></td></tr></table></figure></p>
+<p>change <code>-o</code> to <code>-output</code> to fix this bug.</p>
+<p>If you see the code on line 72, you will find <code>eval([mexcmd &#39; gdetect/fconv_var_dim_MT.cc -o fconv_var_dim&#39;]);</code>, change it too.</p>
+<h2 id="Configure_pthread_on_Windows">Configure pthread on Windows</h2><p>Go on and get this error:<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Error</span> using mex</span><br><span class="line">fconvsse.<span class="keyword">cc</span></span><br><span class="line"><span class="keyword">E</span>:\Projects\pedestrain_detection\voc-release5\gdetect\fconvsse.<span class="keyword">cc</span>(8) : fatal <span class="keyword">error</span> C1083: Cannot <span class="keyword">open</span> <span class="keyword">include</span> <span class="keyword">file</span>:</span><br><span class="line">'pthread.<span class="keyword">h</span>': <span class="keyword">No</span> such <span class="keyword">file</span> or directory</span><br></pre></td></tr></table></figure></p>
+<p>The pthread library is multi-thread library in linux, Windows does not provide it. So we should download it and configure it by myself.</p>
+<p>You should go <a href="ftp://sourceware.org/pub/pthreads-win32/prebuilt-dll-2-9-1-release/" target="_blank" rel="external">here</a> to download <code>pthread.h</code>, <code>sched.h</code>,<code>dll\x64\pthreadVC2.dll</code>,<code>lib\X64\pthreadVC2.lib</code> to fix bugs. See more details in <a href="https://linqtolinq.wordpress.com/2012/04/24/setting-up-pthreads-in-windows-under-visual-studio/" target="_blank" rel="external">link 4</a>.</p>
+<p><strong>Tips</strong>: If your Matlab and windows are 32bit, you should download *.dll and *.lib from x86 file.</p>
+<p>And put <code>pthread.h</code> and <code>sched.h</code> in your <code>[VS_PATH]\VC\include</code> (For me, it’s <code>D:\Program Files\Microsoft Visual Studio 12.0\VC\include</code>, it’s up to your VS installations path),<br>put <code>pthreadVC2.dll</code> in <code>C:\Windows\System32</code>, put <code>pthreadVC2.lib</code> in <code>[VS_PATH]\VC\lib</code>(For me, it’s <code>D:\Program Files\Microsoft Visual Studio 12.0\VC\lib</code>).</p>
+<h2 id="Modify_fconvsse-cc">Modify fconvsse.cc</h2><p>Then go on and get error:<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Error using mex</span><br><span class="line">fconvsse.cc</span><br><span class="line">E:<span class="command">\Projects</span><span class="command">\pedestrain</span>_detection<span class="command">\code</span><span class="command">\voc</span>-release5<span class="command">\gdetect</span><span class="command">\fconvsse</span>.cc(120) : error C2146: syntax error : missing ';'</span><br><span class="line">before identifier '__attribute__'</span><br><span class="line">E:<span class="command">\Projects</span><span class="command">\pedestrain</span>_detection<span class="command">\code</span><span class="command">\voc</span>-release5<span class="command">\gdetect</span><span class="command">\fconvsse</span>.cc(120) : error C3861: '__attribute__': identifier</span><br><span class="line">not found</span><br><span class="line">E:<span class="command">\Projects</span><span class="command">\pedestrain</span>_detection<span class="command">\code</span><span class="command">\voc</span>-release5<span class="command">\gdetect</span><span class="command">\fconvsse</span>.cc(120) : error C3861: 'aligned': identifier not</span><br><span class="line">found</span><br><span class="line">E:<span class="command">\Projects</span><span class="command">\pedestrain</span>_detection<span class="command">\code</span><span class="command">\voc</span>-release5<span class="command">\gdetect</span><span class="command">\fconvsse</span>.cc(130) : error C3861: 'memalign': identifier not</span><br><span class="line">found</span><br><span class="line">E:<span class="command">\Projects</span><span class="command">\pedestrain</span>_detection<span class="command">\code</span><span class="command">\voc</span>-release5<span class="command">\gdetect</span><span class="command">\fconvsse</span>.cc(163) : warning C4267: 'initializing' : conversion</span><br><span class="line">from 'size_t' to 'mwSize', possible loss of data</span><br></pre></td></tr></table></figure></p>
+<p>Add <code>#define __attribute__(X)</code>. See more details in <a href="https://gcc.gnu.org/onlinedocs/gcc-4.1.2/gcc/Variable-Attributes.html#Variable-Attributes" target="_blank" rel="external">link 5</a> and <a href="http://stackoverflow.com/questions/25826746/attribute-and-visualc" target="_blank" rel="external">line 6</a>.</p>
+<p>Change <code>#define malloc_aligned(a,b) memalign(a,b)</code> to <code>#define malloc_aligned(a,b) _aligned_malloc(b,a)</code> on line 19. (<strong>Be careful here, I change the order of a and b in <code>_aligned_malloc</code> function</strong>). See more details in <a href="https://msdn.microsoft.com/en-us/library/8z34s9c6.aspx" target="_blank" rel="external">link 7</a>, <a href="http://stackoverflow.com/questions/4645613/allocating-aligned-data-memalign-in-visual-c" target="_blank" rel="external">link 8</a> and <a href="http://www.gnu.org/software/libc/manual/html_node/Aligned-Memory-Blocks.html" target="_blank" rel="external">link 9</a>.</p>
+<p>Why do we change order of a and b? The reason is :<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">void * _aligned_malloc(size_t <span class="built_in">size</span>, size_t alignment);</span><br><span class="line">void * memalign (size_t boundary, size_t <span class="built_in">size</span>);</span><br><span class="line">//Both alignment <span class="keyword">value</span> and boundary <span class="keyword">value</span> must be an <span class="type">integer</span> power of <span class="number">2.</span> This two <span class="function"><span class="keyword">function</span></span> have same <span class="function"><span class="keyword">function</span>.</span></span><br></pre></td></tr></table></figure></p>
+<p>And replace <code>process</code> function using this code. See more details in <a href="http://stackoverflow.com/questions/34308187/why-cant-i-remove-mm-empty" target="_blank" rel="external">link 10</a>.<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">void *process<span class="list">(<span class="keyword">void</span> <span class="variable">*thread_arg) &#123;</span><br><span class="line">	thread_data *</span>args = <span class="list">(<span class="keyword">thread_data</span> <span class="variable">*)thread_arg;</span><br><span class="line">	float *</span>A = args-&gt;A<span class="comment">;</span></span><br><span class="line">	float <span class="variable">*B = args-&gt;B;</span><br><span class="line">	double *</span>C = args-&gt;C<span class="comment">;</span></span><br><span class="line">	const mwSize <span class="variable">*A_dims = args-&gt;A_dims;</span><br><span class="line">	const mwSize *</span>B_dims = args-&gt;B_dims<span class="comment">;</span></span><br><span class="line">	const mwSize <span class="variable">*C_dims = args-&gt;C_dims;</span><br><span class="line"></span><br><span class="line">	__m128 a, b, c;</span><br><span class="line">	double *</span>dst = C<span class="comment">;</span></span><br><span class="line">	for <span class="list">(<span class="keyword">int</span> x = <span class="number">0</span><span class="comment">; x &lt; C_dims[1]; x++) &#123;</span></span><br><span class="line">		for <span class="list">(<span class="keyword">int</span> y = <span class="number">0</span><span class="comment">; y &lt; C_dims[0]; y++) &#123;</span></span><br><span class="line">			__m128 v = _mm_setzero_ps<span class="list">()</span>, v1 = _mm_setzero_ps<span class="list">()</span>, v2 = _mm_setzero_ps<span class="list">()</span>, v3 = _mm_setzero_ps<span class="list">()</span><span class="comment">;</span></span><br><span class="line">			const float <span class="variable">*A_src = A + y*</span>NUM_FEATURES + x*A_dims[<span class="number">0</span>] <span class="variable">* NUM_FEATURES;</span><br><span class="line">			const float *</span>B_src = B<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">			for <span class="list">(<span class="keyword">int</span> xp = <span class="number">0</span><span class="comment">; xp &lt; B_dims[1]; xp++) &#123;</span></span><br><span class="line">				const float <span class="variable">*A_off = A_src;</span><br><span class="line">				const float *</span>B_off = B_src<span class="comment">;</span></span><br><span class="line">				for <span class="list">(<span class="keyword">int</span> yp = <span class="number">0</span><span class="comment">; yp &lt; B_dims[0]; yp++) &#123;</span></span><br><span class="line">					a = _mm_load_ps<span class="list">(<span class="keyword">A_off</span> + <span class="number">0</span>)</span><span class="comment">;</span></span><br><span class="line">					b = _mm_load_ps<span class="list">(<span class="keyword">B_off</span> + <span class="number">0</span>)</span><span class="comment">;</span></span><br><span class="line">					c = _mm_mul_ps<span class="list">(<span class="keyword">a</span>, b)</span><span class="comment">;</span></span><br><span class="line">					v1 = _mm_add_ps<span class="list">(<span class="keyword">v1</span>, c)</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">					a = _mm_load_ps<span class="list">(<span class="keyword">A_off</span> + <span class="number">4</span>)</span><span class="comment">;</span></span><br><span class="line">					b = _mm_load_ps<span class="list">(<span class="keyword">B_off</span> + <span class="number">4</span>)</span><span class="comment">;</span></span><br><span class="line">					c = _mm_mul_ps<span class="list">(<span class="keyword">a</span>, b)</span><span class="comment">;</span></span><br><span class="line">					v2 = _mm_add_ps<span class="list">(<span class="keyword">v2</span>, c)</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">					a = _mm_load_ps<span class="list">(<span class="keyword">A_off</span> + <span class="number">8</span>)</span><span class="comment">;</span></span><br><span class="line">					b = _mm_load_ps<span class="list">(<span class="keyword">B_off</span> + <span class="number">8</span>)</span><span class="comment">;</span></span><br><span class="line">					c = _mm_mul_ps<span class="list">(<span class="keyword">a</span>, b)</span><span class="comment">;</span></span><br><span class="line">					v3 = _mm_add_ps<span class="list">(<span class="keyword">v3</span>, c)</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">					a = _mm_load_ps<span class="list">(<span class="keyword">A_off</span> + <span class="number">12</span>)</span><span class="comment">;</span></span><br><span class="line">					b = _mm_load_ps<span class="list">(<span class="keyword">B_off</span> + <span class="number">12</span>)</span><span class="comment">;</span></span><br><span class="line">					c = _mm_mul_ps<span class="list">(<span class="keyword">a</span>, b)</span><span class="comment">;</span></span><br><span class="line">					v1 = _mm_add_ps<span class="list">(<span class="keyword">v1</span>, c)</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">					a = _mm_load_ps<span class="list">(<span class="keyword">A_off</span> + <span class="number">16</span>)</span><span class="comment">;</span></span><br><span class="line">					b = _mm_load_ps<span class="list">(<span class="keyword">B_off</span> + <span class="number">16</span>)</span><span class="comment">;</span></span><br><span class="line">					c = _mm_mul_ps<span class="list">(<span class="keyword">a</span>, b)</span><span class="comment">;</span></span><br><span class="line">					v2 = _mm_add_ps<span class="list">(<span class="keyword">v2</span>, c)</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">					a = _mm_load_ps<span class="list">(<span class="keyword">A_off</span> + <span class="number">20</span>)</span><span class="comment">;</span></span><br><span class="line">					b = _mm_load_ps<span class="list">(<span class="keyword">B_off</span> + <span class="number">20</span>)</span><span class="comment">;</span></span><br><span class="line">					c = _mm_mul_ps<span class="list">(<span class="keyword">a</span>, b)</span><span class="comment">;</span></span><br><span class="line">					v3 = _mm_add_ps<span class="list">(<span class="keyword">v3</span>, c)</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">					a = _mm_load_ps<span class="list">(<span class="keyword">A_off</span> + <span class="number">24</span>)</span><span class="comment">;</span></span><br><span class="line">					b = _mm_load_ps<span class="list">(<span class="keyword">B_off</span> + <span class="number">24</span>)</span><span class="comment">;</span></span><br><span class="line">					c = _mm_mul_ps<span class="list">(<span class="keyword">a</span>, b)</span><span class="comment">;</span></span><br><span class="line">					v1 = _mm_add_ps<span class="list">(<span class="keyword">v1</span>, c)</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">					a = _mm_load_ps<span class="list">(<span class="keyword">A_off</span> + <span class="number">28</span>)</span><span class="comment">;</span></span><br><span class="line">					b = _mm_load_ps<span class="list">(<span class="keyword">B_off</span> + <span class="number">28</span>)</span><span class="comment">;</span></span><br><span class="line">					c = _mm_mul_ps<span class="list">(<span class="keyword">a</span>, b)</span><span class="comment">;</span></span><br><span class="line">					v2 = _mm_add_ps<span class="list">(<span class="keyword">v2</span>, c)</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">					// N.B. Unroll me more/less if you change NUM_FEATURES</span><br><span class="line"></span><br><span class="line">					A_off += NUM_FEATURES<span class="comment">;</span></span><br><span class="line">					B_off += NUM_FEATURES<span class="comment">;</span></span><br><span class="line">				&#125;</span><br><span class="line">				A_src += A_dims[<span class="number">0</span>] <span class="variable">* NUM_FEATURES;</span><br><span class="line">				B_src += B_dims[0] *</span> NUM_FEATURES<span class="comment">;</span></span><br><span class="line">			&#125;</span><br><span class="line">			v = _mm_add_ps<span class="list">(<span class="keyword">v</span>, v1)</span><span class="comment">;</span></span><br><span class="line">			v = _mm_add_ps<span class="list">(<span class="keyword">v</span>, v2)</span><span class="comment">;</span></span><br><span class="line">			v = _mm_add_ps<span class="list">(<span class="keyword">v</span>, v3)</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">			// buf[] must be <span class="number">16</span>-byte aligned</span><br><span class="line">			__declspec<span class="list">(<span class="keyword">align</span><span class="list">(<span class="number">16</span>)</span>)</span> float buf[<span class="number">4</span>]<span class="comment">;</span></span><br><span class="line">			_mm_store_ps<span class="list">(<span class="keyword">buf</span>, v)</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">			<span class="variable">*(dst++) = buf[0] + buf[1] + buf[2] + buf[3];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	pthread_exit(NULL);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span></span></span></span></span></span></span></span><br></pre></td></tr></table></figure></p>
+<p>Add this code in <code>fconvsse.cc</code> to prevent link error:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#pragma</span> <span class="function"><span class="title">comment</span><span class="params">(lib, <span class="string">"[VS_PATH]\\VC\\lib\\pthreadVC2.lib"</span>)</span></span></span><br><span class="line"><span class="comment">//for me, it's #pragma comment(lib, "D:\\Program Files\\Microsoft Visual Studio 12.0\\VC\\lib\\pthreadVC2.lib")</span></span><br><span class="line"><span class="comment">//Here you should use absolute path to ensure that compiler can find this lib.</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Modify_fconv_var_dim_MT-cc">Modify fconv_var_dim_MT.cc</h2><p>Replace <code>process</code> function as mentioned before.<br>Add <code>#include &lt;xmmintrin.h&gt;</code> and <code>#pragma comment(lib, &quot;D:\\Program Files\\Microsoft Visual Studio 12.0\\VC\\lib\\pthreadVC2.lib&quot;)</code> and <code>#define NUM_FEATURES 32</code>.</p>
+<p>Now, Run compile.m again, it completed successfully!!!</p>
+<p>国内的朋友看到我全篇用英文写请不要说我装逼，因为我在下载完这个code发现在windows下运行不了，网上google发现了一些别人写的教程，但是人家直接把多线程这一块注释掉不用，加上他写的比较乱，所以我就自己配置了一下，因为想着肯定还有不少跟我一样的人，需要在windows下操作，本着分享的原则，所以就记录下这个过程，让我配置完再来写这篇博客，可能写的也会比较乱，不能按照整个顺序来，然而中文输入法和英文输入法切换还是比较麻烦的，所以就直接用英文写了，我英语水平仅仅过了六级而已，所以用词简单，大家应该能看懂的。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/computer-vision/" rel="tag">#computer vision</a>
+          
+            <a href="/tags/dpm/" rel="tag">#dpm</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/02/160303-SML01/" rel="next" title="统计学习理论学习笔记（一）">
+                <i class="fa fa-chevron-left"></i> 统计学习理论学习笔记（一）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/29/160429-DPM-Release-on-Windows/"
+           data-title="VOC Release 5在windows上的使用" data-url="site:ocxsBlog.github.io/2016/04/29/160429-DPM-Release-on-Windows/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.png"
+               alt="Xusong Chen" />
+          <p class="site-author-name" itemprop="name">Xusong Chen</p>
+          <p class="site-description motion-element" itemprop="description">Welcome</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Requirements"><span class="nav-number">2.</span> <span class="nav-text">Requirements</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#compile"><span class="nav-number">3.</span> <span class="nav-text">compile</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Delete_system_juding_code"><span class="nav-number">3.1.</span> <span class="nav-text">Delete system juding code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modify_time-h"><span class="nav-number">3.2.</span> <span class="nav-text">Modify time.h</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modify_resize-cc"><span class="nav-number">3.3.</span> <span class="nav-text">Modify resize.cc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modify_dt-cc"><span class="nav-number">3.4.</span> <span class="nav-text">Modify dt.cc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change_-o_to_-output"><span class="nav-number">3.5.</span> <span class="nav-text">Change -o to -output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configure_pthread_on_Windows"><span class="nav-number">3.6.</span> <span class="nav-text">Configure pthread on Windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modify_fconvsse-cc"><span class="nav-number">3.7.</span> <span class="nav-text">Modify fconvsse.cc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modify_fconv_var_dim_MT-cc"><span class="nav-number">3.8.</span> <span class="nav-text">Modify fconv_var_dim_MT.cc</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xusong Chen</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ocxsblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
