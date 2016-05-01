@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Computer Vision,OpenCV," />
+  <meta name="keywords" content="CV,OpenCV," />
 
 
 
@@ -76,7 +76,7 @@ Fitting a line to a set of points    （用直线拟合一组点）">
 <meta property="og:image" content="site:ocxsBlog.github.io/\img\151224-1.png">
 <meta property="og:image" content="site:ocxsBlog.github.io/\img\151224-2.jpg">
 <meta property="og:image" content="site:ocxsBlog.github.io/\img\151224-3.png">
-<meta property="og:updated_time" content="1970-01-01T00:00:00.000Z">
+<meta property="og:updated_time" content="2016-04-30T06:56:25.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV 学习笔记(7) Extracting Lines,Contours and Components">
 <meta name="twitter:description" content="In this chapter, we will cover:
@@ -260,6 +260,25 @@ Fitting a line to a set of points    （用直线拟合一组点）">
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Computer-Vision/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Vision</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -295,7 +314,7 @@ Fitting a line to a set of points    （用直线拟合一组点）">
 <li>Detecting lines in images with the Hough transform    （使用Hough变换检测直线）</li>
 <li>Fitting a line to a set of points    （用直线拟合一组点）</li>
 <li>Extracting the components’ contours（提取连通区域的轮廓）</li>
-<li>Computing components’ shape descriptors    </li>
+<li>Computing components’ shape descriptors</li>
 </ul>
 </blockquote>
 <a id="more"></a>
@@ -332,7 +351,10 @@ Fitting a line to a set of points    （用直线拟合一组点）">
 <hr>
 <h1 id="Fitting_a_line_to_a_set_of_points"><strong>Fitting a line to a set of points</strong></h1><p>本节主要讲给定一组点，如何找出那条最贴近这组点的直线（有点像最小二乘法）。</p>
 <h2 id="实现方法"><strong>实现方法</strong></h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//points可以是一组二维或三维的点集，例std::Vector&lt;cv::Point&gt;points;</span></span><br><span class="line">cv::Vec4f line;</span><br><span class="line">cv::fitLine(cv::Mat(points),line,</span><br><span class="line">CV_DIST_L2, <span class="comment">// distance type</span></span><br><span class="line"><span class="number">0</span>, <span class="comment">// not used with L2 distance</span></span><br><span class="line"><span class="number">0.01</span>,<span class="number">0.01</span>); <span class="comment">// accuracy</span></span><br></pre></td></tr></table></figure>
-<p><code>cv::fitLine</code>的各个参数含义见<a href="http://docs.opencv.org/2.4.9/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html?highlight=fitline#cv.FitLine" target="_blank" rel="external">文档</a>.其中输出<code>line</code>为<code>(vx, vy, x0, y0)</code>（二维）或<code>(vx, vy, vz, x0, y0, z0)</code>（三维），<code>(vx, vy)</code>是一组与拟合直线平行的向量，相当于提供斜率（即vy/vk）不过他们的绝对值应该都是小于1的，<code>(x0, y0)</code>就是拟合直线上的一点。<br>想要将该直线画出来，引用书上的代码如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x0= line[<span class="number">2</span>]; <span class="comment">// a point on the line</span></span><br><span class="line"><span class="keyword">int</span> y0= line[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">int</span> x1= x0-<span class="number">200</span>*line[<span class="number">0</span>]; <span class="comment">// add a vector of length 200</span></span><br><span class="line"><span class="keyword">int</span> y1= y0-<span class="number">200</span>*line[<span class="number">1</span>]; <span class="comment">// using the unit vector</span></span><br><span class="line">image= cv::imread(<span class="string">"../road.jpg"</span>,<span class="number">0</span>);</span><br><span class="line">cv::line(image,cv::Point(x0,y0),cv::Point(x1,y1),</span><br><span class="line">cv::Scalar(<span class="number">0</span>),<span class="number">3</span>);</span><br><span class="line">```	</span><br><span class="line">画出来的方法很多，书上举例，将 直线的长度定成<span class="number">200</span>。</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">## **实现原理**</span></span><br><span class="line">直线拟合在`fitLine`函数中，有多个距离函数可供选用，最快的就是欧式距离（Euclidean distance），即参数`CV_DIST_L2`。该参数对应的是标准的最小二乘法。可以参考文档链接或者[M-estimator](https:<span class="comment">//en.wikipedia.org/wiki/M-estimator)</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">## **椭圆拟合**</span></span><br><span class="line">```cpp</span><br><span class="line">cv::RotatedRect rrect= cv::fitEllipse(cv::Mat(points));</span><br><span class="line">cv::ellipse(image,rrect,cv::Scalar(<span class="number">0</span>));</span><br></pre></td></tr></table></figure></p>
+<p><code>cv::fitLine</code>的各个参数含义见<a href="http://docs.opencv.org/2.4.9/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html?highlight=fitline#cv.FitLine" target="_blank" rel="external">文档</a>.其中输出<code>line</code>为<code>(vx, vy, x0, y0)</code>（二维）或<code>(vx, vy, vz, x0, y0, z0)</code>（三维），<code>(vx, vy)</code>是一组与拟合直线平行的向量，相当于提供斜率（即vy/vk）不过他们的绝对值应该都是小于1的，<code>(x0, y0)</code>就是拟合直线上的一点。<br>想要将该直线画出来，引用书上的代码如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x0= line[<span class="number">2</span>]; <span class="comment">// a point on the line</span></span><br><span class="line"><span class="keyword">int</span> y0= line[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">int</span> x1= x0-<span class="number">200</span>*line[<span class="number">0</span>]; <span class="comment">// add a vector of length 200</span></span><br><span class="line"><span class="keyword">int</span> y1= y0-<span class="number">200</span>*line[<span class="number">1</span>]; <span class="comment">// using the unit vector</span></span><br><span class="line">image= cv::imread(<span class="string">"../road.jpg"</span>,<span class="number">0</span>);</span><br><span class="line">cv::line(image,cv::Point(x0,y0),cv::Point(x1,y1),</span><br><span class="line">cv::Scalar(<span class="number">0</span>),<span class="number">3</span>);</span><br></pre></td></tr></table></figure></p>
+<p>画出来的方法很多，书上举例，将 直线的长度定成200。</p>
+<h2 id="实现原理"><strong>实现原理</strong></h2><p>直线拟合在<code>fitLine</code>函数中，有多个距离函数可供选用，最快的就是欧式距离（Euclidean distance），即参数<code>CV_DIST_L2</code>。该参数对应的是标准的最小二乘法。可以参考文档链接或者<a href="https://en.wikipedia.org/wiki/M-estimator" target="_blank" rel="external">M-estimator</a></p>
+<h2 id="椭圆拟合"><strong>椭圆拟合</strong></h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cv::RotatedRect rrect= cv::fitEllipse(cv::Mat(points));</span><br><span class="line">cv::ellipse(image,rrect,cv::Scalar(<span class="number">0</span>));</span><br></pre></td></tr></table></figure>
 <p><code>cv::ellipse</code>就能画出这个拟合后的椭圆了。其中返回的矩形的内切椭圆就是拟合的椭圆。</p>
 <hr>
 <h1 id="Extracting_the_components’_contours"><strong>Extracting the components’ contours</strong></h1><h2 id="实现方法-1"><strong>实现方法</strong></h2><p>如何提取连通域，OpenCV给出的实现函数<code>cv::findContours</code>，可参考<a href="http://docs.opencv.org/2.4.9/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html?highlight=findcontour#cv.FindContours" target="_blank" rel="external">文档</a>:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;cv::Point&gt; &gt; contours;</span><br><span class="line">cv::findContours(image, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"contours.size()"</span> &lt;&lt; contours.size() &lt;&lt; <span class="built_in">std</span>::endl;</span><br><span class="line">cv::<span class="function">Mat <span class="title">result</span><span class="params">(image.size()</span>, CV_8U, cv::<span class="title">Scalar</span><span class="params">(<span class="number">255</span>)</span>)</span>;</span><br><span class="line">cv::drawContours(result, contours, -<span class="number">1</span>, cv::Scalar(<span class="number">0</span>), <span class="number">2</span>);</span><br></pre></td></tr></table></figure></p>
@@ -362,7 +384,7 @@ Fitting a line to a set of points    （用直线拟合一组点）">
       
         <div class="post-tags">
           
-            <a href="/tags/Computer-Vision/" rel="tag">#Computer Vision</a>
+            <a href="/tags/CV/" rel="tag">#CV</a>
           
             <a href="/tags/OpenCV/" rel="tag">#OpenCV</a>
           
@@ -461,6 +483,13 @@ Fitting a line to a set of points    （用直线拟合一组点）">
           </div>
 
           
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
 
           
             <div class="site-state-item site-state-tags">
@@ -496,7 +525,7 @@ Fitting a line to a set of points    （用直线拟合一组点）">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Canny算子检测轮廓"><span class="nav-number">1.</span> <span class="nav-text">使用Canny算子检测轮廓</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Canny的使用"><span class="nav-number">1.1.</span> <span class="nav-text">Canny的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#theroy"><span class="nav-number">1.2.</span> <span class="nav-text">theroy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Hough变换检测直线"><span class="nav-number">2.</span> <span class="nav-text">使用Hough变换检测直线</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Related_Work"><span class="nav-number">2.1.</span> <span class="nav-text">Related Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">2.2.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Theory"><span class="nav-number">2.3.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Circles_Hough_Transform(CHT)"><span class="nav-number">2.4.</span> <span class="nav-text">Circles Hough Transform(CHT)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Theory-1"><span class="nav-number">2.4.1.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用-1"><span class="nav-number">2.4.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#广义hough变换"><span class="nav-number">2.5.</span> <span class="nav-text">广义hough变换</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fitting_a_line_to_a_set_of_points"><span class="nav-number">3.</span> <span class="nav-text">Fitting a line to a set of points</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现方法"><span class="nav-number">3.1.</span> <span class="nav-text">实现方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Extracting_the_components’_contours"><span class="nav-number">4.</span> <span class="nav-text">Extracting the components’ contours</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现方法-1"><span class="nav-number">4.1.</span> <span class="nav-text">实现方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#**"><span class="nav-number">5.</span> <span class="nav-text">**</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Canny算子检测轮廓"><span class="nav-number">1.</span> <span class="nav-text">使用Canny算子检测轮廓</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Canny的使用"><span class="nav-number">1.1.</span> <span class="nav-text">Canny的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#theroy"><span class="nav-number">1.2.</span> <span class="nav-text">theroy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Hough变换检测直线"><span class="nav-number">2.</span> <span class="nav-text">使用Hough变换检测直线</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Related_Work"><span class="nav-number">2.1.</span> <span class="nav-text">Related Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">2.2.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Theory"><span class="nav-number">2.3.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Circles_Hough_Transform(CHT)"><span class="nav-number">2.4.</span> <span class="nav-text">Circles Hough Transform(CHT)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Theory-1"><span class="nav-number">2.4.1.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用-1"><span class="nav-number">2.4.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#广义hough变换"><span class="nav-number">2.5.</span> <span class="nav-text">广义hough变换</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fitting_a_line_to_a_set_of_points"><span class="nav-number">3.</span> <span class="nav-text">Fitting a line to a set of points</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现方法"><span class="nav-number">3.1.</span> <span class="nav-text">实现方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现原理"><span class="nav-number">3.2.</span> <span class="nav-text">实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#椭圆拟合"><span class="nav-number">3.3.</span> <span class="nav-text">椭圆拟合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Extracting_the_components’_contours"><span class="nav-number">4.</span> <span class="nav-text">Extracting the components’ contours</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现方法-1"><span class="nav-number">4.1.</span> <span class="nav-text">实现方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#**"><span class="nav-number">5.</span> <span class="nav-text">**</span></a></li></ol></div>
             
           </div>
         </section>
@@ -626,6 +655,29 @@ Fitting a line to a set of points    （用直线拟合一组点）">
   
   
   
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Computer Vision,OpenCV," />
+  <meta name="keywords" content="CV,OpenCV," />
 
 
 
@@ -73,7 +73,7 @@ Scanning an image with iterators">
 Accessing pixel values
 Scanning an image with pointers
 Scanning an image with iterators">
-<meta property="og:updated_time" content="1970-01-01T00:00:00.000Z">
+<meta property="og:updated_time" content="2016-04-30T06:56:42.082Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV 学习笔记(2) Manipulating the Pixels (上)">
 <meta name="twitter:description" content="本节导读：
@@ -257,6 +257,25 @@ Scanning an image with iterators">
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Computer-Vision/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Vision</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -296,8 +315,8 @@ Scanning an image with iterators">
 </blockquote>
 <h1 id="Introduction"><strong>Introduction</strong></h1><p>　　Fundamentally, an image is a matrix of numerical values.</p>
 <hr>
-<h1 id="Accessing_pixel_values(存取像素值)"><strong>Accessing pixel values(存取像素值)</strong></h1><h2 id="salt-and-pepper_noise(椒盐噪声)">salt-and-pepper noise(椒盐噪声)</h2><h3 id="Definition">Definition</h3><p>　　Salt-and-pepper noise is a particular type of noise in which some pixels are replaced by a white or a black pixel.(This type of noise can occur in faulty communication when the value of some pixels is lost during transmission) </p>
-<h3 id="Add_salt-and-pepper_noise_to_an_image">Add salt-and-pepper noise to an image</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">salt</span><span class="params">(cv::Mat &amp;image, <span class="keyword">int</span> n)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n; ++k)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> i = rand() % image.cols;	<span class="comment">//column, 列，image's width</span></span><br><span class="line">		<span class="keyword">int</span> j = rand() % image.rows;	<span class="comment">//row, 行	image's height</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(<span class="number">1</span> == image.channels())	<span class="comment">//gray-level image</span></span><br><span class="line">		&#123;</span><br><span class="line">			image.at&lt;uchar&gt;(j, i) = <span class="number">255</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(<span class="number">3</span> == image.channels())	<span class="comment">//color image</span></span><br><span class="line">		&#123;</span><br><span class="line">			image.at&lt;cv::Vec3b&gt;(j, i)[<span class="number">0</span>] = <span class="number">255</span>;</span><br><span class="line">			image.at&lt;cv::Vec3b&gt;(j, i)[<span class="number">1</span>] = <span class="number">255</span>;</span><br><span class="line">			image.at&lt;cv::Vec3b&gt;(j, i)[<span class="number">2</span>] = <span class="number">255</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Accessing_pixel_values(存取像素值)"><strong>Accessing pixel values(存取像素值)</strong></h1><h2 id="salt-and-pepper_noise(椒盐噪声)">salt-and-pepper noise(椒盐噪声)</h2><h3 id="Definition">Definition</h3><p>　　Salt-and-pepper noise is a particular type of noise in which some pixels are replaced by a white or a black pixel.(This type of noise can occur in faulty communication when the value of some pixels is lost during transmission)</p>
+<h3 id="Add_salt-and-pepper_noise_to_an_image">Add salt-and-pepper noise to an image</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">salt</span><span class="params">(cv::Mat &amp;image, <span class="keyword">int</span> n)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n; ++k)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> i = rand() % image.cols;	<span class="comment">//column, 列，image's width</span></span><br><span class="line">		<span class="keyword">int</span> j = rand() % image.rows;	<span class="comment">//row, 行	image's height</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(<span class="number">1</span> == image.channels())	<span class="comment">//gray-level image</span></span><br><span class="line">		&#123;</span><br><span class="line">			image.at&lt;uchar&gt;(j, i) = <span class="number">255</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(<span class="number">3</span> == image.channels())	<span class="comment">//color image</span></span><br><span class="line">		&#123;</span><br><span class="line">			image.at&lt;cv::Vec3b&gt;(j, i)[<span class="number">0</span>] = <span class="number">255</span>;</span><br><span class="line">			image.at&lt;cv::Vec3b&gt;(j, i)[<span class="number">1</span>] = <span class="number">255</span>;</span><br><span class="line">			image.at&lt;cv::Vec3b&gt;(j, i)[<span class="number">2</span>] = <span class="number">255</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="The_Difference_of_gray-level_image_and_color_image">The Difference of gray-level image and color image</h3><p>　　In the case of a gray-level image, the number 255 is assigned to the single 8-bit value. For a color image, you need to assign 255 to the three primary color channels in order to obtain a white pixel.</p>
 <h3 id="How_to_access_the_different_attributes_of_an_image-">How to access the different attributes of an image.</h3><p>　　For element access, <code>cv::Mat</code> has the method <code>at(int y, int x)</code>.但是返回类型必须要在编译的时候知道，所以程序员必须给定类型，这也是为什么 <code>at</code> method 用模版来实现，所以调用<code>at</code> method用如下方式，举例说明：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">image.at&lt;uchar&gt;(j, i) = <span class="number">255</span>;</span><br></pre></td></tr></table></figure></p>
 <p>　　这里我们需要保证指定的类型是矩阵中的类型，对于上述例子，必须保证<code>uchar</code>是<code>image</code>的元素类型。In color images, each pixel is associated with three components: the red, green, and blue channels.Therefore, a cv::Mat containing a color image will return a vector of three 8-bit values.<br>　　opencv定义了short vectors ：<code>cv::Vec3b</code>.It is a vector of 3 <code>unsigned chars</code>.<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">image.at&lt;cv::Vec3b&gt;(j,i)[channel]= value;</span><br></pre></td></tr></table></figure></p>
@@ -310,7 +329,7 @@ Scanning an image with iterators">
 <p>　　这里颜色降低的原理就是降低维度，一般彩色图像是0~255，现在变成32个维度，即某通道的强度值是0~7时，用4来表示，为8~15时，用12来表示，大概就是这么个意思，我觉得没必要去细究。</p>
 <h3 id="作用原理">作用原理</h3><p>　　Opencv中默认使用BGR的通道顺序，因此第一个通道通常是蓝色的。一个W*H的彩色图像，需要W*H*3个uchar构成的内存块。但是处于效率的考虑，每行可能会填补一些额外像素，因为行的长度是4或8的倍数,一些多媒体处理芯片(如Intel的MMX架构)可以更高校的处理图像。这些额外的像素不会被显示或者保存，填补的值会被忽略。opencv将填补后的一行的长度指定为关键字。如果没有对图像进行填补，图像的有效长度就等于图像的真实宽度。<code>step</code>代表以字节为单位的图像的有效宽度。即使图像类型元素不是uchar，<strong>step</strong>依然<strong>代表着一行的字节数</strong>。<br>　　像素的大小可以有<code>elemSize</code> method得到：对于一个三通道的<code>short</code>型矩阵<code>(CV_16SC3)</code>,<code>elemSize</code>返回6。<br>　　通道数可以由<code>channels</code> method得到：例如：<code>int nc = image.cols * image.channels();</code><br>　　为了简化指针运算，<code>cv::Mat</code>提供了<strong><code>ptr</code>函数可以得到图像任意行的首地址</strong>。如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uchar *data = image.ptr&lt;uchar&gt;(j);	<span class="comment">//返回第j行的首地址</span></span><br></pre></td></tr></table></figure></p>
 <p>　　此外，之前提到的颜色缩减（降低图像颜色数目），还可以通过位运算实现，如下：（当作一个编程技巧）<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uchar mask = <span class="number">0xFF</span> &lt;&lt; n;	<span class="comment">//e.g. for div = 16, mask = 0xF0</span></span><br><span class="line">data[i] = (data[i] &amp; mask) + div/<span class="number">2</span>;		<span class="comment">//这种实现方法就要比上面的data[i] = data[i]/div*div + div/2;高明了</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="高效遍历连续图像">高效遍历连续图像</h3><p>　　考虑到效率，图像有可能在行尾补充若干个像素，但是当不填补的时候，图像可以被视为一个常委W*H的一位数组。高效遍历连续图像的代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">colorReduce</span><span class="params">(cv::Mat &amp;image, <span class="keyword">int</span> div = <span class="number">64</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> nl = image.rows;	</span><br><span class="line">	<span class="keyword">int</span> nc = image.cols * image.channels();</span><br><span class="line">	<span class="keyword">if</span>(image.isContinus())	<span class="comment">//判断是否为连续图像，即若不包含填充像素，则返回true</span></span><br><span class="line">	&#123;</span><br><span class="line">		nc = nc * nl;</span><br><span class="line">		nl = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nl; ++j)</span><br><span class="line">	&#123;</span><br><span class="line">		uchar *data = image.ptr&lt;uchar&gt;(j);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nc; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			data[i] = data[i]/<span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="高效遍历连续图像">高效遍历连续图像</h3><p>　　考虑到效率，图像有可能在行尾补充若干个像素，但是当不填补的时候，图像可以被视为一个常委W*H的一位数组。高效遍历连续图像的代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">colorReduce</span><span class="params">(cv::Mat &amp;image, <span class="keyword">int</span> div = <span class="number">64</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> nl = image.rows;</span><br><span class="line">	<span class="keyword">int</span> nc = image.cols * image.channels();</span><br><span class="line">	<span class="keyword">if</span>(image.isContinus())	<span class="comment">//判断是否为连续图像，即若不包含填充像素，则返回true</span></span><br><span class="line">	&#123;</span><br><span class="line">		nc = nc * nl;</span><br><span class="line">		nl = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nl; ++j)</span><br><span class="line">	&#123;</span><br><span class="line">		uchar *data = image.ptr&lt;uchar&gt;(j);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nc; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			data[i] = data[i]/<span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>或者使用<code>reshape</code>来完成上述功能<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(image.isContinus())</span><br><span class="line">&#123;</span><br><span class="line">	image.reshape(<span class="number">1</span>, image.cols * image.rows);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> nl = image.rows;</span><br><span class="line"><span class="keyword">int</span> nc = image.cols * image.channels();</span><br></pre></td></tr></table></figure></p>
 <p>　　<code>reshape</code>不需要内存拷贝或者重新分配就能改变矩阵的维度。上述方法在处理小图像的时候很有优势。(书上说的，至于为啥，我猜是调用<code>uchar *data = image.ptr&lt;uchar&gt;(j);</code>每个图像只用一次？)</p>
 <h3 id="底层指针运算">底层指针运算</h3><p>　　在类<code>cv::Mat</code>中，图像数据以unsigned char 形式保存在一块内存中。(<strong>那其他类型的也是这样？感觉有点问题</strong>)这块内存的首地址可以通过data成员变量得到，如下方式：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uchar *data = image.data;	<span class="comment">//图像的首地址指针</span></span><br><span class="line">data += image.step;		<span class="comment">//到下一行</span></span><br></pre></td></tr></table></figure></p>
@@ -337,7 +356,7 @@ Scanning an image with iterators">
       
         <div class="post-tags">
           
-            <a href="/tags/Computer-Vision/" rel="tag">#Computer Vision</a>
+            <a href="/tags/CV/" rel="tag">#CV</a>
           
             <a href="/tags/OpenCV/" rel="tag">#OpenCV</a>
           
@@ -435,6 +454,13 @@ Scanning an image with iterators">
             </a>
           </div>
 
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
           
 
           
@@ -601,6 +627,29 @@ Scanning an image with iterators">
   
   
   
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

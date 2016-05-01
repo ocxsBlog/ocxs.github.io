@@ -64,7 +64,7 @@
 <meta property="og:site_name" content="Ocxs's blog">
 <meta property="og:description" content="一.什么是图1.基本定义">
 <meta property="og:image" content="site:ocxsBlog.github.io/img/150819-1.jpg">
-<meta property="og:updated_time" content="1970-01-01T00:00:00.000Z">
+<meta property="og:updated_time" content="2016-04-30T06:47:52.192Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图（上）">
 <meta name="twitter:description" content="一.什么是图1.基本定义">
@@ -243,6 +243,25 @@
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -282,7 +301,7 @@
 </ul>
 </li>
 <li>图可以没有边，但是不能没有顶点</li>
-<li>无向图：边没有方向 </li>
+<li>无向图：边没有方向</li>
 <li>有向图：边有方向（双向，单向，边可能带权重）</li>
 </ul>
 </li>
@@ -346,7 +365,7 @@
 </blockquote>
 <h3 id="2-广度优先搜索（Breadth_First_Search，BFS）">2.广度优先搜索（Breadth First Search，BFS）</h3><blockquote>
 <ul>
-<li>伪代码<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(Vertex V)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	visited[V] = <span class="literal">true</span>;</span><br><span class="line">	EnQuene(V,Q);<span class="comment">//入队</span></span><br><span class="line">	<span class="keyword">while</span>(!IsEmpty(Q))</span><br><span class="line">	&#123;</span><br><span class="line">		V = DeQuene(Q);<span class="comment">//出队</span></span><br><span class="line">		<span class="keyword">for</span>(V的每个邻接点W)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(!visited[W])</span><br><span class="line">			&#123;</span><br><span class="line">				visited[W] = <span class="literal">true</span>;</span><br><span class="line">				EnQuene(W, Q);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>伪代码<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(Vertex V)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	visited[V] = <span class="literal">true</span>;</span><br><span class="line">	EnQuene(V,Q);<span class="comment">//入队</span></span><br><span class="line">	<span class="keyword">while</span>(!IsEmpty(Q))</span><br><span class="line">	&#123;</span><br><span class="line">		V = DeQuene(Q);<span class="comment">//出队</span></span><br><span class="line">		<span class="keyword">for</span>(V的每个邻接点W)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(!visited[W])</span><br><span class="line">			&#123;</span><br><span class="line">				visited[W] = <span class="literal">true</span>;</span><br><span class="line">				EnQuene(W, Q);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </blockquote>
@@ -376,7 +395,8 @@
 </li>
 <li><p>图不连通怎么办？（如何遍历？）</p>
 <ul>
-<li>伪码描述<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ListCompontents</span><span class="params">(Graph G)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(each V in G)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!visited[V])</span><br><span class="line">		&#123;</span><br><span class="line">			DFS(V);	<span class="comment">//or BFS(V);	//每一个DFS(BFS)遍历一个连通分量</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>伪码描述<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ListCompontents</span><span class="params">(Graph G)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(each V in G)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!visited[V])</span><br><span class="line">		&#123;</span><br><span class="line">			DFS(V);	<span class="comment">//or BFS(V);	//每一个DFS(BFS)遍历一个连通分量</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
 </ul>
@@ -491,6 +511,13 @@
             </a>
           </div>
 
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
           
 
           
@@ -657,6 +684,29 @@
   
   
   
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

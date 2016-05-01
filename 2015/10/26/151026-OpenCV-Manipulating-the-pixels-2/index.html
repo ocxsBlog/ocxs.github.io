@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Computer Vision,OpenCV," />
+  <meta name="keywords" content="CV,OpenCV," />
 
 
 
@@ -62,7 +62,7 @@
 
 Writing effcient image scanning loops(编写高效的图像遍历循环)
 Scanning an image with neighbor access(遍历图像和邻域操作)
-Performing simple image arithmetic 
+Performing simple image arithmetic
 Defining regions of interest">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenCV 学习笔记(2) Manipulating the Pixels (下)">
@@ -73,9 +73,9 @@ Defining regions of interest">
 
 Writing effcient image scanning loops(编写高效的图像遍历循环)
 Scanning an image with neighbor access(遍历图像和邻域操作)
-Performing simple image arithmetic 
+Performing simple image arithmetic
 Defining regions of interest">
-<meta property="og:updated_time" content="1970-01-01T00:00:00.000Z">
+<meta property="og:updated_time" content="2016-04-30T06:56:48.774Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV 学习笔记(2) Manipulating the Pixels (下)">
 <meta name="twitter:description" content="本节导读：
@@ -83,7 +83,7 @@ Defining regions of interest">
 
 Writing effcient image scanning loops(编写高效的图像遍历循环)
 Scanning an image with neighbor access(遍历图像和邻域操作)
-Performing simple image arithmetic 
+Performing simple image arithmetic
 Defining regions of interest">
 
 
@@ -260,6 +260,25 @@ Defining regions of interest">
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Computer-Vision/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Vision</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -293,7 +312,7 @@ Defining regions of interest">
 <ul>
 <li>Writing effcient image scanning loops(编写高效的图像遍历循环)</li>
 <li>Scanning an image with neighbor access(遍历图像和邻域操作)</li>
-<li>Performing simple image arithmetic </li>
+<li>Performing simple image arithmetic</li>
 <li>Defining regions of interest<a id="more"></a>
 </li>
 </ul>
@@ -358,13 +377,13 @@ Defining regions of interest">
 <ul>
 <li><strong>能在一个循环里解决的就不要在折腾</strong></li>
 </ul>
-<p>　　比如在处理三通道图像时，之前的代码中，内层循环有是这么设计的，使循环次数为<code>image.cols * image.channels()</code>，书上就说了，我们可以使循环次数变成<code>image.cols</code><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">colorReduce</span><span class="params">(cv::Mat &amp;image, <span class="keyword">int</span> div=<span class="number">64</span>)</span> </span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> nl= image.rows; <span class="comment">// number of lines</span></span><br><span class="line">	<span class="keyword">int</span> nc= image.cols ; <span class="comment">// number of columns</span></span><br><span class="line">	<span class="comment">// is it a continous image?</span></span><br><span class="line">	<span class="keyword">if</span> (image.isContinuous()) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// then no padded pixels</span></span><br><span class="line">		nc= nc*nl;</span><br><span class="line">		nl= <span class="number">1</span>; <span class="comment">// it is now a 1D array</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;nl; j++) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// pointer to first column of line j</span></span><br><span class="line">		uchar* data= image.ptr&lt;uchar&gt;(j);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nc; i++) </span><br><span class="line">		&#123;</span><br><span class="line">			*data++= div/<span class="number">2</span>;	<span class="comment">//data[i][0]</span></span><br><span class="line">			*data++= div/<span class="number">2</span>;	<span class="comment">//data[i][1]</span></span><br><span class="line">			*data++= div/<span class="number">2</span>;	<span class="comment">//data[i][2]</span></span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>　　比如在处理三通道图像时，之前的代码中，内层循环有是这么设计的，使循环次数为<code>image.cols * image.channels()</code>，书上就说了，我们可以使循环次数变成<code>image.cols</code><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">colorReduce</span><span class="params">(cv::Mat &amp;image, <span class="keyword">int</span> div=<span class="number">64</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> nl= image.rows; <span class="comment">// number of lines</span></span><br><span class="line">	<span class="keyword">int</span> nc= image.cols ; <span class="comment">// number of columns</span></span><br><span class="line">	<span class="comment">// is it a continous image?</span></span><br><span class="line">	<span class="keyword">if</span> (image.isContinuous())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// then no padded pixels</span></span><br><span class="line">		nc= nc*nl;</span><br><span class="line">		nl= <span class="number">1</span>; <span class="comment">// it is now a 1D array</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;nl; j++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// pointer to first column of line j</span></span><br><span class="line">		uchar* data= image.ptr&lt;uchar&gt;(j);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nc; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			*data++= div/<span class="number">2</span>;	<span class="comment">//data[i][0]</span></span><br><span class="line">			*data++= div/<span class="number">2</span>;	<span class="comment">//data[i][1]</span></span><br><span class="line">			*data++= div/<span class="number">2</span>;	<span class="comment">//data[i][2]</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>　　上面这段代码，按照书上的意思是<strong>最快的图像遍历</strong>方法了！(如果我没理解错的话，有错欢迎指正！)</p>
 <h2 id="OpenMP_and_TBB"><strong>OpenMP and TBB</strong></h2><p>　　多线程处理是另外一个提升算法效率的方式，OpenMP 与 Intel Threading Building Blocks(TBB)是两个比较流行的并行编程API。VS2013里有可以直接用OpenMP，具体用法搜索一下，我用过，基础的操作还是蛮简单的，看一下就会用了，奈何自己笔记本就两核，只提升了2倍。</p>
 <hr>
 <h1 id="Scanning_an_image_with_neighbor_access"><strong>Scanning an image with neighbor access</strong></h1><p>　　与其说这一节教你怎么进行邻域操作，倒不如说教你怎么进行图像锐化，一共两种方法，第一种原始的指针操作，第二种自定义核算子，利用OpenCV函数<code>filter2D</code>来操作，更加快捷，二者结果一样，甚至核的尺寸如果比较大，后者效率更高。<br>锐化算子的计算方式：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sharpened_pixel= <span class="number">5</span> * current - left - right - up - down;</span><br><span class="line"><span class="comment">//current代表当前像素值，left代表当前像素位置左边的像素值，依次类推</span></span><br></pre></td></tr></table></figure>
-<h2 id="原始的指针操作"><strong>原始的指针操作</strong></h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sharpen</span><span class="params">(<span class="keyword">const</span> cv::Mat &amp;image, cv::Mat &amp;result)</span> </span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="comment">// allocate if necessary</span></span><br><span class="line">	result.create(image.size(), image.type());</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j= <span class="number">1</span>; j&lt;image.rows-<span class="number">1</span>; j++) </span><br><span class="line">	&#123; 	<span class="comment">// for all rows</span></span><br><span class="line">		<span class="comment">// (except first and last)</span></span><br><span class="line">		<span class="keyword">const</span> uchar *previous = image.ptr&lt;<span class="keyword">const</span> uchar&gt;(j-<span class="number">1</span>); 	<span class="comment">// previous row</span></span><br><span class="line">		<span class="keyword">const</span> uchar *current = image.ptr&lt;<span class="keyword">const</span> uchar&gt;(j); 		<span class="comment">// current row</span></span><br><span class="line">		<span class="keyword">const</span> uchar *next = image.ptr&lt;<span class="keyword">const</span> uchar&gt;(j+<span class="number">1</span>); 		<span class="comment">// next row</span></span><br><span class="line">		uchar* output= result.ptr&lt;uchar&gt;(j); 					<span class="comment">// output row</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;image.cols-<span class="number">1</span>; i++) </span><br><span class="line">		&#123;</span><br><span class="line">			*output++= cv::saturate_cast&lt;uchar&gt;(<span class="number">5</span>*current[i] - current[i-<span class="number">1</span>] - current[i+<span class="number">1</span>] - previous[i] - next[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// Set the unprocess pixels to 0</span></span><br><span class="line">	result.row(<span class="number">0</span>).setTo(cv::Scalar(<span class="number">0</span>));</span><br><span class="line">	result.row(result.rows-<span class="number">1</span>).setTo(cv::Scalar(<span class="number">0</span>));</span><br><span class="line">	result.col(<span class="number">0</span>).setTo(cv::Scalar(<span class="number">0</span>));</span><br><span class="line">	result.col(result.cols-<span class="number">1</span>).setTo(cv::Scalar(<span class="number">0</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="原始的指针操作"><strong>原始的指针操作</strong></h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sharpen</span><span class="params">(<span class="keyword">const</span> cv::Mat &amp;image, cv::Mat &amp;result)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="comment">// allocate if necessary</span></span><br><span class="line">	result.create(image.size(), image.type());</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j= <span class="number">1</span>; j&lt;image.rows-<span class="number">1</span>; j++)</span><br><span class="line">	&#123; 	<span class="comment">// for all rows</span></span><br><span class="line">		<span class="comment">// (except first and last)</span></span><br><span class="line">		<span class="keyword">const</span> uchar *previous = image.ptr&lt;<span class="keyword">const</span> uchar&gt;(j-<span class="number">1</span>); 	<span class="comment">// previous row</span></span><br><span class="line">		<span class="keyword">const</span> uchar *current = image.ptr&lt;<span class="keyword">const</span> uchar&gt;(j); 		<span class="comment">// current row</span></span><br><span class="line">		<span class="keyword">const</span> uchar *next = image.ptr&lt;<span class="keyword">const</span> uchar&gt;(j+<span class="number">1</span>); 		<span class="comment">// next row</span></span><br><span class="line">		uchar* output= result.ptr&lt;uchar&gt;(j); 					<span class="comment">// output row</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;image.cols-<span class="number">1</span>; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			*output++= cv::saturate_cast&lt;uchar&gt;(<span class="number">5</span>*current[i] - current[i-<span class="number">1</span>] - current[i+<span class="number">1</span>] - previous[i] - next[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// Set the unprocess pixels to 0</span></span><br><span class="line">	result.row(<span class="number">0</span>).setTo(cv::Scalar(<span class="number">0</span>));</span><br><span class="line">	result.row(result.rows-<span class="number">1</span>).setTo(cv::Scalar(<span class="number">0</span>));</span><br><span class="line">	result.col(<span class="number">0</span>).setTo(cv::Scalar(<span class="number">0</span>));</span><br><span class="line">	result.col(result.cols-<span class="number">1</span>).setTo(cv::Scalar(<span class="number">0</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里值得注意的两点:</p>
 <ul>
 <li><strong><code>cv::saturate_cast&lt;uchar&gt;</code> method</strong></li>
@@ -377,7 +396,7 @@ Defining regions of interest">
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result.row(<span class="number">0</span>).setTo(cv::Scalar(<span class="number">0</span>));<span class="comment">//如果是一个三通道的图像，则需要使用cv::Scalar(0,0,0)来指定像素三个通道的目标值</span></span><br></pre></td></tr></table></figure>
 <p><code>row</code> and <code>col</code> method ：They return a special <code>cv::Mat</code> instance composed of a single line (or a single column) as specified in a parameter. See <a href="http://docs.opencv.org/modules/core/doc/basic_structures.html?highlight=setto#mat-row" target="_blank" rel="external">row</a>  and <a href="http://docs.opencv.org/modules/core/doc/basic_structures.html?highlight=setto#mat-col" target="_blank" rel="external">col</a><br><code>cv::Mat::setTo</code> method: Sets all or some of the array elements to the specified value.    See <a href="http://docs.opencv.org/modules/core/doc/basic_structures.html?highlight=setto#mat-setto" target="_blank" rel="external">setTo</a></p>
 <h2 id="使用filter2D_method"><strong>使用<code>filter2D</code> method</strong></h2><p>　　尽量使用下面这种方法，相比上面那种方法，filter2D更高效简洁(书上说的)：<br>核矩阵：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> -<span class="number">1</span> <span class="number">0</span></span><br><span class="line">-<span class="number">1</span> <span class="number">5</span> -<span class="number">1</span></span><br><span class="line"><span class="number">0</span> -<span class="number">1</span> <span class="number">0</span></span><br></pre></td></tr></table></figure></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sharpen2D</span><span class="params">(<span class="keyword">const</span> cv::Mat &amp;image, cv::Mat &amp;result)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	cv::<span class="function">Mat <span class="title">kernel</span><span class="params">(<span class="number">3</span>, <span class="number">3</span>, CV_32F, cv::Scalar(<span class="number">0</span>)</span>)</span>;<span class="comment">// Construct kernel (all entries initialized to 0)</span></span><br><span class="line">	<span class="comment">// assigns kernel values</span></span><br><span class="line">	kernel.at&lt;<span class="keyword">float</span>&gt;(<span class="number">0</span>,<span class="number">1</span>) = -<span class="number">1.0</span>;</span><br><span class="line">	kernel.at&lt;<span class="keyword">float</span>&gt;(<span class="number">1</span>,<span class="number">0</span>) = -<span class="number">1.0</span>;</span><br><span class="line">	kernel.at&lt;<span class="keyword">float</span>&gt;(<span class="number">2</span>,<span class="number">1</span>) = -<span class="number">1.0</span>;</span><br><span class="line">	kernel.at&lt;<span class="keyword">float</span>&gt;(<span class="number">1</span>,<span class="number">2</span>) = -<span class="number">1.0</span>;</span><br><span class="line">	kernel.at&lt;<span class="keyword">float</span>&gt;(<span class="number">1</span>,<span class="number">1</span>) = <span class="number">5.0</span>;</span><br><span class="line">	</span><br><span class="line">	cv::filter2D(image, result, image.depth(), kernel);	<span class="comment">//filter the image</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sharpen2D</span><span class="params">(<span class="keyword">const</span> cv::Mat &amp;image, cv::Mat &amp;result)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	cv::<span class="function">Mat <span class="title">kernel</span><span class="params">(<span class="number">3</span>, <span class="number">3</span>, CV_32F, cv::Scalar(<span class="number">0</span>)</span>)</span>;<span class="comment">// Construct kernel (all entries initialized to 0)</span></span><br><span class="line">	<span class="comment">// assigns kernel values</span></span><br><span class="line">	kernel.at&lt;<span class="keyword">float</span>&gt;(<span class="number">0</span>,<span class="number">1</span>) = -<span class="number">1.0</span>;</span><br><span class="line">	kernel.at&lt;<span class="keyword">float</span>&gt;(<span class="number">1</span>,<span class="number">0</span>) = -<span class="number">1.0</span>;</span><br><span class="line">	kernel.at&lt;<span class="keyword">float</span>&gt;(<span class="number">2</span>,<span class="number">1</span>) = -<span class="number">1.0</span>;</span><br><span class="line">	kernel.at&lt;<span class="keyword">float</span>&gt;(<span class="number">1</span>,<span class="number">2</span>) = -<span class="number">1.0</span>;</span><br><span class="line">	kernel.at&lt;<span class="keyword">float</span>&gt;(<span class="number">1</span>,<span class="number">1</span>) = <span class="number">5.0</span>;</span><br><span class="line"></span><br><span class="line">	cv::filter2D(image, result, image.depth(), kernel);	<span class="comment">//filter the image</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <h1 id="Performing_simple_image_arithmetic"><strong>Performing simple image arithmetic</strong></h1><p>　　Images can be combined in different ways. Since they are regular matrices, they can be added, subtracted, multiplied, or divided. OpenCV offers various image arithmetic operators and their use is discussed in this recipe.</p>
 <h2 id="简单的运算"><strong>简单的运算</strong></h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// c[i]= a[i]+b[i];</span></span><br><span class="line">cv::add(imageA,imageB,resultC);</span><br><span class="line"><span class="comment">// c[i]= a[i]+k;</span></span><br><span class="line">cv::add(imageA,cv::Scalar(k),resultC);</span><br><span class="line"><span class="comment">// c[i]= k1*a[1]+k2*b[i]+k3;</span></span><br><span class="line">cv::addWeighted(imageA,k1,imageB,k2,k3,resultC);</span><br><span class="line"><span class="comment">// c[i]= k*a[1]+b[i];</span></span><br><span class="line">cv::scaleAdd(imageA,k,imageB,resultC);</span><br></pre></td></tr></table></figure>
@@ -411,7 +430,7 @@ Defining regions of interest">
       
         <div class="post-tags">
           
-            <a href="/tags/Computer-Vision/" rel="tag">#Computer Vision</a>
+            <a href="/tags/CV/" rel="tag">#CV</a>
           
             <a href="/tags/OpenCV/" rel="tag">#OpenCV</a>
           
@@ -509,6 +528,13 @@ Defining regions of interest">
             </a>
           </div>
 
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
           
 
           
@@ -675,6 +701,29 @@ Defining regions of interest">
   
   
   
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

@@ -63,7 +63,7 @@
 <meta property="og:url" content="site:ocxsBlog.github.io/2015/09/05/150905-sort1/index.html">
 <meta property="og:site_name" content="Ocxs's blog">
 <meta property="og:description" content="排序简介">
-<meta property="og:updated_time" content="1970-01-01T00:00:00.000Z">
+<meta property="og:updated_time" content="2016-04-30T06:48:29.250Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序（上）">
 <meta name="twitter:description" content="排序简介">
@@ -242,6 +242,25 @@
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -274,7 +293,7 @@
 <h3 id="一-简单排序">一.简单排序</h3><blockquote>
 <ul>
 <li>1.冒泡排序<ul>
-<li>伪代码<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BubbleSort</span><span class="params">(ElemenType A[], <span class="keyword">int</span> N)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = N; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">	&#123;</span><br><span class="line">		flag = <span class="number">0</span>;	<span class="comment">//标志位</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; P; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(A[j] &gt; A[j + <span class="number">1</span>])</span><br><span class="line">			&#123;</span><br><span class="line">				Swap(A[j], A[j + <span class="number">1</span>]);	<span class="comment">//注意这里交换的是相邻元素，跟插入排序的区别</span></span><br><span class="line">				flag = <span class="number">1</span>;		<span class="comment">//说明存在交换</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(flag)	</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">break</span>;	<span class="comment">//全程无交换，说明已经排行序，无需继续进行下去</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>伪代码<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BubbleSort</span><span class="params">(ElemenType A[], <span class="keyword">int</span> N)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = N; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">	&#123;</span><br><span class="line">		flag = <span class="number">0</span>;	<span class="comment">//标志位</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; P; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(A[j] &gt; A[j + <span class="number">1</span>])</span><br><span class="line">			&#123;</span><br><span class="line">				Swap(A[j], A[j + <span class="number">1</span>]);	<span class="comment">//注意这里交换的是相邻元素，跟插入排序的区别</span></span><br><span class="line">				flag = <span class="number">1</span>;		<span class="comment">//说明存在交换</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(flag)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">break</span>;	<span class="comment">//全程无交换，说明已经排行序，无需继续进行下去</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -346,7 +365,7 @@
 </li>
 </ul>
 </blockquote>
-<pre><code>*时间复杂度 O(N * logN) 
+<pre><code>*时间复杂度 O(N * logN)
 缺点是：需要开额外的O(N)空间来存储temp数组，且赋值到A也耗时O(N)
 * 算法2
 <span class="comment"><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HeapSort</span><span class="params">(ElemenType A[], <span class="keyword">int</span> N)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(i = N/<span class="number">2</span>; i &gt;= <span class="number">0</span>; --i)	<span class="comment">//build Heap</span></span><br><span class="line">	&#123;</span><br><span class="line">		PercDown(A,i,N);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i = N - <span class="number">1</span>; i &gt; <span class="number">0</span>; --i)</span><br><span class="line">	&#123;</span><br><span class="line">		Swap(A[<span class="number">0</span>], A[i]);	<span class="comment">//delete Max elements</span></span><br><span class="line">		PercDown(A, <span class="number">0</span>, i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></span>
@@ -356,7 +375,7 @@
 </code></pre><h3 id="四-归并排序">四.归并排序</h3><blockquote>
 <ul>
 <li><p>核心算法：有序子列的归并</p>
-  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//L= 左边起始位置，R=右边起始位置， rightEnd = 右边终点位置</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(ElemenType A[], ElemenType temp[], <span class="keyword">int</span> L, <span class="keyword">int</span> R, <span class="keyword">int</span> rightEnd)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	leftEnd = R - <span class="number">1</span>;	<span class="comment">//左边终点位置，这里假设的是两个子序列是紧挨着的</span></span><br><span class="line">	<span class="keyword">int</span> elementsNum = RightEnd - L + <span class="number">1</span>;		<span class="comment">//存放结果的数组的长度</span></span><br><span class="line">	<span class="keyword">int</span> tmp = L;						<span class="comment">//存放结果数组的初始位置</span></span><br><span class="line">	<span class="keyword">while</span>(L &lt;= leftEnd &amp;&amp; R &lt;= RightEnd)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(A[L] &lt;= A[R])</span><br><span class="line">		&#123;</span><br><span class="line">			temp[tmp++] = A[L++];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			temp[tmp++] = A[R++];</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(L &lt;= leftEnd)			<span class="comment">//复制左边剩下的</span></span><br><span class="line">	&#123;</span><br><span class="line">		temp[tmp++] = A[L++];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(R &lt;= rightEnd)		<span class="comment">//复制右边剩下的，(左边和右边最多只会有一个剩下的，或者一个都不剩)</span></span><br><span class="line">	&#123;</span><br><span class="line">		temp[tmp++] = A[R++];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; elementsNum; ++i, --rightEnd)</span><br><span class="line">	&#123;</span><br><span class="line">		A[rightEnd] = temp[rightEnd];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//L= 左边起始位置，R=右边起始位置， rightEnd = 右边终点位置</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(ElemenType A[], ElemenType temp[], <span class="keyword">int</span> L, <span class="keyword">int</span> R, <span class="keyword">int</span> rightEnd)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	leftEnd = R - <span class="number">1</span>;	<span class="comment">//左边终点位置，这里假设的是两个子序列是紧挨着的</span></span><br><span class="line">	<span class="keyword">int</span> elementsNum = RightEnd - L + <span class="number">1</span>;		<span class="comment">//存放结果的数组的长度</span></span><br><span class="line">	<span class="keyword">int</span> tmp = L;						<span class="comment">//存放结果数组的初始位置</span></span><br><span class="line">	<span class="keyword">while</span>(L &lt;= leftEnd &amp;&amp; R &lt;= RightEnd)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(A[L] &lt;= A[R])</span><br><span class="line">		&#123;</span><br><span class="line">			temp[tmp++] = A[L++];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			temp[tmp++] = A[R++];</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(L &lt;= leftEnd)			<span class="comment">//复制左边剩下的</span></span><br><span class="line">	&#123;</span><br><span class="line">		temp[tmp++] = A[L++];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(R &lt;= rightEnd)		<span class="comment">//复制右边剩下的，(左边和右边最多只会有一个剩下的，或者一个都不剩)</span></span><br><span class="line">	&#123;</span><br><span class="line">		temp[tmp++] = A[R++];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; elementsNum; ++i, --rightEnd)</span><br><span class="line">	&#123;</span><br><span class="line">		A[rightEnd] = temp[rightEnd];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>递归算法<br>  分而治之(自顶向下)</p>
   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MSort</span><span class="params">(ElemenType A[], ElemenType TempA[], <span class="keyword">int</span> L, <span class="keyword">int</span> rightEnd)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> center;</span><br><span class="line">	<span class="keyword">if</span>(L &lt; rightEnd)</span><br><span class="line">	&#123;</span><br><span class="line">		center = (L + rightEnd) / <span class="number">2</span>;</span><br><span class="line">		MSort(A, TempA, L, center);</span><br><span class="line">		MSort(A, TempA, center + <span class="number">1</span>, rightEnd);</span><br><span class="line">		Merge(A, TempA, L, center + <span class="number">1</span>, rightEnd);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -385,7 +404,7 @@
 </li>
 </ul>
 </blockquote>
-<pre><code><span class="comment"><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span><span class="params">(ElemenType A[], <span class="keyword">int</span> N)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	ElemenType *TempA = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">	<span class="keyword">if</span>(TempA != <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(length &lt; N)</span><br><span class="line">		&#123;</span><br><span class="line">			Merge_pass(A, TempA, N, length);</span><br><span class="line">			length *= <span class="number">2</span>;</span><br><span class="line">			Merge_pass(A, TempA, N, length);	<span class="comment">//这里第二次做Merge不用担心length超过N，即使超过N，在Merge函数里只是做了赋值，执行的是else里的for循环语句</span></span><br><span class="line">			length *= <span class="number">2</span>;	</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">delete</span> []TempA;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"no enough memory"</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></span>
+<pre><code><span class="comment"><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span><span class="params">(ElemenType A[], <span class="keyword">int</span> N)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	ElemenType *TempA = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">	<span class="keyword">if</span>(TempA != <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(length &lt; N)</span><br><span class="line">		&#123;</span><br><span class="line">			Merge_pass(A, TempA, N, length);</span><br><span class="line">			length *= <span class="number">2</span>;</span><br><span class="line">			Merge_pass(A, TempA, N, length);	<span class="comment">//这里第二次做Merge不用担心length超过N，即使超过N，在Merge函数里只是做了赋值，执行的是else里的for循环语句</span></span><br><span class="line">			length *= <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">delete</span> []TempA;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"no enough memory"</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></span>
 </code></pre>
       
     </div>
@@ -496,6 +515,13 @@
             </a>
           </div>
 
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
           
 
           
@@ -662,6 +688,29 @@
   
   
   
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Algorithms,Computer Vision,Particle Filter," />
+  <meta name="keywords" content="Algorithms,CV,particle filter," />
 
 
 
@@ -85,7 +85,7 @@ Resample算法
 
 Result&amp;amp;Discussion
 References">
-<meta property="og:updated_time" content="1970-01-01T00:00:00.000Z">
+<meta property="og:updated_time" content="2016-04-30T06:57:39.223Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Particle Filter">
 <meta name="twitter:description" content="Introduction
@@ -275,6 +275,25 @@ References">
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Computer-Vision/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Vision</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -360,9 +379,9 @@ References">
 
 \begin{equation}
 x_k = f(x_{k-1}, {\mu}_{k-1}) \tag{1}
-\end{equation} 
+\end{equation}
 
-<p>\begin{equation}<br>y_k = h(x_k, v_k) \tag{2}<br>\end{equation} </p>
+<p>\begin{equation}<br>y_k = h(x_k, v_k) \tag{2}<br>\end{equation}</p>
 <p>其中，$f(.)$和$h(.)$为已知函数，系统噪声$x_k$和观测噪声$v_k$是概率密度已知的随机变量，$x_k$代表系统在$k$时刻的状态变量，$y_k$代表$x_k$的观测值，$u_k$和$v_k$相互独立且独立于系统状态.</p>
 <p>　　这里(1)就是系统方程，(2)就是观测方程，在实际问题中，$y_k$可能就是一组由传感器得到的数据，意思就是说$y_k$不一定是由观测方程算出来的，而是直接得到的，比如室内的温度，可以直接由温度计得到，这就是观测数据，系统方程提供的是预测值，我们可以根据观测值来修正预测值，在MATLAB官网上file exchange中提供的<a href="http://www.mathworks.com/matlabcentral/fileexchange/35468-particle-filter-tutorial" target="_blank" rel="external">particle filter tutorial</a>中，则是利用观测方程来生成观测数据，因为这是仿真，所以用观测方程来模拟生成，而不是用传感器直接得到。</p>
 <p>上述状态空间模型的统计描述方式如下：</p>
@@ -370,12 +389,12 @@ x_k = f(x_{k-1}, {\mu}_{k-1}) \tag{1}
 <li>(1)对应于系统模型有系统的状态转移概率密度
 \begin{equation}
 p(x_k|x_{k-1})
-\end{equation} 
+\end{equation}
 </li>
 <li>(2)对应于观测模型有系统状态的观测似然概率密度
 \begin{equation}
 p(y_k|x_k)
-\end{equation} 
+\end{equation}
 
 </li>
 </ul>
@@ -396,7 +415,7 @@ p(x_{0:k}|y_{1:k}) = \frac{p(x_{0:k})p(y_{1:k}|x_{0:k})}{\int p(y_{1:k}|x_{0:k})
 上述后验概率密度$p(x_{0:k}|y_{1:k})$是贝叶斯估计问题的完整解。　　而滤波问题就是要计算后验滤波概率密度$p(x_k|y_{1:k})$,它是$p(x_{0:k}|y_{1:k})$的边沿密度即
 \begin{equation}
 p(x_{0:k}|y_{1:k}) = \int \int .. \int p(x_{0:k}|y_{1:k})dx_0dx_1...d_{x-1} \tag{4}
-\end{equation} 
+\end{equation}
 
 
 　　对于动态系统，从该后验滤波概率密度就可以计算系统状态的各种估计，如以均值作为系统状态的估值等.由(3)和(4)式可见，当每一个新观测数据到来时，后验滤波概率密度$p(x_k|y_{1:k})$就要被重新计算一次，这是十分不方便的。为此，采用如下递推更新方法来获得该后验滤波概率密度:
@@ -418,12 +437,12 @@ p(x_k|y_{1:k-1}) = \int p(x_k|x_{k-1}) p(x_{k-1}|y_{1:k-1}) dx_{k-1} \tag{5}
 <li>(1)首先我们知道$x_k$服从一阶markov过程，所以$p(x_k|x_{k-1}, y_{1:k-1}) = p(x_k|x_{k-1})$ ;</li>
 <li>(2)把上式带入式(5)中，利用Bayes公式替换即可，具体如下：
 \begin{equation}
-p(x_k|y_{1:k-1}) = \int p(x_k|x_{k-1}) p(x_{k-1}|y_{1:k-1}) dx_{k-1} 
+p(x_k|y_{1:k-1}) = \int p(x_k|x_{k-1}) p(x_{k-1}|y_{1:k-1}) dx_{k-1}
 \quad=\int p(x_k|x_{k-1}, y_{1:k-1}) p(x_{k-1}|y_{1:k-1}) dx_{k-1} \\
-\quad=\int \frac{p(x_k,x_{k-1}, y_{1:k-1})}{p(x_{k-1}, y_{1:k-1})}\frac{p(x_{k-1},y_{1:k-1})}{p(y_{1:k-1})}dx_{k-1} 
-\quad=\int \frac{p(x_k,x_{k-1}, y_{1:k-1})}{p(y_{1:k-1})}  dx_{k-1} 
+\quad=\int \frac{p(x_k,x_{k-1}, y_{1:k-1})}{p(x_{k-1}, y_{1:k-1})}\frac{p(x_{k-1},y_{1:k-1})}{p(y_{1:k-1})}dx_{k-1}
+\quad=\int \frac{p(x_k,x_{k-1}, y_{1:k-1})}{p(y_{1:k-1})}  dx_{k-1}
 \quad=\int p(x_k,x_{k-1})| p(y_{1:k-1})  dx_{k-1}	\tag{6}
-\end{equation} 
+\end{equation}
 
 </li>
 </ul>
@@ -432,7 +451,7 @@ $$p(x_k|y_{1:k}) = \frac{p(x_k)p(y_{1:k}|x_k)}{p(y_{1:k})} = \frac{p(x_k)p(y_k, 
 <br>由条件概率定义有:<br>
 $$p(y_k, y_{1:k-1}) = p(y_{1:k-1}) p(y_k | y_{1:k-1})  \tag{8}$$
 <br>由联合分布概率公式有:<br>
-$$p(y_k, y_{1:k-1}|x_k) = \frac{p(y_k, y_{1:k-1}, x_k)}{p(x_k)} 
+$$p(y_k, y_{1:k-1}|x_k) = \frac{p(y_k, y_{1:k-1}, x_k)}{p(x_k)}
 = \frac{p(y_k, y_{1:k-1}, x_k)}{p(y_{1:k-1}, x_k)} \frac{p(y_{1:k-1}, x_k)}{p(x_k)} = p(y_k|y_{1:k-1}, x_k)p(y_{1:k-1}|x_k) \tag{9}$$
 <br>又由贝叶斯公式有:<br>
 $$p(y_{1:k-1}|x_k) = \frac{p(y_{1:k-1})p(x_k|y_{1:k-1})}{p(x_k)} \tag{10}$$
@@ -484,7 +503,7 @@ $$E(g(x_{0:k})) \approx \frac{1}{N} \sum_{i=1}^{N} g(x_{0:k}(i)) \tag{17}$$
 <p>当$N$足够大时，该近似值绝对收敛于 $E(g(x_{0:k}))$ .</p>
 <p>　　实际问题中，通常较难甚至无法直接从后验概率密度 $p(x_{0:k} | y_{1:k})$中抽样。于是，引入一个被称为重要性概率密度的参考分布$q(x_{0:k} | y_{1:k})$ ,该参考分布应已知且便于从中抽样。利用该重要性概率密度和贝叶斯公式有:</p>
 
-$$E(g(x_{0:k})) = \int g(x_{0:k}) \frac{p(x_{0:k}|y_{1:k})}{q(x_{0:k} | y_{1:k})} q(x_{0:k} | y_{1:k}) dx_{0:k} 
+$$E(g(x_{0:k})) = \int g(x_{0:k}) \frac{p(x_{0:k}|y_{1:k})}{q(x_{0:k} | y_{1:k})} q(x_{0:k} | y_{1:k}) dx_{0:k}
 = \int g(x_{0:k}) \frac{p(y_{1:k}| x_{0:k}) p(x_{0:k})}{p(y_{1:k}) q(x_{0:k} | y_{1:k})} q(x_{0:k} | y_{1:k}) dx_{0:k} \\
 = \int g(x_{0:k}) \frac{{w_k}^{*}(x_{0:k})}{p(y_{1:k})} q(x_{0:k} | y_{1:k}) dx_{0:k} \tag{18}$$
 
@@ -496,8 +515,8 @@ $${w_k}^{*}(x_{0:k}) = \frac{p(y_{1:k} | x_{0:k}) p(x_{0:k})}{q(x_{0:k} | y_{1:k
 $$ E(g(x_{0:k})) = \frac{\int g(x_{0:k}) {w_k}^{*}(x_{0:k}) q(x_{0:k}|y_{1:k})}{p(y_{1:k})} \tag{20}$$
 
 又因为
-$$ p(y_{1:k}) = \int p(y_{1:k}, x_{0:k}) dx_{0:k} 
-= \int \frac{p(y_{1:k}|x_{0:k}) p(x_{0:k}) q(x_{0:k}|y_{1:k})}{q(x_{0:k}|y_{1:k})} dx_{0:k} 
+$$ p(y_{1:k}) = \int p(y_{1:k}, x_{0:k}) dx_{0:k}
+= \int \frac{p(y_{1:k}|x_{0:k}) p(x_{0:k}) q(x_{0:k}|y_{1:k})}{q(x_{0:k}|y_{1:k})} dx_{0:k}
 = \int {w_k}^{*}(x_{0:k}) q(x_{0:k}|y_{1:k}) dx_{0:k} \tag{21} $$
 
 将(21)代入(20)得：
@@ -505,7 +524,7 @@ $$ E(g(x_{0:k})) = \frac {\int g(x_{0:k}) {w_k}^{*}(x_{0:k}) q(x_{0:k}|y_{1:k}) 
 
 <p>依据蒙特卡罗仿真原理，从重要性概率密度 $q(x_{0:k}|y_{1:k})$中抽取$N$个独立同分布的样本$\{x_{0:k}(i), i=1,2,…,N \}$ ,则上述数学期望可近似表示为：</p>
 
-$$E(g(x_{0:k})) \approx \frac{\frac{1}{N} \sum_{i=1}^{N} g(x_{0:k}(i)) {w_k}^{*}(x_{0:k}(i)) }{\frac{1}{N} \sum_{i=1}^{N} {w_k}^{*}(x_{0:k}(i)) } 
+$$E(g(x_{0:k})) \approx \frac{\frac{1}{N} \sum_{i=1}^{N} g(x_{0:k}(i)) {w_k}^{*}(x_{0:k}(i)) }{\frac{1}{N} \sum_{i=1}^{N} {w_k}^{*}(x_{0:k}(i)) }
 = \sum_{i=1}^{N} g(x_{0:k}(i)) {w_k}(x_{0:k}(i)) \tag{23}$$
 
 <p>其中，<br>
@@ -665,9 +684,9 @@ $$u(i) = \frac{i-1}{N} + U , i = 1,2,...,N \tag{46}$$
           
             <a href="/tags/Algorithms/" rel="tag">#Algorithms</a>
           
-            <a href="/tags/Computer-Vision/" rel="tag">#Computer Vision</a>
+            <a href="/tags/CV/" rel="tag">#CV</a>
           
-            <a href="/tags/Particle-Filter/" rel="tag">#Particle Filter</a>
+            <a href="/tags/particle-filter/" rel="tag">#particle filter</a>
           
         </div>
       
@@ -763,6 +782,13 @@ $$u(i) = \frac{i-1}{N} + U , i = 1,2,...,N \tag{46}$$
             </a>
           </div>
 
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
           
 
           
@@ -929,6 +955,29 @@ $$u(i) = \frac{i-1}{N} + U , i = 1,2,...,N \tag{46}$$
   
   
   
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 
